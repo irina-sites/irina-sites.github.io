@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>КЕДРОН — коммерческое предложение на строительство дома</title>
+<meta name="description" content="Презентация для клиента: проект дома 96 м², смета, комплектации, сроки и гарантии. 12 слайдов, листается стрелками, печатается в PDF.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="КЕДРОН — коммерческое предложение">
+<meta property="og:description" content="Презентация для клиента: проект, смета, комплектации, сроки и гарантии.">
+<link rel="icon" href="../kedron/favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+/* ==========================================================================
+   КЕДРОН — презентация для клиента.
+   Листается стрелками, пробелом, кликом и свайпом. Печатается в PDF: Ctrl+P.
+   ========================================================================== */
+:root{
+  /* Один тон на всю презентацию: тёплый графит. Светлых слайдов больше нет —
+     они и ломали ритм, и топили стрелки управления. */
+  --bg:#15120e;
+  --bg-2:#1e1913;
+  --surface:rgba(245,241,233,.055);
+  --surface-2:rgba(245,241,233,.09);
+  --text:#f5f1e9;
+  --muted:rgba(245,241,233,.74);
+  --faint:rgba(245,241,233,.48);
+  --line:rgba(245,241,233,.14);
+  --line-soft:rgba(245,241,233,.08);
+  /* Один акцент на всю колоду: охра КЕДРОНа, поднятая по яркости под тёмный фон */
+  --accent:#e8a24a;
+  --accent-deep:#c9812f;
+  --accent-wash:rgba(232,162,74,.15);
+  --sage:#8fbfa8;             /* только для второстепенных полос в диаграммах */
+  --font:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --display:"Bitter",Georgia,serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0; background:#0c0a08; color:var(--text);
+  font-family:var(--font); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow:hidden;
+}
+h1,h2,h3,h4{margin:0; font-family:var(--display); font-weight:700; line-height:1.14; letter-spacing:-.015em; color:var(--text);}
+p{margin:0;}
+ul,ol{margin:0; padding:0; list-style:none;}
+
+/* ---------- сцена ---------- */
+.stage{position:fixed; inset:0; display:grid; place-items:center; padding:22px;}
+.deck{
+  position:relative; width:min(1180px, 100%); aspect-ratio:16/9; max-height:calc(100vh - 44px);
+  border-radius:16px; overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 8% -10%, rgba(232,162,74,.16), transparent 58%),
+    radial-gradient(90% 80% at 108% 108%, rgba(143,191,168,.12), transparent 60%),
+    linear-gradient(152deg, var(--bg-2), var(--bg) 62%);
+  box-shadow:0 34px 80px -34px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.06);
+}
+/* Чертёжная сетка: фон не плоский, но и не отвлекает.
+   Шаг крупный, контраст на грани заметности, к низу сходит на нет. */
+.deck::before{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    repeating-linear-gradient(to right, var(--line-soft) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(to bottom, var(--line-soft) 0 1px, transparent 1px 84px);
+  mask-image:radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
+  -webkit-mask-image:radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 78%);
+}
+/* Зерно: снимает «пластиковость» плоской заливки */
+.deck::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- слайд ---------- */
+.slide{
+  position:absolute; inset:0; display:none; z-index:1;
+  padding:clamp(26px,4.2vw,58px);
+  container-type:inline-size;
+}
+.slide.is-on{display:flex; flex-direction:column; justify-content:center;}
+/* Вход ступенькой: заголовок, потом остальное. Один раз на слайд, без петель. */
+.slide.is-on > *{animation:rise .42s cubic-bezier(.22,1,.36,1) both;}
+.slide.is-on > *:nth-child(1){animation-delay:.02s;}
+.slide.is-on > *:nth-child(2){animation-delay:.08s;}
+.slide.is-on > *:nth-child(3){animation-delay:.14s;}
+.slide.is-on > *:nth-child(n+4){animation-delay:.2s;}
+@keyframes rise{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+@media (prefers-reduced-motion:reduce){
+  .slide.is-on > *{animation:none;}
+}
+
+.kicker{
+  display:inline-block; align-self:flex-start; margin-bottom:14px; padding:6px 14px;
+  border:1px solid var(--accent-wash); border-radius:999px;
+  background:var(--accent-wash); color:var(--accent);
+  font-size:clamp(10px,1cqw,12px); font-weight:800; letter-spacing:.18em; text-transform:uppercase;
+}
+.slide h1{font-size:clamp(28px,4.6cqw,54px); margin-bottom:16px;}
+.slide h2{font-size:clamp(22px,3.4cqw,40px); margin-bottom:12px;}
+.slide h3{font-size:clamp(15px,1.7cqw,21px); margin-bottom:7px;}
+.lead{max-width:60ch; color:var(--muted); font-size:clamp(13px,1.5cqw,19px);}
+.small{font-size:clamp(11px,1.15cqw,14.5px); color:var(--faint);}
+
+.cols{display:grid; gap:clamp(16px,2.4cqw,34px); align-items:center;}
+.cols--2{grid-template-columns:1fr 1fr;}
+.cols--3{grid-template-columns:repeat(3,1fr);}
+.cols--4{grid-template-columns:repeat(4,1fr);}
+.cols--sb{grid-template-columns:1.15fr .85fr;}
+.cols > *{min-width:0;}
+
+.card{
+  padding:clamp(14px,1.8cqw,24px); border-radius:14px;
+  background:var(--surface); border:1px solid var(--line);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.card p{color:var(--muted); font-size:clamp(11.5px,1.25cqw,15px);}
+
+.big{font-family:var(--display); font-size:clamp(26px,3.8cqw,46px); line-height:1.05; color:var(--accent);}
+.big + .small{margin-top:5px;}
+
+.list{display:grid; gap:clamp(7px,.9cqw,12px);}
+.list li{position:relative; padding-left:26px; color:var(--muted); font-size:clamp(12px,1.35cqw,17px); line-height:1.45;}
+.list li::before{content:""; position:absolute; left:2px; top:.45em; width:13px; height:7px; border-left:2px solid var(--accent); border-bottom:2px solid var(--accent); transform:rotate(-45deg);}
+.list b{color:var(--text); font-weight:700;}
+
+/* полосы сметы */
+.bars{display:grid; gap:clamp(5px,.7cqw,9px);}
+.brow{display:grid; grid-template-columns:minmax(0,1fr) 3fr auto; gap:clamp(8px,1.2cqw,16px); align-items:center; font-size:clamp(11px,1.2cqw,15px);}
+.brow span:first-child{color:var(--muted);}
+.btrack{height:clamp(12px,1.5cqw,20px); background:var(--surface-2); border-radius:5px; overflow:hidden;}
+.bfill{height:100%; background:linear-gradient(90deg, var(--accent-deep), var(--accent)); border-radius:5px;}
+.bfill--dim{background:rgba(143,191,168,.5);}
+.brow b{white-space:nowrap; font-size:clamp(11px,1.2cqw,15px); color:var(--text);}
+
+/* таблица комплектаций */
+.tar{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.4cqw,18px);}
+.tar > *{min-width:0;}
+.tarbox{
+  display:flex; flex-direction:column; padding:clamp(14px,1.8cqw,24px);
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+}
+.tarbox--best{
+  border-color:var(--accent);
+  background:linear-gradient(180deg, var(--accent-wash), var(--surface));
+  box-shadow:0 14px 40px -20px rgba(232,162,74,.55);
+}
+.tarbox .price{font-family:var(--display); font-size:clamp(18px,2.4cqw,30px); color:var(--accent); line-height:1.1;}
+.tarbox .unit{margin-bottom:10px; color:var(--faint); font-size:clamp(10px,1.1cqw,13px);}
+
+/* этапы */
+.steps{display:grid; grid-template-columns:repeat(5,1fr); gap:clamp(8px,1.2cqw,16px);}
+.steps > *{min-width:0;}
+.stepbox{
+  padding:clamp(12px,1.5cqw,20px); background:var(--surface);
+  border:1px solid var(--line); border-radius:14px; border-top:3px solid var(--accent);
+}
+.stepbox b{display:block; font-family:var(--display); font-size:clamp(13px,1.5cqw,18px); margin-bottom:5px; color:var(--text);}
+.stepbox span{display:block; color:var(--muted); font-size:clamp(10.5px,1.1cqw,13.5px); line-height:1.4;}
+.stepbox em{display:block; margin-top:7px; font-style:normal; font-weight:700; color:var(--accent); font-size:clamp(10.5px,1.1cqw,13.5px);}
+
+.quote{display:flex; flex-direction:column; height:100%; padding:clamp(14px,1.8cqw,24px); background:var(--surface); border:1px solid var(--line); border-radius:14px;}
+.quote p{flex:1; font-size:clamp(11.5px,1.25cqw,15.5px); color:var(--muted);}
+.quote footer{margin-top:12px; font-size:clamp(11px,1.15cqw,14px);}
+.quote footer b{display:block; color:var(--text);}
+.quote footer span{color:var(--faint);}
+
+.plan svg{width:100%; height:auto; max-width:100%; display:block;}
+.art{width:100%; max-width:100%;}
+.art svg{width:100%; height:auto; display:block;}
+
+/* ---------- управление ---------- */
+.bar{position:absolute; left:0; right:0; bottom:0; height:4px; background:rgba(245,241,233,.1); z-index:4;}
+.bar i{display:block; height:100%; background:linear-gradient(90deg, var(--accent-deep), var(--accent)); transition:width .3s cubic-bezier(.22,1,.36,1);}
+
+/* Стрелки на матовой подложке — один вид на всех слайдах.
+   Раньше их стиль зависел от того, есть ли выше по разметке тёмный слайд,
+   и на светлых слайдах они становились белыми на белом. */
+.hud{
+  position:absolute; right:clamp(14px,2vw,22px); bottom:clamp(16px,2vw,22px);
+  display:flex; align-items:center; gap:6px; z-index:5;
+  padding:5px; border-radius:14px;
+  background:rgba(12,10,8,.55); border:1px solid rgba(245,241,233,.16);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 10px 28px -14px rgba(0,0,0,.8);
+}
+.hud button{
+  display:grid; place-items:center; width:36px; height:36px;
+  border:1px solid transparent; border-radius:10px;
+  background:rgba(245,241,233,.1); color:var(--text); cursor:pointer;
+  transition:background .18s, color .18s, transform .18s;
+}
+.hud button:hover{background:var(--accent); color:#1a1309; transform:translateY(-1px);}
+.hud button:active{transform:none;}
+.hud button svg{width:17px; height:17px;}
+.count{padding:0 8px; font-size:14px; font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums;}
+
+.tip{
+  position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
+  padding:7px 15px; border-radius:999px; background:rgba(12,10,8,.72); color:#fff;
+  font-size:12.5px; transition:opacity .4s; z-index:10;
+}
+.tip.is-off{opacity:0; pointer-events:none;}
+
+@media (max-width:760px){
+  .cols--2,.cols--sb{grid-template-columns:1fr;}
+  .cols--3,.cols--4{grid-template-columns:1fr 1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .tar{grid-template-columns:1fr;}
+  .slide{overflow-y:auto;}
+}
+
+/* ---------- печать в PDF ----------
+   На бумаге тёмный фон не печатают: переопределяем те же переменные
+   на светлые, и вся колода переворачивается одним блоком. */
+@media print{
+  :root{
+    --bg:#ffffff; --bg-2:#ffffff;
+    --surface:#faf8f4; --surface-2:#efe8dd;
+    --text:#1b1813; --muted:#4f4840; --faint:#847b70;
+    --line:#ddd4c6; --line-soft:transparent;
+    --accent:#a85f21; --accent-deep:#874a15; --accent-wash:#f7ece1;
+    color-scheme:light;
+  }
+  body{overflow:visible; background:#fff; color:var(--text);}
+  .stage{position:static; padding:0; display:block;}
+  .deck{
+    width:auto; aspect-ratio:auto; max-height:none; border-radius:0;
+    background:#fff; box-shadow:none;
+  }
+  .deck::before,.deck::after{display:none;}
+  .slide{position:static; display:flex !important; min-height:0; break-after:page; page-break-after:always; padding:14mm;}
+  .slide:last-child{break-after:auto; page-break-after:auto;}
+  .slide.is-on > *{animation:none;}
+  .card,.tarbox,.stepbox,.quote{background:var(--surface); border-color:var(--line); box-shadow:none;}
+  .tarbox--best{background:var(--accent-wash);}
+  .bfill{background:var(--accent);}
+  .bfill--dim{background:#c6b9a8;}
+  .hud,.tip,.bar{display:none !important;}
+  @page{size:A4 landscape; margin:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- 1 -->
+    <section class="slide">
+      <span class="kicker">Коммерческое предложение</span>
+      <h1>Дом 96 м², в который заезжают через 70 дней</h1>
+      <p class="lead" style="margin-bottom:26px">Каркасный дом «Кедр 96» под ключ. Смета зафиксирована в договоре: сколько посчитали — столько и заплатите.</p>
+      <div class="cols cols--3" style="max-width:760px">
+        <div><p class="big">4 056 000 ₽</p><p class="small">под ключ с фундаментом</p></div>
+        <div><p class="big">70 дней</p><p class="small">от договора до ключей</p></div>
+        <div><p class="big">10 лет</p><p class="small">гарантия на конструктив</p></div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <span class="kicker">Почему это сложно</span>
+      <h2>Три страха, из-за которых покупку дома откладывают годами</h2>
+      <div class="cols cols--3" style="margin-top:22px">
+        <div class="card"><h3>«Смета вырастет вдвое»</h3><p>Подрядчик называет привлекательную цену, а к середине стройки выясняется, что грунт сложный, материалы подорожали и нужно ещё миллион.</p></div>
+        <div class="card"><h3>«Стройка растянется на годы»</h3><p>Обещали за лето, а зимуете под плёнкой. Бригада уходит на другой объект, и повлиять на это нечем.</p></div>
+        <div class="card"><h3>«Каркасник — это холодно»</h3><p>Соседский опыт: дует из углов, счета за отопление как за квартиру вдвое больше.</p></div>
+      </div>
+      <p class="small" style="margin-top:22px">Дальше — что мы делаем с каждым из этих трёх.</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <span class="kicker">Ответ на первый страх</span>
+      <h2>Смета фиксируется до начала работ</h2>
+      <div class="cols cols--2" style="margin-top:20px">
+        <ul class="list">
+          <li><b>Считаем после выезда на участок,</b> а не по телефону. Грунт и подъезд видим своими глазами — отсюда честная цена фундамента.</li>
+          <li><b>Сумма в договоре не меняется</b> от подорожания материалов. Этот риск берём на себя.</li>
+          <li><b>Оплата по этапам:</b> 20% на старте, 30% после фундамента, 35% после контура, 15% после приёмки.</li>
+          <li><b>Изменить смету можно только вашей подписью</b> — допсоглашением, если вы сами захотите что-то добавить.</li>
+        </ul>
+        <div class="card">
+          <h3>Что входит в 4 056 000 ₽</h3>
+          <div class="bars" style="margin-top:12px">
+            <div class="brow"><span>Каркас и перекрытия</span><div class="btrack"><i class="bfill" style="width:100%"></i></div><b>905 000</b></div>
+            <div class="brow"><span>Черновая отделка</span><div class="btrack"><i class="bfill" style="width:72%"></i></div><b>653 000</b></div>
+            <div class="brow"><span>Инженерия</span><div class="btrack"><i class="bfill" style="width:70%"></i></div><b>638 000</b></div>
+            <div class="brow"><span>Утепление</span><div class="btrack"><i class="bfill" style="width:53%"></i></div><b>482 000</b></div>
+            <div class="brow"><span>Фасад</span><div class="btrack"><i class="bfill" style="width:46%"></i></div><b>412 000</b></div>
+            <div class="brow"><span>Кровля</span><div class="btrack"><i class="bfill" style="width:44%"></i></div><b>394 000</b></div>
+            <div class="brow"><span>Окна и двери</span><div class="btrack"><i class="bfill" style="width:39%"></i></div><b>356 000</b></div>
+            <div class="brow"><span>Фундамент</span><div class="btrack"><i class="bfill bfill--dim" style="width:24%"></i></div><b>216 000</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <span class="kicker">Ответ на второй страх</span>
+      <h2>Срок с неустойкой, а не «ориентировочно к осени»</h2>
+      <div class="steps" style="margin-top:22px">
+        <div class="stepbox"><b>Выезд</b><span>Смотрим грунт, подъезд, границы участка</span><em>1–3 дня</em></div>
+        <div class="stepbox"><b>Проект и смета</b><span>Планировка, расчёт до самореза, договор</span><em>3–7 дней</em></div>
+        <div class="stepbox"><b>Фундамент</b><span>Тип выбираем по результатам осмотра</span><em>5–14 дней</em></div>
+        <div class="stepbox"><b>Контур</b><span>Каркас, кровля, окна. Дом закрыт и утеплён</span><em>15–40 дней</em></div>
+        <div class="stepbox"><b>Отделка</b><span>Инженерия, отделка, сдача с тепловизором</span><em>10–30 дней</em></div>
+      </div>
+      <div class="cols cols--2" style="margin-top:26px">
+        <div class="card"><h3>Неустойка 0,1% в день</h3><p>За каждый день просрочки по нашей вине. За 10 лет платили дважды: из-за поставщика окон и из-за аномальных дождей.</p></div>
+        <div class="card"><h3>Фотоотчёт каждый вечер</h3><p>Прораб присылает снимки в чат. Если живёте в другом городе, приезжать нужно только на приёмку этапов.</p></div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <span class="kicker">Ответ на третий страх</span>
+      <h2>200 мм утеплителя — теплее кирпичной кладки в полтора метра</h2>
+      <div class="cols cols--sb" style="margin-top:20px">
+        <div class="card plan">
+          <svg viewBox="0 0 420 210" role="img" aria-label="Схема слоёв стены">
+            <rect width="420" height="210" rx="8" fill="#f1ece3"/>
+            <g font-family="Manrope, sans-serif" font-size="11" font-weight="600">
+              <rect x="18" y="18" width="384" height="22" rx="3" fill="#2d423a" opacity=".85"/><text x="210" y="33" text-anchor="middle" fill="#fff">Гипсокартон</text>
+              <rect x="18" y="45" width="384" height="18" rx="3" fill="#a85f21" opacity=".55"/><text x="210" y="58" text-anchor="middle" fill="#221f1a">Пароизоляция</text>
+              <rect x="18" y="68" width="384" height="72" rx="3" fill="#a85f21" opacity=".2" stroke="#a85f21" stroke-width="1.4"/>
+              <text x="210" y="100" text-anchor="middle" fill="#221f1a" font-size="13" font-weight="700">Каркас + минеральная вата 200 мм</text>
+              <text x="210" y="118" text-anchor="middle" fill="#5f5950">основной слой тепла</text>
+              <rect x="18" y="145" width="384" height="18" rx="3" fill="#2d423a" opacity=".5"/><text x="210" y="158" text-anchor="middle" fill="#221f1a">Ветрозащитная мембрана + вентзазор</text>
+              <rect x="18" y="168" width="384" height="24" rx="3" fill="#2d423a"/><text x="210" y="184" text-anchor="middle" fill="#fff">Фасад: имитация бруса</text>
+            </g>
+          </svg>
+        </div>
+        <ul class="list">
+          <li><b>Промерзают не каркасники,</b> а дома с нарушенным пирогом стены: без ветрозащиты, без проклеенной пароизоляции или с провисшим утеплителем.</li>
+          <li><b>Сдаём со снимками тепловизора.</b> На них видно каждый мостик холода — и то, что его нет.</li>
+          <li><b>Древесина камерной сушки,</b> влажность 12–14%. Сырой брус дешевле вдвое, но через год ведёт каркас.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <span class="kicker">Проект</span>
+      <h2>«Кедр 96» — что внутри</h2>
+      <div class="cols cols--sb" style="margin-top:18px">
+        <div class="cols cols--2" style="gap:14px">
+          <div class="card plan">
+            <h3 style="font-size:14px">Первый этаж · 48 м²</h3>
+            <svg viewBox="0 0 220 150" role="img" aria-label="Планировка первого этажа" style="margin-top:8px">
+              <rect width="220" height="150" fill="#f1ece3" rx="5"/>
+              <g stroke="#221f1a" stroke-width="2" fill="#fff"><rect x="12" y="12" width="196" height="126"/></g>
+              <g stroke="#221f1a" stroke-width="1.6" fill="none"><line x1="12" y1="98" x2="86" y2="98"/><line x1="86" y1="12" x2="86" y2="138"/><line x1="86" y1="62" x2="150" y2="62"/><line x1="150" y1="12" x2="150" y2="62"/></g>
+              <g font-family="Manrope, sans-serif" font-size="8.5" font-weight="700" fill="#221f1a" text-anchor="middle">
+                <text x="49" y="52">Гостиная-кухня</text><text x="49" y="63" font-size="7.5" font-weight="600" fill="#5f5950">26 м²</text>
+                <text x="49" y="120">Тамбур</text><text x="118" y="36">Котельная</text><text x="179" y="36">Санузел</text>
+                <text x="148" y="106">Холл и лестница</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card plan">
+            <h3 style="font-size:14px">Второй этаж · 48 м²</h3>
+            <svg viewBox="0 0 220 150" role="img" aria-label="Планировка второго этажа" style="margin-top:8px">
+              <rect width="220" height="150" fill="#f1ece3" rx="5"/>
+              <g stroke="#221f1a" stroke-width="2" fill="#fff"><rect x="12" y="12" width="196" height="126"/></g>
+              <g stroke="#221f1a" stroke-width="1.6" fill="none"><line x1="100" y1="12" x2="100" y2="138"/><line x1="100" y1="78" x2="208" y2="78"/><line x1="156" y1="78" x2="156" y2="138"/></g>
+              <g font-family="Manrope, sans-serif" font-size="8.5" font-weight="700" fill="#221f1a" text-anchor="middle">
+                <text x="56" y="72">Спальня 1</text><text x="56" y="83" font-size="7.5" font-weight="600" fill="#5f5950">16 м²</text>
+                <text x="154" y="46">Холл</text><text x="128" y="112">Спальня 2</text><text x="182" y="104">Спальня 3</text><text x="182" y="128">Санузел</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <ul class="list">
+          <li><b>Габариты 8 × 6 м.</b> Стандартная доска — 6 метров, перекрытия собираются без сращивания.</li>
+          <li><b>Котельная вынесена</b> из жилой зоны: не слышно насоса, газовики согласуют без вопросов.</li>
+          <li><b>Санузлы друг над другом</b> — общий стояк, короче трассы, дешевле разводка.</li>
+          <li><b>Планировку можно менять.</b> Перенести стену или добавить окно — на срок не влияет.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <span class="kicker">Выбор</span>
+      <h2>Три комплектации: до какой готовности строим</h2>
+      <div class="tar" style="margin-top:20px">
+        <div class="tarbox">
+          <h3>Тёплый контур</h3>
+          <p class="price">3 840 000 ₽</p>
+          <p class="unit">40 000 ₽ за м² · от 35 дней</p>
+          <ul class="list">
+            <li>Каркас, утепление, кровля</li>
+            <li>Окна и входная дверь</li>
+            <li>Фасад</li>
+          </ul>
+        </div>
+        <div class="tarbox tarbox--best">
+          <h3>Комфорт</h3>
+          <p class="price">4 416 000 ₽</p>
+          <p class="unit">46 000 ₽ за м² · от 50 дней</p>
+          <ul class="list">
+            <li>Всё из «Тёплого контура»</li>
+            <li>Электрика, вода, отопление</li>
+            <li>Черновая отделка и двери</li>
+          </ul>
+        </div>
+        <div class="tarbox">
+          <h3>Под ключ</h3>
+          <p class="price">4 992 000 ₽</p>
+          <p class="unit">52 000 ₽ за м² · от 70 дней</p>
+          <ul class="list">
+            <li>Всё из «Комфорта»</li>
+            <li>Чистовая отделка и сантехника</li>
+            <li>Документы для Росреестра</li>
+          </ul>
+        </div>
+      </div>
+      <p class="small" style="margin-top:16px">Цены указаны для дома 96 м² без фундамента. Фундамент считается отдельно: от 216 000 ₽ за свайно-винтовой до 475 200 ₽ за монолитную плиту.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <span class="kicker">Неочевидное</span>
+      <h2>Что на самом деле двигает цену</h2>
+      <p class="lead">Покупатели торгуются за фундамент, а решающее решение принимают мимоходом.</p>
+      <div class="bars" style="margin-top:24px; max-width:840px">
+        <div class="brow"><span>Комплектация<br><small style="color:var(--faint)">контур → под ключ</small></span><div class="btrack"><i class="bfill" style="width:100%"></i></div><b>+1 152 000 ₽</b></div>
+        <div class="brow"><span>Этажность<br><small style="color:var(--faint)">один этаж → два</small></span><div class="btrack"><i class="bfill bfill--dim" style="width:38%"></i></div><b>−436 800 ₽</b></div>
+        <div class="brow"><span>Фундамент<br><small style="color:var(--faint)">сваи → плита</small></span><div class="btrack"><i class="bfill bfill--dim" style="width:22%"></i></div><b>+259 200 ₽</b></div>
+      </div>
+      <div class="cols cols--2" style="margin-top:26px">
+        <div class="card"><h3>Второй этаж дешевле, а не дороже</h3><p>При той же площади пятно застройки вдвое меньше: меньше фундамента и кровли. Экономия 437 000 ₽ на тех же 96 м².</p></div>
+        <div class="card"><h3>Фундамент — всего 5% сметы</h3><p>Даже самый дорогой вариант добавит 259 000 ₽. Экономить здесь в ущерб надёжности бессмысленно.</p></div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <span class="kicker">О нас</span>
+      <h2>Кто будет строить</h2>
+      <div class="cols cols--4" style="margin-top:26px">
+        <div><p class="big">214</p><p class="small">дома сдано с 2014 года</p></div>
+        <div><p class="big">26</p><p class="small">человек в штате, без субподряда на каркас</p></div>
+        <div><p class="big">1 400 м²</p><p class="small">собственный цех в Клину</p></div>
+        <div><p class="big">0</p><p class="small">судебных споров с заказчиками</p></div>
+      </div>
+      <ul class="list" style="margin-top:30px; max-width:80ch">
+        <li><b>Домокомплект собираем сами.</b> Своя сушильная камера и линия раскроя — отвечаем за качество древесины, а не пересылаем претензии поставщику.</li>
+        <li><b>Гарантия по пунктам:</b> 10 лет на каркас и кровлю, 3 года на инженерию, 1 год на отделку. Выезд по заявке — в течение 3 рабочих дней.</li>
+        <li><b>Покажем адреса сданных домов.</b> С разрешения владельцев — можно приехать и поговорить без нас.</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <span class="kicker">Отзывы</span>
+      <h2>Что говорят те, кто уже заехал</h2>
+      <div class="cols cols--3" style="margin-top:22px; align-items:stretch">
+        <blockquote class="quote">
+          <p>Боялась, что смету пересчитают в середине стройки — так было у знакомых. Итог совпал с договором до рубля. Единственная доплата была наша: попросили окна побольше.</p>
+          <footer><b>Марина, Дмитров</b><span>Кедр 96, заехали в мае</span></footer>
+        </blockquote>
+        <blockquote class="quote">
+          <p>Зимой держит тепло: при минус 22 на улице внутри 23 без дополнительного обогревателя. Счета за газ вышли меньше, чем за нашу прежнюю квартиру.</p>
+          <footer><b>Андрей, Тверская обл.</b><span>Модуль 54 Дуо</span></footer>
+        </blockquote>
+        <blockquote class="quote">
+          <p>Понравилось, что отчитывались фотографиями каждый вечер. Я живу в другом городе и приехал только на приёмку — всё совпало с тем, что видел на снимках.</p>
+          <footer><b>Сергей, Калуга</b><span>Ель 120, сдан в августе</span></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <span class="kicker">Что дальше</span>
+      <h2>Следующий шаг — бесплатный выезд на участок</h2>
+      <div class="cols cols--4" style="margin-top:26px">
+        <div class="card"><h3>1. Созвон</h3><p>Уточняем адрес, площадь и удобный день. Пять минут.</p></div>
+        <div class="card"><h3>2. Выезд</h3><p>Замер, проба грунта, оценка подъезда для техники.</p></div>
+        <div class="card"><h3>3. Расчёт</h3><p>За два дня присылаем смету с разбивкой и сроками.</p></div>
+        <div class="card"><h3>4. Решение</h3><p>Договор или нет — расчёт остаётся у вас в любом случае.</p></div>
+      </div>
+      <p class="lead" style="margin-top:28px">Выезд бесплатный, даже если вы выберете другого подрядчика. Расчёт заберёте с собой — с ним удобно сравнивать предложения.</p>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide">
+      <span class="kicker">Контакты</span>
+      <h1 style="max-width:18ch">Приезжайте на производство — покажем дом в сборке</h1>
+      <div class="cols cols--3" style="margin-top:26px; max-width:860px">
+        <div><p class="big" style="font-size:clamp(17px,2.1cqw,26px)">8 800 123-45-67</p><p class="small">звонок по России бесплатный</p></div>
+        <div><p class="big" style="font-size:clamp(17px,2.1cqw,26px)">info@kedron-demo.ru</p><p class="small">пришлите проект или чужую смету</p></div>
+        <div><p class="big" style="font-size:clamp(17px,2.1cqw,26px)">Клин, Литейная, 12с3</p><p class="small">цех и офис, Пн–Сб 9:00–19:00</p></div>
+      </div>
+      <p class="small" style="margin-top:32px">КЕДРОН — вымышленная компания. Демонстрационная презентация для портфолио: контакты и цены приведены как пример.</p>
+    </section>
+
+    <div class="bar" aria-hidden="true"><i id="progress"></i></div>
+
+    <div class="hud">
+      <button type="button" id="prev" aria-label="Предыдущий слайд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <span class="count"><span id="cur">1</span> / <span id="total">12</span></span>
+      <button type="button" id="next" aria-label="Следующий слайд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button type="button" id="full" aria-label="Во весь экран">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<p class="tip" id="tip">Листать: стрелки, пробел или клик по слайду · F — во весь экран · Ctrl+P — сохранить в PDF</p>
+
+<script>
+(function () {
+  'use strict';
+
+  var deck = document.getElementById('deck');
+  var slides = deck.querySelectorAll('.slide');
+  var last = slides.length - 1;
+  var cur = 0;
+
+  document.getElementById('total').textContent = slides.length;
+
+  function show(n, push) {
+    cur = Math.min(Math.max(n, 0), last);
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.toggle('is-on', i === cur);
+    }
+    document.getElementById('cur').textContent = cur + 1;
+    document.getElementById('progress').style.width = ((cur + 1) / slides.length * 100) + '%';
+    if (push !== false) history.replaceState(null, '', '#' + (cur + 1));
+  }
+
+  function next() { show(cur + 1); }
+  function prev() { show(cur - 1); }
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  document.getElementById('full').addEventListener('click', function () {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { e.preventDefault(); show(0); }
+    else if (e.key === 'End') { e.preventDefault(); show(last); }
+    else if (e.key === 'f' || e.key === 'F' || e.key === 'а' || e.key === 'А') {
+      document.getElementById('full').click();
+    }
+  });
+
+  /* клик по слайду: правая половина — вперёд, левая — назад */
+  deck.addEventListener('click', function (e) {
+    if (e.target.closest('.hud') || e.target.closest('a') || e.target.closest('button')) return;
+    var r = deck.getBoundingClientRect();
+    if (e.clientX - r.left > r.width * 0.35) next(); else prev();
+  });
+
+  /* свайп на телефоне */
+  var x0 = null;
+  deck.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  deck.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+    x0 = null;
+  }, { passive: true });
+
+  /* подсказка исчезает сама */
+  setTimeout(function () { document.getElementById('tip').classList.add('is-off'); }, 5200);
+
+  /* открытие по ссылке вида #7 */
+  function fromHash(push) {
+    var n = parseInt((location.hash || '').replace('#', ''), 10);
+    show(isNaN(n) ? 0 : n - 1, push);
+  }
+  /* смена только якоря страницу не перезагружает — ловим её отдельно,
+     иначе ссылка на слайд не сработает у того, кто уже открыл презентацию */
+  window.addEventListener('hashchange', function () { fromHash(false); });
+  fromHash(false);
+})();
+</script>
+</body>
+</html>

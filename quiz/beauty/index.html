@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ШЁЛК — студия косметологии</title>
+    <meta
+      name="description"
+      content="Демо-квиз студии косметологии «Шёлк»: подбор процедуры под кожу без навязывания."
+    >
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="petals" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <g fill="currentColor" opacity="0.92">
+              <ellipse cx="60" cy="30" rx="13" ry="26"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(72 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(144 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(216 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(288 60 60)"/>
+            </g>
+            <circle cx="60" cy="60" r="12" fill="#e7b96f"/>
+          </svg>
+        </span>
+        <div>
+          <p class="brand-title" id="headerTitle"></p>
+          <p class="brand-subtitle" id="headerSubtitle"></p>
+        </div>
+      </div>
+      <p class="brand-meta">Студия косметологии</p>
+    </header>
+
+    <main class="app-shell">
+      <section class="screen screen-start" id="startScreen">
+        <span class="bouquet" aria-hidden="true">
+          <svg viewBox="0 0 260 260">
+            <g stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.55">
+              <path d="M130 250c0-60-26-104-62-132"/>
+              <path d="M130 250c0-52 20-96 56-124"/>
+              <path d="M130 250c4-44 2-82-6-114"/>
+            </g>
+            <g fill="currentColor" opacity="0.4">
+              <ellipse cx="86" cy="150" rx="20" ry="9" transform="rotate(-35 86 150)"/>
+              <ellipse cx="172" cy="160" rx="20" ry="9" transform="rotate(32 172 160)"/>
+              <ellipse cx="112" cy="186" rx="17" ry="8" transform="rotate(-18 112 186)"/>
+            </g>
+            <g class="bloom-a">
+              <g fill="currentColor" opacity="0.6">
+                <ellipse cx="68" cy="96" rx="11" ry="22"/>
+                <ellipse cx="68" cy="96" rx="11" ry="22" transform="rotate(72 68 118)"/>
+                <ellipse cx="68" cy="96" rx="11" ry="22" transform="rotate(144 68 118)"/>
+                <ellipse cx="68" cy="96" rx="11" ry="22" transform="rotate(216 68 118)"/>
+                <ellipse cx="68" cy="96" rx="11" ry="22" transform="rotate(288 68 118)"/>
+              </g>
+              <circle cx="68" cy="118" r="9" fill="#e7b96f" opacity="0.75"/>
+            </g>
+            <g class="bloom-b">
+              <g fill="currentColor" opacity="0.5">
+                <ellipse cx="186" cy="104" rx="9" ry="18"/>
+                <ellipse cx="186" cy="104" rx="9" ry="18" transform="rotate(72 186 122)"/>
+                <ellipse cx="186" cy="104" rx="9" ry="18" transform="rotate(144 186 122)"/>
+                <ellipse cx="186" cy="104" rx="9" ry="18" transform="rotate(216 186 122)"/>
+                <ellipse cx="186" cy="104" rx="9" ry="18" transform="rotate(288 186 122)"/>
+              </g>
+              <circle cx="186" cy="122" r="7" fill="#e7b96f" opacity="0.7"/>
+            </g>
+            <g class="bloom-c">
+              <g fill="currentColor" opacity="0.55">
+                <ellipse cx="126" cy="56" rx="12" ry="24"/>
+                <ellipse cx="126" cy="56" rx="12" ry="24" transform="rotate(72 126 80)"/>
+                <ellipse cx="126" cy="56" rx="12" ry="24" transform="rotate(144 126 80)"/>
+                <ellipse cx="126" cy="56" rx="12" ry="24" transform="rotate(216 126 80)"/>
+                <ellipse cx="126" cy="56" rx="12" ry="24" transform="rotate(288 126 80)"/>
+              </g>
+              <circle cx="126" cy="80" r="10" fill="#e7b96f" opacity="0.8"/>
+            </g>
+          </svg>
+        </span>
+
+        <p class="kicker" id="projectTagline"></p>
+        <h1 id="startTitle"></h1>
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg viewBox="0 0 120 120" class="divider-flower">
+            <g fill="currentColor">
+              <ellipse cx="60" cy="30" rx="13" ry="26"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(72 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(144 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(216 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(288 60 60)"/>
+            </g>
+            <circle cx="60" cy="60" r="12" fill="#e7b96f"/>
+          </svg>
+          <span></span>
+        </div>
+        <p class="lead" id="startSubtitle"></p>
+        <ul class="benefit-list" id="startBenefits"></ul>
+        <button class="button button-primary" id="startButton" type="button"></button>
+      </section>
+
+      <section class="screen screen-question is-hidden" id="questionScreen" aria-live="polite">
+        <div class="quiz-topline">
+          <p class="question-counter" id="questionCounter"></p>
+          <div class="progress" aria-hidden="true">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <h2 id="questionTitle"></h2>
+        <p class="question-hint" id="questionHint"></p>
+        <div class="answer-list" id="answerList"></div>
+      </section>
+
+      <section class="screen screen-result is-hidden" id="resultScreen" aria-live="polite">
+        <span class="sprig" aria-hidden="true">
+          <svg viewBox="0 0 160 90">
+            <path d="M6 84C44 74 96 52 154 10" stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.5"/>
+            <g fill="currentColor" opacity="0.42">
+              <ellipse cx="42" cy="66" rx="16" ry="7" transform="rotate(-28 42 66)"/>
+              <ellipse cx="76" cy="50" rx="16" ry="7" transform="rotate(-28 76 50)"/>
+              <ellipse cx="110" cy="34" rx="16" ry="7" transform="rotate(-28 110 34)"/>
+            </g>
+            <g fill="currentColor" opacity="0.55">
+              <ellipse cx="146" cy="16" rx="7" ry="13"/>
+              <ellipse cx="146" cy="16" rx="7" ry="13" transform="rotate(72 146 29)"/>
+              <ellipse cx="146" cy="16" rx="7" ry="13" transform="rotate(144 146 29)"/>
+              <ellipse cx="146" cy="16" rx="7" ry="13" transform="rotate(216 146 29)"/>
+              <ellipse cx="146" cy="16" rx="7" ry="13" transform="rotate(288 146 29)"/>
+            </g>
+          </svg>
+        </span>
+
+        <p class="kicker" id="resultKicker"></p>
+        <h2 id="resultTitle"></h2>
+        <div class="divider" aria-hidden="true">
+          <span></span>
+          <svg viewBox="0 0 120 120" class="divider-flower">
+            <g fill="currentColor">
+              <ellipse cx="60" cy="30" rx="13" ry="26"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(72 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(144 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(216 60 60)"/>
+              <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(288 60 60)"/>
+            </g>
+            <circle cx="60" cy="60" r="12" fill="#e7b96f"/>
+          </svg>
+          <span></span>
+        </div>
+        <p class="result-description" id="resultDescription"></p>
+
+        <div class="recommendations">
+          <h3 id="recommendationsTitle"></h3>
+          <ol id="recommendationsList"></ol>
+        </div>
+
+        <p class="cta-note" id="resultCta"></p>
+
+        <form class="lead-form" id="leadForm">
+          <div class="form-heading">
+            <h3 id="formTitle"></h3>
+            <p id="formDescription"></p>
+          </div>
+
+          <label>
+            <span id="nameLabel"></span>
+            <input id="leadName" name="name" type="text" autocomplete="name" required>
+          </label>
+
+          <label>
+            <span id="contactLabel"></span>
+            <input id="leadContact" name="contact" type="text" autocomplete="tel" required>
+          </label>
+
+          <label>
+            <span id="commentLabel"></span>
+            <textarea id="leadComment" name="comment" rows="4"></textarea>
+          </label>
+
+          <label class="lead-consent" for="leadConsent">
+            <input type="checkbox" id="leadConsent" name="consent" required>
+            <span>Даю согласие на обработку персональных данных в соответствии с <a href="../privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>. Ответы на вопросы квиза передаются вместе с заявкой.</span>
+          </label>
+
+          <button class="button button-primary" id="submitButton" type="submit"></button>
+        </form>
+
+        <div class="success-message is-hidden" id="successMessage"></div>
+        <button class="button button-secondary" id="restartButton" type="button"></button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p id="footerText"></p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

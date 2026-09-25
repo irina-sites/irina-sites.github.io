@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Портфолио: квизы для сбора заявок</title>
+    <meta name="description" content="Шесть квизов для лидогенерации — каждый со своим брендом и дизайном.">
+    <link rel="icon" href="data:,">
+    <style>
+      :root {
+        --bg: #0e0e12;
+        --surface: #17171e;
+        --text: #f4f4f7;
+        --muted: #9a9aad;
+        --border: #272733;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background: var(--bg);
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+        line-height: 1.55;
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        position: relative;
+        width: min(1100px, calc(100% - 36px));
+        margin: 0 auto;
+        padding: 64px 0 72px;
+      }
+
+      .glow {
+        position: fixed;
+        top: -300px;
+        left: 50%;
+        width: 900px;
+        height: 620px;
+        transform: translateX(-50%);
+        background: radial-gradient(circle, rgba(108, 62, 244, 0.3), transparent 65%);
+        pointer-events: none;
+      }
+
+      .kicker {
+        display: inline-flex;
+        margin: 0 0 20px;
+        padding: 8px 16px;
+        color: #c8ff2f;
+        border: 1px solid #2f3a1a;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        position: relative;
+        margin: 0 0 18px;
+        font-size: clamp(34px, 6vw, 62px);
+        font-weight: 900;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+      }
+
+      .lead {
+        position: relative;
+        max-width: 56ch;
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .note {
+        position: relative;
+        max-width: 56ch;
+        margin: 0 0 46px;
+        color: #6f6f82;
+        font-size: 14px;
+      }
+
+      .grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 28px;
+        color: inherit;
+        text-decoration: none;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        transition: transform 0.22s ease, border-color 0.22s ease;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--brand);
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 180px;
+        height: 180px;
+        background: var(--brand);
+        border-radius: 50%;
+        opacity: 0.12;
+        filter: blur(30px);
+        transition: opacity 0.22s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--brand);
+      }
+
+      .card:hover::after { opacity: 0.26; }
+
+      .card-brand {
+        position: relative;
+        margin: 6px 0 4px;
+        color: var(--brand);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .card h2 {
+        position: relative;
+        margin: 0 0 10px;
+        font-size: 23px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .card p {
+        position: relative;
+        flex-grow: 1;
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .card-style {
+        position: relative;
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+        color: #6f6f82;
+        font-size: 13px;
+      }
+
+      footer a {
+        color: #a98cff;
+      }
+
+      .card-link {
+        position: relative;
+        margin-top: 16px;
+        color: var(--brand);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      footer {
+        position: relative;
+        margin-top: 56px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        color: #6f6f82;
+        font-size: 13px;
+      }
+
+      @media (max-width: 640px) {
+        .wrap { padding: 40px 0 48px; }
+        .card { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kicker">Портфолио</p>
+      <h1>Квизы, которые приводят заявки</h1>
+      <p class="lead">
+        Шесть ниш — шесть разных бизнесов. У каждого свой характер: вопросы, сегментация
+        клиентов, тексты и полностью отдельный дизайн.
+      </p>
+      <p class="note">
+        Бренды в примерах вымышленные, созданы специально для портфолио. Под реального
+        клиента адаптируется всё: от названия и цветов до логики вопросов.
+      </p>
+
+      <div class="grid">
+        <a class="card" href="real-estate/index.html" style="--brand:#c9a227">
+          <span class="card-brand">Меридиан</span>
+          <h2>Подбор недвижимости</h2>
+          <p>Определяет, что человеку нужно: квартира для жизни, объект под доход или срочная сделка.</p>
+          <span class="card-style">Тёмный премиум, золото, чертёжная сетка</span>
+          <span class="card-link">Открыть демо →</span>
+        </a>
+
+        <a class="card" href="dentistry/index.html" style="--brand:#16a3c7">
+          <span class="card-brand">Белый Кит</span>
+          <h2>Семейная стоматология</h2>
+          <p>Снимает страх перед визитом и показывает первый шаг: боль, план лечения, эстетика или имплант.</p>
+          <span class="card-style">Светлый и мягкий, волны, мятно-голубой</span>
+          <span class="card-link">Открыть демо →</span>
+        </a>
+
+        <a class="card" href="beauty/index.html" style="--brand:#e0789a">
+          <span class="card-brand">Шёлк</span>
+          <h2>Студия косметологии</h2>
+          <p>Подбирает процедуру по типу кожи и цели — спокойно, без давления и навязывания.</p>
+          <span class="card-style">Розовые градиенты, цветы, золотая рамка</span>
+          <span class="card-link">Открыть демо →</span>
+        </a>
+
+        <a class="card" href="fitness/index.html" style="--brand:#c8ff2f">
+          <span class="card-brand">Пульс</span>
+          <h2>Студия тренировок</h2>
+          <p>Разделяет новичков и продолжающих: мягкий старт, работа с питанием или полная программа.</p>
+          <span class="card-style">Чёрный, неоновый лайм, бегущая строка</span>
+          <span class="card-link">Открыть демо →</span>
+        </a>
+
+        <a class="card" href="legal/index.html" style="--brand:#b99b5f">
+          <span class="card-brand">Статус</span>
+          <h2>Юридическая компания</h2>
+          <p>Отделяет срочные обращения от плановых: сроки, документы, спор или профилактика.</p>
+          <span class="card-style">Бордовая шапка, бланк с полями, печать</span>
+          <span class="card-link">Открыть демо →</span>
+        </a>
+
+        <a class="card" href="online-school/index.html" style="--brand:#6c3ef4">
+          <span class="card-brand">Мастерская</span>
+          <h2>Онлайн-школа</h2>
+          <p>Сегментирует аудиторию до продажи: новичок, практик, готов к программе или на консультацию.</p>
+          <span class="card-style">Яркий необрутализм, толстые рамки, фиолетовый</span>
+          <span class="card-link">Открыть демо →</span>
+        </a>
+      </div>
+
+      <footer>
+        <p>Все примеры работают локально: без сервера, базы данных и внешних сервисов. Заявки в демо не отправляются — подключение CRM, Telegram или почты делается отдельным этапом.</p>
+        <p>В каждом квизе стоит галочка согласия на обработку персональных данных, как требует 152-ФЗ. Вместе с квизом идёт <a href="privacy.html">шаблон политики конфиденциальности</a> — остаётся вписать реквизиты.</p>
+      </footer>
+    </div>
+  </body>
+</html>

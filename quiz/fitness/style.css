@@ -1,0 +1,666 @@
+/* ПУЛЬС — спортивный дерзкий: чёрный фон, неоновый лайм, жирный капс, диагонали. */
+:root {
+  --background: #0d0f12;
+  --surface: #16191f;
+  --surfaceMuted: #1d2128;
+  --text: #ffffff;
+  --muted: #98a1ad;
+  --primary: #c8ff2f;
+  --primaryDark: #a8e017;
+  --accent: #ff5c28;
+  --border: #262b33;
+  --success: #7ee787;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background: var(--background);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.stripes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(200, 255, 47, 0.05) 0px,
+    rgba(200, 255, 47, 0.05) 2px,
+    transparent 2px,
+    transparent 22px
+  );
+  mask-image: linear-gradient(160deg, #000 0%, transparent 55%);
+  -webkit-mask-image: linear-gradient(160deg, #000 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* халфтон-точки в углу */
+.dots {
+  position: fixed;
+  right: -40px;
+  bottom: -40px;
+  z-index: 0;
+  width: 320px;
+  height: 320px;
+  background-image: radial-gradient(rgba(200, 255, 47, 0.35) 1.6px, transparent 1.6px);
+  background-size: 14px 14px;
+  mask-image: radial-gradient(circle at 70% 70%, #000, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 70% 70%, #000, transparent 70%);
+  pointer-events: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ── Бегущая строка под шапкой ───────────────────────── */
+
+.ticker-wrap {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  margin-bottom: 4px;
+  padding: 6px 0;
+}
+
+.ticker {
+  overflow: hidden;
+  padding: 9px 0;
+  background: var(--primary);
+  transform: rotate(-1.2deg) scale(1.04);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 26s linear infinite;
+}
+
+.ticker-track span {
+  padding-right: 40px;
+  color: var(--background);
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
+
+.site-header,
+.site-footer,
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(960px, calc(100% - 36px));
+  margin: 0 auto;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 0 20px;
+  border-bottom: 2px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 54px;
+  height: 34px;
+  place-items: center;
+  color: var(--primary);
+}
+
+.brand-mark svg {
+  width: 100%;
+}
+
+.brand-title,
+.brand-subtitle,
+.brand-meta,
+.site-footer p {
+  margin: 0;
+}
+
+.brand-title {
+  font-family: "Arial Black", "Segoe UI", Impact, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.brand-meta {
+  padding: 6px 14px;
+  color: var(--background);
+  background: var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: skewX(-12deg);
+}
+
+.app-shell {
+  padding: 34px 0 44px;
+}
+
+.screen {
+  position: relative;
+  overflow: hidden;
+  padding: 42px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+}
+
+.screen-start::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 6px;
+  background: var(--primary);
+}
+
+/* крупный контурный водяной знак */
+.watermark {
+  position: absolute;
+  right: -14px;
+  bottom: -30px;
+  color: transparent;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(88px, 16vw, 184px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  -webkit-text-stroke: 2px rgba(200, 255, 47, 0.16);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* угловые уголки-скобки */
+.corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
+
+.corner-tr {
+  top: 14px;
+  right: 14px;
+  border-top: 3px solid var(--primary);
+  border-right: 3px solid var(--primary);
+}
+
+
+.kicker {
+  display: inline-flex;
+  margin: 0 0 22px;
+  padding: 8px 16px;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform: skewX(-12deg);
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: "Arial Black", "Segoe UI", Impact, sans-serif;
+  font-weight: 900;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  max-width: 14ch;
+  font-size: clamp(42px, 8.5vw, 88px);
+}
+
+h1 span,
+h2 span {
+  color: var(--primary);
+}
+
+h2 {
+  max-width: 18ch;
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+h3 {
+  margin: 0 0 16px;
+  font-family: "Arial Black", "Segoe UI", Impact, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+p {
+  overflow-wrap: anywhere;
+}
+
+.lead {
+  max-width: 50ch;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.benefit-list {
+  display: grid;
+  gap: 10px;
+  margin: 32px 0 36px;
+  padding: 0;
+  list-style: none;
+  counter-reset: benefit;
+}
+
+.benefit-list li {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--surfaceMuted);
+  border-left: 4px solid var(--primary);
+  font-size: 15px;
+  font-weight: 600;
+  counter-increment: benefit;
+}
+
+.benefit-list li::before {
+  content: "0" counter(benefit);
+  color: var(--primary);
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 18px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 16px 40px;
+  border: 2px solid transparent;
+  font-family: "Arial Black", "Segoe UI", Impact, sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: skewX(-12deg);
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.button > * {
+  transform: skewX(12deg);
+}
+
+.button-primary {
+  color: var(--background);
+  background: var(--primary);
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+.button-primary:hover {
+  background: #ffffff;
+  box-shadow: 9px 9px 0 var(--accent);
+}
+
+/* во всю ширину — без скоса, иначе острые углы срезает рамкой карточки */
+.button-secondary {
+  width: 100%;
+  margin-top: 18px;
+  color: var(--primary);
+  background: transparent;
+  border-color: var(--border);
+  box-shadow: none;
+  transform: none;
+}
+
+.button-secondary:hover {
+  color: var(--background);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.button:focus-visible,
+.answer-button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.quiz-topline {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.question-counter {
+  margin: 0;
+  color: var(--primary);
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  overflow: hidden;
+  background: var(--surfaceMuted);
+  border: 2px solid var(--border);
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--primary) 0px,
+    var(--primary) 10px,
+    var(--primaryDark) 10px,
+    var(--primaryDark) 20px
+  );
+  box-shadow: 0 0 14px rgba(200, 255, 47, 0.5);
+  transition: width 0.3s ease;
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(200, 255, 47, 0.35); }
+  50% { box-shadow: 0 0 20px rgba(200, 255, 47, 0.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar { animation: none; }
+}
+
+.question-hint {
+  max-width: 50ch;
+  margin: 14px 0 30px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.answer-list {
+  display: grid;
+  gap: 10px;
+  counter-reset: answer;
+}
+
+.answer-button {
+  position: relative;
+  width: 100%;
+  min-height: 64px;
+  padding: 18px 52px 18px 22px;
+  color: var(--text);
+  text-align: left;
+  background: var(--surfaceMuted);
+  border: 2px solid var(--border);
+  font-size: 16px;
+  font-weight: 700;
+  counter-increment: answer;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+}
+
+/* номер варианта справа */
+.answer-button::after {
+  content: "0" counter(answer);
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  color: var(--border);
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 17px;
+  transform: translateY(-50%);
+  transition: color 0.18s ease;
+}
+
+.answer-button:hover {
+  transform: translateX(6px);
+  color: var(--primary);
+  background: #11141a;
+  border-color: var(--primary);
+}
+
+.answer-button:hover::after {
+  color: var(--primary);
+}
+
+.result-description {
+  max-width: 56ch;
+  margin: 20px 0 30px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.recommendations {
+  margin: 0 0 28px;
+  padding: 28px;
+  background: var(--surfaceMuted);
+  border-left: 4px solid var(--accent);
+}
+
+.recommendations h3 {
+  color: var(--accent);
+}
+
+.recommendations ol {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 16px;
+}
+
+.recommendations li::marker {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.cta-note {
+  margin: 0 0 28px;
+  padding: 24px;
+  color: var(--background);
+  background: var(--primary);
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 17px;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.lead-form {
+  display: grid;
+  gap: 18px;
+  padding: 30px;
+  background: #11141a;
+  border: 2px solid var(--border);
+}
+
+.form-heading h3 {
+  color: var(--primary);
+}
+
+.form-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 15px 16px;
+  color: var(--text);
+  background: var(--surfaceMuted);
+  border: 2px solid var(--border);
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7480;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 22px;
+  color: var(--success);
+  background: rgba(126, 231, 135, 0.08);
+  border: 2px solid rgba(126, 231, 135, 0.3);
+  font-weight: 700;
+}
+
+.site-footer {
+  padding: 24px 0 34px;
+  border-top: 2px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .site-header,
+  .site-footer,
+  .app-shell {
+    width: calc(100% - 24px);
+  }
+
+  .screen {
+    padding: 24px 18px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .button {
+    width: 100%;
+    padding: 16px 18px;
+  }
+
+  .button-primary {
+    box-shadow: 4px 4px 0 var(--accent);
+  }
+
+  .recommendations,
+  .lead-form {
+    padding: 20px 16px;
+  }
+
+  .cta-note {
+    padding: 20px 18px;
+    font-size: 15px;
+  }
+}
+
+/* ==========================================================================
+   Галочка согласия на обработку персональных данных.
+   152-ФЗ ст.9: согласие должно быть конкретным и осознанным, поэтому
+   отдельная галочка, а не «отправляя форму, вы соглашаетесь».
+   Ниже сбрасываются общие правила для label и input — они в этом файле
+   задают капслок и подчёркнутое поле, чекбоксу это не нужно.
+   ========================================================================== */
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.55;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.lead-consent input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  margin-top: 1px;
+  padding: 0;
+  border: none;
+  border-bottom: none;
+  accent-color: var(--primary);
+}
+
+.lead-consent a {
+  color: var(--primary);
+}

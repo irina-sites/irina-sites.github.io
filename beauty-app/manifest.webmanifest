@@ -1,0 +1,20 @@
+{
+  "name": "Сияние 40+ · Уход за кожей",
+  "short_name": "Сияние 40+",
+  "description": "Персональный уход за кожей и отслеживание прогресса для женщин 40+",
+  "lang": "ru",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf3f1",
+  "theme_color": "#c96a7b",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

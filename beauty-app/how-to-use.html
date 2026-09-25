@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сияние 40+ · Как пользоваться</title>
+<style>
+  :root{
+    --rose:#c96a7b; --rose-dark:#a94d5f; --rose-soft:#f6e3e7;
+    --blush:#fbf3f1; --card:#fff; --ink:#3a2f31; --ink-soft:#7d6f72; --line:#ecdfe1;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--blush); color:var(--ink);
+    font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    font-size:18px; line-height:1.6; padding:24px 16px 60px;
+  }
+  .wrap{max-width:720px; margin:0 auto}
+  h1{font-size:32px; letter-spacing:-.5px; margin:0 0 4px}
+  .sub{color:var(--ink-soft); margin:0 0 26px; font-size:17px}
+  .card{
+    background:var(--card); border-radius:18px; padding:22px 24px;
+    box-shadow:0 6px 20px rgba(150,90,100,.10); margin-bottom:18px;
+  }
+  h2{font-size:22px; margin:0 0 14px; display:flex; align-items:center; gap:10px}
+  ol,ul{margin:0; padding-left:22px}
+  li{margin-bottom:10px}
+  b{color:var(--rose-dark)}
+  code{
+    background:var(--rose-soft); color:var(--rose-dark);
+    padding:2px 8px; border-radius:6px; font-size:16px;
+    font-family:"Consolas",monospace; word-break:break-all;
+  }
+  a{color:var(--rose-dark); font-weight:700}
+  .note{
+    background:var(--rose-soft); border-radius:14px; padding:14px 18px;
+    font-size:16px; color:var(--ink); margin-top:14px;
+  }
+  .foot{text-align:center; color:var(--ink-soft); font-size:15px; margin-top:30px}
+  table{width:100%; border-collapse:collapse; margin-top:6px}
+  td{padding:9px 6px; border-bottom:1px solid var(--line); vertical-align:top; font-size:16px}
+  td:first-child{white-space:nowrap; font-weight:700; color:var(--rose-dark); padding-right:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Сияние 40+ 🌷</h1>
+  <p class="sub">Приложение для ухода за кожей и гимнастики лица. Как всем этим пользоваться.</p>
+
+  <div class="card">
+    <h2>▶️ Как запустить на компьютере</h2>
+    <ol>
+      <li>Дважды кликните по файлу <b>«start-app.bat»</b></li>
+      <li>Откроется чёрное окно — это сервер. <b>Не закрывайте его</b>, пока пользуетесь приложением</li>
+      <li>Браузер откроется сам на странице приложения</li>
+      <li>Чтобы <b>остановить</b> — просто закройте чёрное окно</li>
+    </ol>
+    <div class="note">Если браузер не открылся сам — откройте вручную адрес: <code>http://localhost:8000/</code></div>
+  </div>
+
+  <div class="card">
+    <h2>🌍 Как опубликовать в интернете <span style="font-size:15px;color:var(--ink-soft);font-weight:400">(бесплатно, за минуту)</span></h2>
+    <p style="margin:0 0 14px">Через <b>Netlify Drop</b> — без программиста и без аккаунта для старта:</p>
+    <ol>
+      <li>Откройте в браузере: <a href="https://app.netlify.com/drop" target="_blank">app.netlify.com/drop</a></li>
+      <li><b>Перетащите</b> на страницу архив <b>«Сияние40-сайт.zip»</b> (лежит на рабочем столе)</li>
+      <li>Подождите ~30 секунд — Netlify выдаст живую ссылку вида <code>имя.netlify.app</code></li>
+      <li>Готово! Ссылка работает на любом устройстве</li>
+    </ol>
+    <div class="note">
+      <b>Чтобы ссылка осталась навсегда</b> — Netlify предложит создать бесплатный аккаунт (кнопка на той же странице). В настройках можно задать красивое имя: <code>ваше-имя.netlify.app</code>.<br><br>
+      <b>Чтобы обновить приложение</b> после правок — попросите пересобрать архив и перетащите новый на вкладке «Deploys» вашего сайта.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📱 Как поставить на телефон</h2>
+    <p style="margin:0 0 14px">После публикации откройте ссылку на телефоне:</p>
+    <ul>
+      <li><b>iPhone (Safari):</b> «Поделиться» → «На экран Домой»</li>
+      <li><b>Android (Chrome):</b> меню ⋮ → «Добавить на главный экран»</li>
+    </ul>
+    <p style="margin:14px 0 0">Появится иконка-цветок, приложение будет открываться на весь экран, работать без интернета и не отправлять данные никуда.</p>
+  </div>
+
+  <div class="card">
+    <h2>✏️ Как менять содержимое <span style="font-size:15px;color:var(--ink-soft);font-weight:400">(без программиста)</span></h2>
+    <p style="margin:0 0 12px">Всё простыми текстовыми файлами в папке <code>data</code>:</p>
+    <ul>
+      <li><code>data/articles.js</code> — статьи в разделе «Знания»</li>
+      <li><code>data/routines.js</code> — шаги ухода (утро / вечер)</li>
+      <li><code>data/exercises.js</code> — упражнения гимнастики для лица</li>
+    </ul>
+    <div class="note">Проще всего — попросите меня внести правки. После изменений перезапустите <code>.bat</code> и обновите страницу.</div>
+  </div>
+
+  <div class="card">
+    <h2>📂 Что где лежит</h2>
+    <table>
+      <tr><td>index.html</td><td>Главная страница приложения</td></tr>
+      <tr><td>css/</td><td>Внешний вид (цвета, шрифты)</td></tr>
+      <tr><td>js/</td><td>Логика работы экранов</td></tr>
+      <tr><td>data/</td><td><b>Тексты</b>: статьи, уход, упражнения — правьте здесь</td></tr>
+      <tr><td>assets/icons/</td><td>Иконка приложения</td></tr>
+      <tr><td>Запустить&nbsp;приложение.bat</td><td>Запуск на компьютере</td></tr>
+      <tr><td>Сияние40-сайт.zip</td><td>Архив для публикации на Netlify</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🔒 Приватность</h2>
+    <p style="margin:0">Профиль, отметки ухода, тренировки и фото «до/после» <b>никуда не отправляются</b> — они хранятся только в браузере на устройстве пользователя.</p>
+  </div>
+
+  <p class="foot">Сияние 40+ · версия 1.0 (базовая версия / MVP)</p>
+
+</div>
+</body>
+</html>

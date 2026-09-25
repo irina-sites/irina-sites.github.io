@@ -1,0 +1,552 @@
+/* МЕРИДИАН — тёмный премиум: чертёжная сетка, золото, серифные заголовки. */
+:root {
+  --background: #0a1420;
+  --surface: #101f30;
+  --surfaceMuted: #16283c;
+  --text: #f2f5f8;
+  --muted: #8ba0b5;
+  --primary: #c9a227;
+  --primaryDark: #a8871c;
+  --accent: #e8c45a;
+  --border: rgba(201, 162, 39, 0.24);
+  --success: #5ed29a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background: var(--background);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(201, 162, 39, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+.bg-glow {
+  position: fixed;
+  top: -240px;
+  left: 50%;
+  z-index: 0;
+  width: 900px;
+  height: 640px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(201, 162, 39, 0.16), transparent 65%);
+  pointer-events: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.site-header,
+.site-footer,
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(980px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  color: var(--primary);
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-title,
+.brand-subtitle,
+.brand-meta,
+.site-footer p {
+  margin: 0;
+}
+
+.brand-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.brand-meta {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.app-shell {
+  padding: 40px 0 44px;
+}
+
+.screen {
+  padding: 44px;
+  background: linear-gradient(160deg, rgba(22, 40, 60, 0.92), rgba(10, 20, 32, 0.92));
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+}
+
+.screen-start {
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-start::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  border-radius: 50%;
+}
+
+.kicker {
+  display: inline-flex;
+  margin: 0 0 24px;
+  padding: 7px 14px;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  max-width: 16ch;
+  font-size: clamp(38px, 6.4vw, 66px);
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 2px;
+  margin-top: 26px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+h2 {
+  font-size: clamp(28px, 4.4vw, 42px);
+}
+
+h3 {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+p {
+  overflow-wrap: anywhere;
+}
+
+.lead {
+  max-width: 56ch;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.benefit-list {
+  display: grid;
+  gap: 0;
+  margin: 34px 0 36px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.benefit-list li {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--border);
+  color: #d8e2ec;
+  counter-increment: benefit;
+}
+
+.benefit-list li::before {
+  content: "0" counter(benefit);
+  color: var(--primary);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.benefit-list {
+  counter-reset: benefit;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 15px 34px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.button-primary {
+  color: #0a1420;
+  background: var(--primary);
+}
+
+.button-primary:hover {
+  background: var(--accent);
+}
+
+.button-secondary {
+  width: 100%;
+  margin-top: 18px;
+  color: var(--primary);
+  background: transparent;
+  border-color: var(--border);
+}
+
+.button-secondary:hover {
+  border-color: var(--primary);
+}
+
+.button:focus-visible,
+.answer-button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.quiz-topline {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.question-counter {
+  margin: 0;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.progress {
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(201, 162, 39, 0.18);
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primaryDark), var(--accent));
+  transition: width 0.35s ease;
+}
+
+.question-hint {
+  margin: 14px 0 30px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.answer-list {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.answer-button {
+  position: relative;
+  width: 100%;
+  min-height: 64px;
+  padding: 18px 46px 18px 22px;
+  color: var(--text);
+  text-align: left;
+  background: rgba(10, 20, 32, 0.86);
+  border: none;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+.answer-button::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  color: var(--primary);
+  opacity: 0;
+  transform: translateY(-50%) translateX(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.answer-button:hover {
+  padding-left: 30px;
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.answer-button:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.result-description {
+  margin: 20px 0 30px;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.recommendations {
+  margin: 0 0 28px;
+  padding: 28px;
+  background: rgba(201, 162, 39, 0.06);
+  border-left: 2px solid var(--primary);
+}
+
+.recommendations h3 {
+  color: var(--primary);
+}
+
+.recommendations ol {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding-left: 20px;
+  color: #d8e2ec;
+}
+
+.recommendations li::marker {
+  color: var(--primary);
+  font-family: Georgia, serif;
+}
+
+.cta-note {
+  margin: 0 0 28px;
+  padding: 20px 24px;
+  color: var(--accent);
+  background: rgba(201, 162, 39, 0.08);
+  border: 1px solid var(--border);
+  font-family: Georgia, serif;
+  font-size: 18px;
+}
+
+.lead-form {
+  display: grid;
+  gap: 18px;
+  padding: 30px;
+  background: rgba(10, 20, 32, 0.7);
+  border: 1px solid var(--border);
+}
+
+.form-heading h3 {
+  color: var(--primary);
+}
+
+.form-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 15px 16px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 15px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #5f7488;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 20px;
+  color: var(--success);
+  background: rgba(94, 210, 154, 0.08);
+  border: 1px solid rgba(94, 210, 154, 0.3);
+  font-size: 15px;
+}
+
+.site-footer {
+  padding: 26px 0 32px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .site-header,
+  .site-footer,
+  .app-shell {
+    width: calc(100% - 28px);
+  }
+
+  .screen {
+    padding: 26px 22px;
+  }
+
+  .screen-start::after {
+    display: none;
+  }
+
+  .app-shell {
+    padding: 26px 0 30px;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .button {
+    width: 100%;
+    padding: 15px 20px;
+  }
+
+  .recommendations,
+  .lead-form {
+    padding: 22px 18px;
+  }
+
+  .cta-note {
+    padding: 18px;
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   Галочка согласия на обработку персональных данных.
+   152-ФЗ ст.9: согласие должно быть конкретным и осознанным, поэтому
+   отдельная галочка, а не «отправляя форму, вы соглашаетесь».
+   Ниже сбрасываются общие правила для label и input — они в этом файле
+   задают капслок и подчёркнутое поле, чекбоксу это не нужно.
+   ========================================================================== */
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.55;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.lead-consent input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  margin-top: 1px;
+  padding: 0;
+  border: none;
+  border-bottom: none;
+  accent-color: var(--primary);
+}
+
+.lead-consent a {
+  color: var(--primary);
+}

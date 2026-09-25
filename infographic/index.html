@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Из чего складывается цена каркасного дома — инфографика</title>
+<meta name="description" content="Разбор сметы каркасного дома 96 м²: что и сколько весит в цене, как влияют комплектация, этажность и тип фундамента.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Из чего складывается цена каркасного дома">
+<meta property="og:description" content="Комплектация меняет цену на 1,15 млн ₽ — больше, чем фундамент и этажность вместе.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c17a4e'/%3E%3Cg fill='%23fff'%3E%3Crect x='7' y='17' width='4' height='9' rx='1'/%3E%3Crect x='14' y='11' width='4' height='15' rx='1'/%3E%3Crect x='21' y='6' width='4' height='20' rx='1'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+/* ==========================================================================
+   Инфографика «Из чего складывается цена каркасного дома»
+   Один самодостаточный файл: без внешних библиотек, шрифтов и картинок.
+   Все стили в классе .ifg — файл можно вставить блоком на сайт.
+   ========================================================================== */
+body{margin:0; background:#efece5;}
+
+.ifg{
+  --paper:#fbf9f5;
+  --card:#ffffff;
+  --line:#ece7dc;
+  --ink:#2a2721;
+  --soft:#726c5e;
+
+  --c1:#c17a4e;   /* терракота — акцент */
+  --c2:#4f7a6b;   /* шалфей */
+  --c3:#5b7fa6;   /* пыльно-синий */
+  --c4:#8a6fa8;   /* лиловый */
+  --c5:#c9a227;   /* охра */
+  --dim:#b9b2a4;  /* нейтральный */
+
+  width:794px; max-width:100%; margin:0 auto; padding:44px 46px 34px;
+  background:var(--paper); color:var(--ink);
+  font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:14px; line-height:1.55;
+  box-sizing:border-box;
+}
+.ifg *,.ifg *::before,.ifg *::after{box-sizing:border-box;}
+.ifg p{margin:0;}
+.ifg h1,.ifg h2,.ifg h3{margin:0; line-height:1.18;}
+.ifg ul{margin:0; padding:0; list-style:none;}
+
+/* ---------- шапка ---------- */
+.ifg__kicker{font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--c1); margin-bottom:12px;}
+.ifg__title{font-family:Georgia,"Times New Roman",serif; font-size:31px; font-weight:700; letter-spacing:-.01em; margin-bottom:10px;}
+.ifg__title em{font-style:normal; color:var(--c1);}
+.ifg__lead{max-width:62ch; color:var(--soft); font-size:14.5px; padding-bottom:20px; border-bottom:2px solid var(--ink);}
+
+/* ---------- полоса ключевых цифр ---------- */
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:20px 0 26px;}
+.kpi{padding:14px 15px; background:var(--card); border:1px solid var(--line); border-radius:9px;}
+.kpi b{display:block; font-family:Georgia,serif; font-size:22px; white-space:nowrap; line-height:1.1; letter-spacing:-.01em;}
+.kpi span{display:block; margin-top:5px; font-size:11.5px; line-height:1.4; color:var(--soft);}
+.kpi--acc b{color:var(--c1);}
+
+/* ---------- блок ---------- */
+.blk{margin-bottom:26px;}
+.blk__h{display:flex; align-items:baseline; gap:10px; margin-bottom:4px;}
+.blk__n{font-size:10.5px; font-weight:700; letter-spacing:.1em; color:#fff; background:var(--c1); border-radius:5px; padding:2px 7px;}
+.blk__h h2{font-family:Georgia,serif; font-size:18px; font-weight:700;}
+.blk__sub{margin-bottom:14px; font-size:12.5px; color:var(--soft);}
+
+/* ---------- горизонтальные полосы ---------- */
+.bars{display:grid; gap:9px;}
+.bar{display:grid; grid-template-columns:186px 1fr 104px; align-items:center; gap:12px;}
+.bar__name{font-size:13px;}
+.bar__name small{display:block; font-size:11px; color:var(--soft);}
+.bar__track{height:22px; background:#f1ede4; border-radius:4px; overflow:hidden;}
+.bar__fill{height:100%; border-radius:4px; background:var(--dim);}
+.bar__val{font-size:13px; font-weight:700; text-align:right; white-space:nowrap;}
+.bar--acc .bar__fill{background:var(--c1);}
+.bar--acc .bar__val{color:var(--c1);}
+.bar--c2 .bar__fill{background:var(--c2);}
+.bar--c3 .bar__fill{background:var(--c3);}
+
+/* ---------- структура 100% ---------- */
+.stack{display:flex; height:34px; border-radius:6px; overflow:hidden; margin-bottom:10px;}
+.stack div{display:grid; place-items:center; color:#fff; font-size:12px; font-weight:700;}
+.stack__legend{display:flex; flex-wrap:wrap; gap:16px; font-size:12.5px; color:var(--soft);}
+.stack__legend i{display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:baseline;}
+
+/* ---------- карточки срока ---------- */
+.terms{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.term{padding:14px 15px; background:var(--card); border:1px solid var(--line); border-radius:9px; border-left:3px solid var(--dim);}
+.term b{display:block; font-family:Georgia,serif; font-size:23px; line-height:1.1;}
+.term span{display:block; margin-top:4px; font-size:11.5px; color:var(--soft); line-height:1.4;}
+.term--fast{border-left-color:var(--c2);} .term--fast b{color:var(--c2);}
+.term--acc{border-left-color:var(--c1);}
+
+/* ---------- вывод ---------- */
+.means{padding:18px 20px; background:#f6f1e7; border:1px solid var(--line); border-left:4px solid var(--c1); border-radius:9px;}
+.means h3{font-family:Georgia,serif; font-size:16px; margin-bottom:10px;}
+.means li{position:relative; padding-left:19px; margin-bottom:7px; font-size:13.5px; color:#3a352c;}
+.means li:last-child{margin-bottom:0;}
+.means li::before{content:""; position:absolute; left:2px; top:8px; width:6px; height:6px; border-radius:50%; background:var(--c1);}
+.means b{color:var(--ink);}
+
+/* ---------- подвал ---------- */
+.ifg__foot{margin-top:24px; padding-top:14px; border-top:1px solid var(--line); font-size:11px; color:#8b8577; line-height:1.55;}
+.ifg__foot b{color:var(--soft);}
+
+/* ---------- телефон ---------- */
+@media (max-width:560px){
+  .ifg{padding:26px 18px 22px; font-size:13.5px;}
+  .ifg__title{font-size:24px;}
+  .kpis{grid-template-columns:repeat(2,1fr);}
+  .bar{grid-template-columns:1fr; gap:4px;}
+  .bar__val{text-align:left;}
+  .terms{grid-template-columns:1fr;}
+  .stack div{font-size:11px;}
+}
+
+/* совсем узкие окна: крупные суммы не переносятся, поэтому колонку делаем одну */
+@media (max-width:380px){
+  .ifg{padding:20px 14px 18px;}
+  .ifg__title{font-size:21px;}
+  .kpis{grid-template-columns:1fr; gap:8px;}
+  .kpi b{font-size:19px;}
+  .stack__legend{gap:8px; font-size:11.5px;}
+  .blk__h h2{font-size:16px;}
+}
+
+/* ---------- печать в PDF (A4) ---------- */
+@media print{
+  body{background:#fff;}
+  .ifg{width:auto; padding:0; background:#fff;}
+  .blk{break-inside:avoid;}
+  @page{size:A4 portrait; margin:12mm;}
+}
+</style>
+</head>
+<body>
+
+<div class="ifg">
+
+  <p class="ifg__kicker">КЕДРОН · каркасный дом 96 м² · расценки 2026 года</p>
+  <h1 class="ifg__title">Комплектация меняет цену дома на <em>1,15 млн ₽</em> — больше, чем фундамент и этажность вместе</h1>
+  <p class="ifg__lead">Покупатели торгуются за фундамент и спорят про этажи, а решающее решение принимают мимоходом — до какой готовности строить. Разбираем смету дома 96 м² по статьям и считаем, что на самом деле двигает цену.</p>
+
+  <ul class="kpis">
+    <li class="kpi"><b>4 056 000 ₽</b><span>смета дома 96 м² в комплектации «Комфорт»</span></li>
+    <li class="kpi kpi--acc"><b>63 %</b><span>сметы — коробка: каркас, утепление, кровля, окна, фасад</span></li>
+    <li class="kpi"><b>5 %</b><span>сметы приходится на фундамент</span></li>
+    <li class="kpi"><b>42 250 ₽</b><span>итоговая цена одного квадратного метра</span></li>
+  </ul>
+
+  <!-- ГЛАВНЫЙ ГРАФИК -->
+  <section class="blk">
+    <div class="blk__h"><span class="blk__n">1</span><h2>Три решения, которые двигают цену</h2></div>
+    <p class="blk__sub">Насколько меняется итог, если поменять одно решение и оставить остальные прежними. Дом 96 м², каркасная технология.</p>
+    <div class="bars">
+      <div class="bar bar--acc">
+        <div class="bar__name">Комплектация<small>«Тёплый контур» → «Под ключ»</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:100%"></div></div>
+        <div class="bar__val">+1 152 000 ₽</div>
+      </div>
+      <div class="bar">
+        <div class="bar__name">Этажность<small>один этаж → два этажа</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:37.9%"></div></div>
+        <div class="bar__val">−436 800 ₽</div>
+      </div>
+      <div class="bar">
+        <div class="bar__name">Тип фундамента<small>сваи → монолитная плита</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:22.5%"></div></div>
+        <div class="bar__val">+259 200 ₽</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- СТРУКТУРА СМЕТЫ -->
+  <section class="blk">
+    <div class="blk__h"><span class="blk__n">2</span><h2>Куда уходят деньги на самом деле</h2></div>
+    <p class="blk__sub">Смета дома 96 м², комплектация «Комфорт», свайно-винтовой фундамент. Всего 4 056 000 ₽.</p>
+
+    <div class="stack">
+      <div style="width:63%; background:var(--c1)">Коробка · 63 %</div>
+      <div style="width:32%; background:var(--c2)">Инженерия и отделка · 32 %</div>
+      <div style="width:5%; background:var(--dim)"></div>
+    </div>
+    <p class="stack__legend" style="margin-bottom:16px">
+      <span><i style="background:var(--c1)"></i>Коробка — 2 549 000 ₽</span>
+      <span><i style="background:var(--c2)"></i>Инженерия и отделка — 1 291 000 ₽</span>
+      <span><i style="background:var(--dim)"></i>Фундамент — 216 000 ₽ (5 %)</span>
+    </p>
+
+    <div class="bars">
+      <div class="bar bar--acc">
+        <div class="bar__name">Каркас и перекрытия</div>
+        <div class="bar__track"><div class="bar__fill" style="width:100%"></div></div>
+        <div class="bar__val">905 000 ₽ · 22 %</div>
+      </div>
+      <div class="bar bar--c2">
+        <div class="bar__name">Черновая отделка</div>
+        <div class="bar__track"><div class="bar__fill" style="width:72.2%"></div></div>
+        <div class="bar__val">653 000 ₽ · 16 %</div>
+      </div>
+      <div class="bar bar--c2">
+        <div class="bar__name">Инженерия</div>
+        <div class="bar__track"><div class="bar__fill" style="width:70.5%"></div></div>
+        <div class="bar__val">638 000 ₽ · 16 %</div>
+      </div>
+      <div class="bar bar--acc">
+        <div class="bar__name">Утепление и мембраны</div>
+        <div class="bar__track"><div class="bar__fill" style="width:53.3%"></div></div>
+        <div class="bar__val">482 000 ₽ · 12 %</div>
+      </div>
+      <div class="bar bar--acc">
+        <div class="bar__name">Фасад</div>
+        <div class="bar__track"><div class="bar__fill" style="width:45.5%"></div></div>
+        <div class="bar__val">412 000 ₽ · 10 %</div>
+      </div>
+      <div class="bar bar--acc">
+        <div class="bar__name">Кровля</div>
+        <div class="bar__track"><div class="bar__fill" style="width:43.5%"></div></div>
+        <div class="bar__val">394 000 ₽ · 10 %</div>
+      </div>
+      <div class="bar bar--acc">
+        <div class="bar__name">Окна и двери</div>
+        <div class="bar__track"><div class="bar__fill" style="width:39.3%"></div></div>
+        <div class="bar__val">356 000 ₽ · 9 %</div>
+      </div>
+      <div class="bar">
+        <div class="bar__name">Фундамент</div>
+        <div class="bar__track"><div class="bar__fill" style="width:23.9%"></div></div>
+        <div class="bar__val">216 000 ₽ · 5 %</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОМПЛЕКТАЦИИ -->
+  <section class="blk">
+    <div class="blk__h"><span class="blk__n">3</span><h2>Цена дома 96 м² по комплектациям</h2></div>
+    <p class="blk__sub">Без фундамента. Шкала начинается с нуля.</p>
+    <div class="bars">
+      <div class="bar">
+        <div class="bar__name">Тёплый контур<small>40 000 ₽ за м²</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:76.9%"></div></div>
+        <div class="bar__val">3 840 000 ₽</div>
+      </div>
+      <div class="bar bar--c3">
+        <div class="bar__name">Комфорт<small>46 000 ₽ за м²</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:88.5%"></div></div>
+        <div class="bar__val">4 416 000 ₽</div>
+      </div>
+      <div class="bar bar--acc">
+        <div class="bar__name">Под ключ<small>52 000 ₽ за м²</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:100%"></div></div>
+        <div class="bar__val">4 992 000 ₽</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФУНДАМЕНТЫ -->
+  <section class="blk">
+    <div class="blk__h"><span class="blk__n">4</span><h2>Фундамент: самая маленькая статья с самым большим разбросом</h2></div>
+    <p class="blk__sub">Пятно застройки 48 м² — двухэтажный дом 96 м². Плита дороже свай в 2,2 раза, но это всего 6 % итоговой сметы.</p>
+    <div class="bars">
+      <div class="bar bar--c2">
+        <div class="bar__name">Свайно-винтовой<small>4 500 ₽ за м² пятна</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:45.5%"></div></div>
+        <div class="bar__val">216 000 ₽</div>
+      </div>
+      <div class="bar bar--c3">
+        <div class="bar__name">Ленточный<small>7 800 ₽ за м² пятна</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:78.8%"></div></div>
+        <div class="bar__val">374 400 ₽</div>
+      </div>
+      <div class="bar bar--acc">
+        <div class="bar__name">Монолитная плита<small>9 900 ₽ за м² пятна</small></div>
+        <div class="bar__track"><div class="bar__fill" style="width:100%"></div></div>
+        <div class="bar__val">475 200 ₽</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- СРОКИ -->
+  <section class="blk">
+    <div class="blk__h"><span class="blk__n">5</span><h2>Сроки строительства того же дома</h2></div>
+    <p class="blk__sub">96 м², комплектация «Комфорт». Модульный дом собирают в цехе, поэтому площадь почти не влияет на срок.</p>
+    <ul class="terms">
+      <li class="term term--fast"><b>35 дней</b><span>модульный дом, один этаж</span></li>
+      <li class="term term--acc"><b>65 дней</b><span>каркасный дом, один этаж</span></li>
+      <li class="term"><b>70 дней</b><span>каркасный дом, два этажа</span></li>
+    </ul>
+  </section>
+
+  <!-- ВЫВОД -->
+  <section class="blk">
+    <div class="means">
+      <h3>Что это значит</h3>
+      <ul>
+        <li><b>Торговаться нужно не за фундамент.</b> Он занимает 5 % сметы: даже самый дорогой вариант добавит 259 тысяч, а выбор комплектации — больше миллиона.</li>
+        <li><b>Второй этаж на той же площади дешевле, а не дороже.</b> Пятно застройки вдвое меньше, значит, вдвое меньше фундамента и кровли: экономия 437 тысяч при тех же 96 м².</li>
+        <li><b>Самая большая статья — каркас и перекрытия, 22 %.</b> Именно на ней экономят недобросовестные подрядчики: сырая древесина вместо сушёной выглядит одинаково, а стоит вдвое дешевле.</li>
+        <li><b>Полный набор дополнительных работ</b> — скважина, септик, котёл, терраса, навес и тёплый пол — добавляет 968 400 ₽, почти четверть сметы. Их стоит заложить в бюджет сразу, а не «потом».</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="ifg__foot">
+    <b>Источник:</b> расценки калькулятора КЕДРОН и смета проекта «Кедр 96», 2026 год.
+    <b>Расчёты:</b> дом 96 м², каркасная технология, комплектация «Комфорт», свайно-винтовой фундамент, если не указано иное.
+    <b>Допущения:</b> пятно застройки двухэтажного дома принято равным половине общей площади; цены по комплектациям даны без фундамента; сроки округлены до пяти дней.
+    <b>Подготовлено:</b> 20 сентября 2026 года.<br>
+    КЕДРОН — вымышленная компания, демонстрационный проект для портфолио. Цифры внутренне согласованы и взяты из расчётов сайта.
+  </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Отчёт аудита безопасности и комплаенса — образец</title>
+<style>
+  :root{
+    --bg:#f5f6f9; --bg2:#eef1f6; --panel:#ffffff; --soft:#fbfcfe;
+    --line:#e3e7ee; --line2:#eceff4;
+    --text:#1b2430; --mut:#5a6675; --dim:#8a94a3;
+    --acc:#4f46e5; --acc2:#0ea5e9; --acc-soft:#eef0fe;
+    --crit:#dc2626; --high:#ea580c; --med:#ca8a04; --low:#2563eb; --info:#64748b; --ok:#16a34a;
+    --shadow:0 1px 2px rgba(20,30,50,.04),0 6px 20px rgba(20,30,50,.06);
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;}
+  a{color:var(--acc);text-decoration:none;} a:hover{text-decoration:underline;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+
+  header.hero{position:relative;overflow:hidden;background:
+    radial-gradient(900px 380px at 12% -20%,rgba(79,70,229,.10),transparent),
+    radial-gradient(800px 360px at 92% -10%,rgba(14,165,233,.10),transparent),
+    linear-gradient(180deg,#ffffff,#f7f8fb);
+    border-bottom:1px solid var(--line);padding:52px 0 38px;}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--acc);border:1px solid #dcd9fb;border-radius:999px;padding:6px 14px;margin-bottom:18px;background:var(--acc-soft);font-weight:600;}
+  h1{font-size:32px;line-height:1.15;margin:0 0 10px;letter-spacing:-.01em;}
+  .meta{color:var(--mut);font-size:15px;margin:0 0 22px;}
+  .meta b{color:var(--text);}
+  .verdict{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid #d4e7da;
+    border-left:5px solid var(--ok);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow);max-width:780px;}
+  .verdict .ic{font-size:30px;}
+  .verdict h3{margin:0 0 3px;font-size:17px;color:#166534;}
+  .verdict p{margin:0;color:var(--mut);font-size:14.5px;}
+
+  section{padding:38px 0;} section + section{border-top:1px solid var(--line2);}
+  h2{font-size:24px;margin:0 0 8px;display:flex;align-items:center;gap:11px;letter-spacing:-.01em;}
+  h2 .n{font-size:12px;color:#fff;background:linear-gradient(135deg,var(--acc),var(--acc2));border-radius:8px;padding:3px 10px;font-weight:700;}
+  .lead{color:var(--mut);margin:0 0 22px;max-width:820px;}
+  h3.blk{font-size:18px;margin:26px 0 12px;padding-left:12px;border-left:3px solid var(--acc);color:#2a3444;}
+
+  .tiles{display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 8px;}
+  .tile{flex:1;min-width:120px;background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:16px;text-align:center;box-shadow:var(--shadow);}
+  .tile .num{font-size:30px;font-weight:800;line-height:1;}
+  .tile .lb{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin-top:6px;}
+  .tile.crit .num{color:var(--crit);} .tile.high .num{color:var(--high);}
+  .tile.med .num{color:var(--med);} .tile.ok .num{color:var(--ok);}
+
+  .sev{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;color:#fff;white-space:nowrap;}
+  .s-crit{background:var(--crit);} .s-high{background:var(--high);} .s-med{background:var(--med);}
+  .s-low{background:var(--low);} .s-info{background:var(--info);} .s-ok{background:var(--ok);}
+  .s-fix{background:#0d9488;} .s-na{background:#94a3b8;}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.2px;background:var(--panel);
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line2);vertical-align:top;}
+  th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;background:var(--soft);}
+  tr:last-child td{border-bottom:none;}
+  td b{color:var(--text);}
+  tr:hover td{background:#fafbfe;}
+  /* Таблицы на телефоне шире экрана. Каждую оборачиваем в контейнер
+     с горизонтальной прокруткой — тогда вбок едет только таблица,
+     а страница остаётся на месте. Обёртку добавляет скрипт внизу файла. */
+  .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:10px 0; border-radius:12px;}
+  .table-scroll table{margin:0; min-width:520px;}
+  td, th{overflow-wrap:break-word;}
+  @media (max-width:520px){ .table-scroll table{min-width:460px;} }
+  .ok-txt{color:var(--ok);font-weight:600;}
+
+  .fixcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    box-shadow:var(--shadow);margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;}
+  .fixcard .n{flex:none;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#0d9488,#0ea5e9);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+  .fixcard h4{margin:0 0 4px;font-size:15.5px;}
+  .fixcard .ba{font-size:14px;margin:3px 0;color:var(--mut);}
+  .fixcard .ba .was{color:#9a3412;} .fixcard .ba .now{color:#166534;font-weight:600;}
+
+  .note{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--info);
+    border-radius:12px;padding:15px 17px;margin:16px 0;color:var(--mut);font-size:14.5px;box-shadow:var(--shadow);}
+  .note.ok{border-left-color:var(--ok);background:#f2fbf5;}
+  .note.warn{border-left-color:var(--high);background:#fff8f1;}
+  .note b{color:var(--text);}
+  code{font-family:'Consolas',monospace;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:13.5px;color:#b4530a;}
+  .sample-tag{display:inline-block;background:#fff4e5;border:1px solid #f5d9b0;color:#9a5b00;font-size:12px;
+    font-weight:600;border-radius:8px;padding:4px 10px;margin-top:14px;}
+  footer{padding:32px 0 60px;color:var(--dim);font-size:13.5px;border-top:1px solid var(--line2);}
+  footer b{color:var(--mut);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">● Отчёт аудита · образец</span>
+    <h1>Аудит безопасности и комплаенса сайта</h1>
+    <p class="meta"><b>Объект:</b> [сайт клиента] · <b>Тип:</b> сайт / веб-приложение · <b>Режим:</b> пассивный ·
+      <b>Проверено по:</b> OWASP Web / API / LLM Top-10 + 152-ФЗ и смежные</p>
+    <div class="verdict">
+      <div class="ic">✅</div>
+      <div>
+        <h3>Итог: замечания устранены, риск снят</h3>
+        <p>По результатам аудита найденные проблемы по кибербезопасности и соответствию законодательству
+          РФ закрыты. Ниже — что проверялось, что нашли и как исправили.</p>
+      </div>
+    </div>
+    <span class="sample-tag">Это обезличенный образец. Данные заменены на условные.</span>
+  </div>
+</header>
+
+<!-- СВОДКА -->
+<section>
+  <div class="wrap">
+    <h2>Сводка</h2>
+    <p class="lead">Пример структуры отчёта: слева — сколько проблем было найдено в первом прогоне, справа —
+      сколько устранено к финалу.</p>
+    <div class="tiles">
+      <div class="tile crit"><div class="num">0</div><div class="lb">🔴 Critical</div></div>
+      <div class="tile high"><div class="num">1</div><div class="lb">🟠 High</div></div>
+      <div class="tile med"><div class="num">3</div><div class="lb">🟡 Medium</div></div>
+      <div class="tile ok"><div class="num">4</div><div class="lb">✅ Исправлено</div></div>
+    </div>
+    <div class="note ok">
+      <b>Резюме:</b> критических уязвимостей не обнаружено. Найдены типовые замечания — внешние трекеры
+      (трансграничная передача данных), недостающие заголовки безопасности и элементы юридической прозрачности.
+      Все закрыты; для остаточных пунктов дан план на будущее.
+    </div>
+  </div>
+</section>
+
+<!-- БЕЗОПАСНОСТЬ -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">Часть A</span> Кибербезопасность</h2>
+    <p class="lead">Проверено пассивно: транспорт (TLS), заголовки безопасности, cookie, открытые пути, утечки
+      секретов, код на типовые уязвимости OWASP.</p>
+    <table>
+      <tr><th>Проверка</th><th>Результат</th></tr>
+      <tr><td><b>HTTPS + редирект с HTTP</b></td><td class="ok-txt">✅ трафик только по HTTPS</td></tr>
+      <tr><td><b>TLS</b> — версии и сертификат</td><td class="ok-txt">✅ современные протоколы, сертификат валиден</td></tr>
+      <tr><td><b>HSTS</b></td><td class="ok-txt">✅ включён</td></tr>
+      <tr><td><b>Content-Security-Policy</b></td><td><span class="sev s-fix">исправлено</span> &nbsp;политика ужесточена</td></tr>
+      <tr><td><b>Заголовки</b> (X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy)</td><td class="ok-txt">✅ на месте</td></tr>
+      <tr><td><b>Cross-Origin-Opener-Policy</b></td><td><span class="sev s-fix">добавлено</span></td></tr>
+      <tr><td><b>Открытые пути</b> (.git, .env, дампы БД, бэкапы)</td><td class="ok-txt">✅ не найдено</td></tr>
+      <tr><td><b>Секреты во фронтенде</b> (ключи, токены, пароли)</td><td class="ok-txt">✅ не найдено</td></tr>
+      <tr><td><b>Флаги cookie</b> (Secure / HttpOnly / SameSite)</td><td class="ok-txt">✅ корректны</td></tr>
+      <tr><td><b>Код-уязвимости</b> (XSS, инъекции, CSRF)</td><td class="ok-txt">✅ опасных паттернов не найдено</td></tr>
+      <tr><td><b>Сторонние зависимости</b> (шрифты, JS-библиотеки, CVE)</td><td><span class="sev s-fix">исправлено</span> &nbsp;переведены на локальный хостинг</td></tr>
+      <tr><td><b>security.txt</b></td><td><span class="sev s-fix">добавлено</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ЧТО ИСПРАВЛЕНО -->
+<section>
+  <div class="wrap">
+    <h2>Что было исправлено (до → после)</h2>
+    <div class="fixcard">
+      <div class="n">1</div>
+      <div>
+        <h4>Внешние трекеры / шрифты с зарубежных CDN <span class="sev s-med">MED</span></h4>
+        <p class="ba"><span class="was">Было:</span> ресурсы грузились со сторонних зарубежных сервисов — отправка IP посетителя за рубеж (трансграничная передача ПД, ст. 12 152-ФЗ).</p>
+        <p class="ba"><span class="now">Стало:</span> ресурсы перенесены на локальный хостинг; политика безопасности (CSP) ужесточена — внешних доменов не осталось.</p>
+      </div>
+    </div>
+    <div class="fixcard">
+      <div class="n">2</div>
+      <div>
+        <h4>Внешняя JS-библиотека с публичного CDN <span class="sev s-med">MED</span></h4>
+        <p class="ba"><span class="was">Было:</span> подключение библиотеки со стороннего CDN (кросс-бордер и потенциальный конфликт с CSP).</p>
+        <p class="ba"><span class="now">Стало:</span> библиотека захостена локально, зависимость от внешнего источника устранена.</p>
+      </div>
+    </div>
+    <div class="fixcard">
+      <div class="n">3</div>
+      <div>
+        <h4>Недостающие элементы гигиены безопасности <span class="sev s-low">LOW/INFO</span></h4>
+        <p class="ba"><span class="was">Было:</span> не хватало заголовка <code>Cross-Origin-Opener-Policy</code> и файла <code>/.well-known/security.txt</code>.</p>
+        <p class="ba"><span class="now">Стало:</span> заголовок добавлен; security.txt доступен по каноническому адресу.</p>
+      </div>
+    </div>
+    <div class="fixcard">
+      <div class="n">4</div>
+      <div>
+        <h4>Юридическая прозрачность оператора <span class="sev s-med">MED</span></h4>
+        <p class="ba"><span class="was">Было:</span> на сайте не указано, кто оказывает услуги (требование прозрачности, 149-ФЗ / ЗоЗПП).</p>
+        <p class="ba"><span class="now">Стало:</span> в подвал добавлены реквизиты оператора и контакты.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ЗАКОН -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">Часть B</span> Законодательство РФ</h2>
+    <p class="lead">Требования оцениваются <b>с учётом контекста</b>: наличие форм сбора данных, онлайн-оплаты,
+      рекламы и аналитики. Неприменимые пункты помечаются отдельно, а не выдаются за нарушения.</p>
+    <table>
+      <tr><th>Требование</th><th>Статус</th><th>Комментарий</th></tr>
+      <tr><td><b>Политика обработки ПД</b></td><td><span class="sev s-na">по контексту</span></td><td>Требуется, если сайт собирает ПД (формы, ЛК, аналитика).</td></tr>
+      <tr><td><b>Согласие / чекбокс</b></td><td><span class="sev s-na">по контексту</span></td><td>Требуется при наличии форм сбора данных.</td></tr>
+      <tr><td><b>Публичная оферта</b></td><td><span class="sev s-na">по контексту</span></td><td>Требуется при онлайн-оплате.</td></tr>
+      <tr><td><b>Маркировка рекламы (erid)</b></td><td><span class="sev s-na">по контексту</span></td><td>Требуется при размещении рекламы.</td></tr>
+      <tr><td><b>Cookie-баннер</b></td><td><span class="sev s-na">по контексту</span></td><td>Требуется при аналитике/трекерах.</td></tr>
+      <tr><td><b>Возрастная маркировка (436-ФЗ)</b></td><td class="ok-txt">✅ / по контексту</td><td>Где применима информационная продукция.</td></tr>
+      <tr><td><b>Реквизиты оператора</b></td><td><span class="sev s-fix">добавлено</span></td><td>Наименование/статус и контакты в подвале.</td></tr>
+      <tr><td><b>Трансграничная передача</b></td><td class="ok-txt">✅ закрыто</td><td>После удаления внешних сервисов данные за рубеж не уходят.</td></tr>
+      <tr><td><b>Хостинг в реестре РКН (236-ФЗ)</b></td><td><span class="sev s-na">по контексту</span></td><td>Обязателен для ресурсов с ПД россиян.</td></tr>
+    </table>
+    <div class="note warn">
+      <b>Рекомендация на будущее:</b> при добавлении форм заявки, аналитики или онлайн-оплаты потребуется
+      расширить юридический пакет (политика конфиденциальности, согласие, оферта, уведомление в РКН) и
+      использовать хостинг из реестра РКН с локализацией баз данных в РФ.
+    </div>
+  </div>
+</section>
+
+<!-- РЕКОМЕНДАЦИИ -->
+<section>
+  <div class="wrap">
+    <h2>Остаточные рекомендации</h2>
+    <div class="note">
+      <ul style="margin:0;padding-left:18px;">
+        <li><b>Мониторинг сертификата и зависимостей</b> — периодическая перепроверка (ретест после изменений).</li>
+        <li><b>Резервное копирование и план восстановления</b> — при развитии проекта.</li>
+        <li><b>Юридический пакет и российский хостинг</b> — заранее, если планируется сбор персональных данных.</li>
+      </ul>
+    </div>
+    <div class="note ok">
+      <b>Вывод:</b> объект прошёл аудит по двум осям — кибербезопасность и соответствие законодательству РФ.
+      Найденные замечания устранены; остаточные пункты носят рекомендательный характер.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Обезличенный образец отчёта · ИИ-агент <b>security-auditor</b> · методологии OWASP + законодательство РФ.
+    Аудит эвристический, не заменяет ручной пентест и юридическое заключение. © [Ваше имя / компания].
+  </div>
+</footer>
+
+<script>
+/* Оборачиваем каждую таблицу в контейнер с прокруткой — чтобы на телефоне
+   вбок ехала только таблица, а не вся страница. */
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll('table'), function (t) {
+    if (t.parentNode.classList.contains('table-scroll')) return;
+    var box = document.createElement('div');
+    box.className = 'table-scroll';
+    t.parentNode.insertBefore(box, t);
+    box.appendChild(t);
+  });
+})();
+</script>
+
+</body>
+</html>

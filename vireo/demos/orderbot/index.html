@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OrderBot — демо-сценарий Telegram-бота (VIREO STUDIO)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../../fonts/fonts.css">
+<style>
+  :root {
+    --tg-bg: #e8eef2;
+    --tg-header: #517da2;
+    --bot-bubble: #ffffff;
+    --user-bubble: #effdde;
+    --ink: #1a1a1a;
+    --gray: #6b7580;
+    --page-bg: #14120f;
+    --gold: #b08d57;
+    --gold-light: #e6c68f;
+    --font-body: "Inter", sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: #fff;
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+  a { color: inherit; }
+  .demo-banner {
+    background: #000; color: #fff;
+    text-align: center; font-size: 13px; padding: 10px 16px;
+  }
+  .demo-banner a { color: var(--gold-light); font-weight: 600; text-decoration: underline; }
+
+  .page {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 50px 20px 80px;
+  }
+  .page__head { text-align: center; max-width: 480px; margin-bottom: 34px; }
+  .page__head .eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px; }
+  .page__head h1 { font-size: 1.8rem; margin: 0 0 12px; }
+  .page__head p { color: rgba(255,255,255,0.6); font-size: 0.95rem; margin: 0; }
+
+  .phone {
+    width: 360px;
+    max-width: 100%;
+    background: var(--tg-bg);
+    border-radius: 34px;
+    border: 8px solid #0b0a08;
+    overflow: hidden;
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    height: 640px;
+  }
+  .phone__header {
+    background: var(--tg-header);
+    color: #fff;
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .phone__avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, #f0b429, #8a5a1c);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .phone__title { font-size: 14.5px; font-weight: 600; }
+  .phone__status { font-size: 12px; opacity: 0.75; }
+
+  .chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .msg {
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13.8px;
+    line-height: 1.45;
+    animation: msgIn 0.3s ease;
+  }
+  @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .msg--bot { background: var(--bot-bubble); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+  .msg--user { background: var(--user-bubble); color: var(--ink); align-self: flex-end; border-bottom-right-radius: 4px; }
+
+  .typing {
+    align-self: flex-start;
+    background: var(--bot-bubble);
+    padding: 12px 16px;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    display: flex; gap: 4px;
+  }
+  .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--gray); animation: blink 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+
+  .options {
+    padding: 10px 14px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-shrink: 0;
+    background: var(--tg-bg);
+  }
+  .option-btn {
+    background: #fff;
+    border: 1px solid rgba(81,125,162,0.3);
+    color: var(--tg-header);
+    padding: 9px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .option-btn:hover { background: var(--tg-header); color: #fff; }
+
+  .phone__inputbar {
+    padding: 10px 14px;
+    background: var(--tg-bg);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    flex-shrink: 0;
+  }
+  .phone__inputbar input {
+    width: 100%; border: none; border-radius: 100px; padding: 10px 16px;
+    background: #fff; font-size: 13px; color: var(--gray);
+  }
+
+  footer { text-align: center; font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 30px; }
+  footer a { color: var(--gold-light); font-weight: 600; text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">Демо-сценарий диалога, студия <a href="../../index.html">VIREO STUDIO</a> — не реальный бот · <a href="../../index.html#portfolio">← Вернуться в портфолио</a></div>
+
+<div class="page">
+  <div class="page__head">
+    <span class="eyebrow">Кейс OrderBot</span>
+    <h1>Как бот принимает заказ</h1>
+    <p>Это рабочий сценарий диалога — нажимайте кнопки внутри «чата», чтобы пройти путь клиента от приветствия до подтверждения заказа.</p>
+  </div>
+
+  <div class="phone">
+    <div class="phone__header">
+      <div class="phone__avatar">☕</div>
+      <div>
+        <div class="phone__title">Grano Coffee Bot</div>
+        <div class="phone__status">бот</div>
+      </div>
+    </div>
+    <div class="chat" id="chat"></div>
+    <div class="options" id="options"></div>
+    <div class="phone__inputbar"><input type="text" placeholder="Сообщение..." disabled></div>
+  </div>
+
+  <footer>OrderBot — демонстрационный сценарий. Дизайн и разработка: <a href="../../index.html">VIREO STUDIO</a></footer>
+</div>
+
+<script>
+  const chatEl = document.getElementById('chat');
+  const optionsEl = document.getElementById('options');
+
+  const state = { cart: [], total: 0, lastAdded: '', orderId: 4821 };
+
+  const nodes = {
+    start: {
+      bot: () => ['Привет! Я бот кофейни Grano ☕', 'Готовы сделать заказ?'],
+      options: [{ label: 'Посмотреть меню', next: 'menu' }]
+    },
+    menu: {
+      bot: () => ['Вот что у нас есть сегодня:'],
+      options: [
+        { label: 'Капучино — 220 ₽', next: 'added', action: { name: 'Капучино', price: 220 } },
+        { label: 'Латте — 240 ₽', next: 'added', action: { name: 'Латте', price: 240 } },
+        { label: 'Раф — 260 ₽', next: 'added', action: { name: 'Раф', price: 260 } },
+        { label: 'Круассан — 180 ₽', next: 'added', action: { name: 'Круассан', price: 180 } }
+      ]
+    },
+    added: {
+      bot: () => [`Добавили «${state.lastAdded}» в заказ.`, 'Добавить что-то ещё или оформляем?'],
+      options: [
+        { label: 'Добавить ещё', next: 'menu' },
+        { label: 'Оформить заказ', next: 'checkout' }
+      ]
+    },
+    checkout: {
+      bot: () => {
+        const list = state.cart.map(i => `${i.name} (${i.price} ₽)`).join(', ');
+        return [`Ваш заказ: ${list}.`, `Итого: ${state.total} ₽. Как оплатите?`];
+      },
+      options: [
+        { label: 'Оплатить картой', next: 'done' },
+        { label: 'Оплата при получении', next: 'done' }
+      ]
+    },
+    done: {
+      bot: () => [`Заказ #${state.orderId} оформлен ✅`, 'Заберите через 10 минут в кофейне. Спасибо за заказ!'],
+      options: [{ label: 'Начать заново', next: 'restart' }]
+    }
+  };
+
+  const addMessage = (text, who) => {
+    const div = document.createElement('div');
+    div.className = `msg msg--${who}`;
+    div.textContent = text;
+    chatEl.appendChild(div);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  };
+
+  const showTyping = () => {
+    const el = document.createElement('div');
+    el.className = 'typing';
+    el.id = 'typingIndicator';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    chatEl.appendChild(el);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  };
+
+  const hideTyping = () => {
+    const el = document.getElementById('typingIndicator');
+    if (el) el.remove();
+  };
+
+  const renderOptions = (options) => {
+    optionsEl.innerHTML = '';
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', () => selectOption(opt));
+      optionsEl.appendChild(btn);
+    });
+  };
+
+  const goToNode = (nodeId, skipUserEcho) => {
+    if (nodeId === 'restart') {
+      state.cart = [];
+      state.total = 0;
+      state.lastAdded = '';
+      chatEl.innerHTML = '';
+      nodeId = 'start';
+    }
+    const node = nodes[nodeId];
+    optionsEl.innerHTML = '';
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      node.bot().forEach(line => addMessage(line, 'bot'));
+      renderOptions(node.options);
+    }, 550);
+  };
+
+  const selectOption = (opt) => {
+    addMessage(opt.label, 'user');
+    if (opt.action) {
+      state.cart.push(opt.action);
+      state.total += opt.action.price;
+      state.lastAdded = opt.action.name;
+    }
+    goToNode(opt.next);
+  };
+
+  goToNode('start');
+</script>
+</body>
+</html>

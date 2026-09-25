@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор стоимости каркасного дома — КЕДРОН</title>
+<meta name="description" content="Рассчитайте стоимость каркасного или модульного дома за 2 минуты: площадь, этажность, комплектация, фундамент и дополнительные работы. Расчёт с разбивкой по статьям.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="КЕДРОН">
+<meta property="og:title" content="Калькулятор стоимости дома — КЕДРОН">
+<meta property="og:description" content="Шесть вопросов — и вы видите цену с разбивкой по статьям и срок строительства.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="head" id="head">
+  <div class="wrap head__row">
+    <a class="brand" href="index.html" aria-label="КЕДРОН — на главную">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg>
+      </span>
+      <span><span class="brand__name">КЕДРОН</span><span class="brand__sub">каркасные дома</span></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Основное меню">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Проекты</a>
+      <a href="technology.html">Технология</a>
+      <a href="prices.html">Цены</a>
+      <a href="calc.html" aria-current="page">Калькулятор</a>
+      <a href="about.html">О компании</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <div class="head__act">
+      <a class="head__phone" href="tel:+78001234567">8 800 123-45-67</a>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Переключить тёмную тему">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="pagehead">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Калькулятор</span>
+    </nav>
+    <h1 class="h1">Сколько будет стоить ваш дом</h1>
+    <p class="lede" style="margin-top:12px">Шесть вопросов, полторы минуты. В конце — цена с разбивкой по статьям и срок строительства. Телефон спрашиваем только если захотите получить расчёт в подробном виде.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="calc">
+
+      <div class="calc__bar" aria-hidden="true"><i id="bar"></i></div>
+
+      <div class="calc__step is-on" data-step="1">
+        <p class="calc__count">Вопрос 1 из 6</p>
+        <h2 class="calc__q">Каркасный дом или модульный?</h2>
+        <p class="calc__hint">Каркасный собирают на участке, модульный привозят готовым с завода.</p>
+        <div class="opts">
+          <button class="opt" type="button" data-key="type" data-value="frame">
+            <b>Каркасный</b><span>Любая планировка, срок 45–85 дней</span>
+          </button>
+          <button class="opt" type="button" data-key="type" data-value="module">
+            <b>Модульный</b><span>Готов за 25–40 дней, монтаж за день</span>
+          </button>
+          <button class="opt" type="button" data-key="type" data-value="frame">
+            <b>Пока не решил</b><span>Посчитаем как каркасный — он универсальнее</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="calc__step" data-step="2">
+        <p class="calc__count">Вопрос 2 из 6</p>
+        <h2 class="calc__q">Какая площадь нужна?</h2>
+        <p class="calc__hint">Ориентир: 30–40 м² на человека с запасом на гостей и хозяйственные помещения.</p>
+        <div class="calc__range">
+          <output id="areaOut" for="area">96 м²</output>
+          <input type="range" id="area" min="36" max="150" step="3" value="96" aria-label="Площадь дома в квадратных метрах">
+          <p class="calc__hint" style="margin:0" id="areaHint">Дом для семьи из 3–4 человек</p>
+        </div>
+        <div class="calc__nav">
+          <button class="btn btn--ghost" type="button" data-back>Назад</button>
+          <button class="btn btn--primary" type="button" data-next>Дальше</button>
+        </div>
+      </div>
+
+      <div class="calc__step" data-step="3">
+        <p class="calc__count">Вопрос 3 из 6</p>
+        <h2 class="calc__q">Один этаж или два?</h2>
+        <p class="calc__hint">Два этажа при той же площади дешевле: меньше фундамента и кровли.</p>
+        <div class="opts">
+          <button class="opt" type="button" data-key="floors" data-value="1">
+            <b>Один этаж</b><span>Без лестниц, удобно старшему поколению</span>
+          </button>
+          <button class="opt" type="button" data-key="floors" data-value="2">
+            <b>Два этажа или мансарда</b><span>Дешевле на квадрат, меньше пятно застройки</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="calc__step" data-step="4">
+        <p class="calc__count">Вопрос 4 из 6</p>
+        <h2 class="calc__q">До какой готовности строим?</h2>
+        <p class="calc__hint">Подробное сравнение комплектаций — на <a href="prices.html" style="color:var(--brand)">странице цен</a>.</p>
+        <div class="opts">
+          <button class="opt" type="button" data-key="pack" data-value="shell">
+            <b>Тёплый контур</b><span>Каркас, утепление, кровля, окна, двери. Отделку делаете сами</span>
+          </button>
+          <button class="opt" type="button" data-key="pack" data-value="comfort">
+            <b>Комфорт</b><span>Плюс электрика, вода, отопление и черновая отделка</span>
+          </button>
+          <button class="opt" type="button" data-key="pack" data-value="turnkey">
+            <b>Под ключ</b><span>Заезжайте с вещами: чистовая отделка и сантехника</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="calc__step" data-step="5">
+        <p class="calc__count">Вопрос 5 из 6</p>
+        <h2 class="calc__q">Какой фундамент?</h2>
+        <p class="calc__hint">Если не знаете — выберите свайно-винтовой: он подходит большинству участков, а на выезде уточним по грунту.</p>
+        <div class="opts">
+          <button class="opt" type="button" data-key="base" data-value="pile">
+            <b>Свайно-винтовой</b><span>Дешевле, можно ставить зимой, подходит для склона</span>
+          </button>
+          <button class="opt" type="button" data-key="base" data-value="strip">
+            <b>Ленточный</b><span>Надёжнее на ровном участке, позволяет цоколь</span>
+          </button>
+          <button class="opt" type="button" data-key="base" data-value="slab">
+            <b>Монолитная плита</b><span>Для сложных грунтов, сразу готовый пол первого этажа</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="calc__step" data-step="6">
+        <p class="calc__count">Вопрос 6 из 6</p>
+        <h2 class="calc__q">Что добавить к дому?</h2>
+        <p class="calc__hint">Можно выбрать несколько или не выбирать ничего.</p>
+        <div class="opts" id="extras">
+          <button class="opt" type="button" data-extra="terrace"><b>Терраса 12 м²</b><span>под общей крышей · 168 000 ₽</span></button>
+          <button class="opt" type="button" data-extra="carport"><b>Навес для машины</b><span>на два места · 145 000 ₽</span></button>
+          <button class="opt" type="button" data-extra="septic"><b>Септик</b><span>с монтажом и обвязкой · 132 000 ₽</span></button>
+          <button class="opt" type="button" data-extra="well"><b>Скважина</b><span>до 35 м с насосом · 168 000 ₽</span></button>
+          <button class="opt" type="button" data-extra="floor"><b>Тёплый пол</b><span>первый этаж · 2 300 ₽ за м²</span></button>
+          <button class="opt" type="button" data-extra="boiler"><b>Котёл и разводка</b><span>газовый, с радиаторами · 245 000 ₽</span></button>
+        </div>
+        <div class="calc__nav">
+          <button class="btn btn--ghost" type="button" data-back>Назад</button>
+          <button class="btn btn--primary" type="button" data-next>Показать расчёт</button>
+        </div>
+      </div>
+
+      <div class="calc__step" data-step="7">
+        <div class="calc__result">
+          <p class="calc__count">Предварительный расчёт</p>
+          <p class="calc__total" id="total">—</p>
+          <p class="calc__total-note" id="totalNote"></p>
+
+          <div class="calc__break" id="break"></div>
+
+          <p class="calc__hint" style="margin-bottom:22px">
+            Это ориентир по нашим действующим расценкам. Точная смета считается после выезда на участок:
+            на цену влияют грунт, подъезд для техники и удалённость от Москвы. Выезд бесплатный.
+          </p>
+
+          <form class="form-card" style="box-shadow:none; padding:24px" data-lead data-ok="calcOk" id="calcForm">
+            <h3 class="h3" style="margin-bottom:6px">Прислать расчёт в подробном виде</h3>
+            <p style="margin-bottom:18px; color:var(--muted); font-size:15.5px">Разложим по материалам и работам, добавим график платежей и сроки по этапам.</p>
+            <div class="field">
+              <label for="c-name">Имя</label>
+              <input id="c-name" type="text" data-check="name" autocomplete="name" placeholder="Как к вам обращаться">
+              <span class="err">Напишите имя</span>
+            </div>
+            <div class="field">
+              <label for="c-contact">Телефон или Telegram</label>
+              <input id="c-contact" type="text" data-check="contact" autocomplete="tel" placeholder="+7 900 000-00-00 или @nickname">
+              <span class="err">Проверьте номер: нужно не меньше 10 цифр, либо ник в Telegram</span>
+            </div>
+            <div class="field field--check">
+              <label class="consent" for="c-agree">
+                <input type="checkbox" id="c-agree" data-check="agree">
+                <span>Согласен с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a> и даю согласие на обработку указанных мной данных.</span>
+              </label>
+              <span class="err">Без согласия мы не имеем права обрабатывать ваши данные</span>
+            </div>
+
+            <button class="btn btn--primary btn--wide" type="submit">Получить подробный расчёт</button>
+            <p class="form-note">Демо-сайт: заявка никуда не отправляется, данные не сохраняются.</p>
+          </form>
+          <div class="form-ok" id="calcOk">
+            <b>Расчёт принят в работу</b>
+            <p>В настоящем проекте здесь уходит заявка менеджеру и письмо клиенту с расчётом в PDF. На демо-сайте показываем, как это выглядит для посетителя.</p>
+          </div>
+
+          <div class="calc__nav" style="margin-top:20px">
+            <button class="btn btn--ghost" type="button" id="again">Посчитать заново</button>
+            <a class="btn btn--ghost" href="catalog.html">Посмотреть проекты</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <a class="brand" href="index.html" aria-label="КЕДРОН — на главную">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg>
+          </span>
+          <span><span class="brand__name">КЕДРОН</span><span class="brand__sub">каркасные дома</span></span>
+        </a>
+        <p class="foot__about">Строим каркасные и модульные дома под ключ в Московской, Тверской и Калужской областях с 2014 года.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="catalog.html">Проекты домов</a></li>
+          <li><a href="technology.html">Технология</a></li>
+          <li><a href="prices.html">Цены и комплектации</a></li>
+          <li><a href="calc.html">Калькулятор</a></li>
+          <li><a href="about.html">О компании</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связаться</h4>
+        <ul>
+          <li><a href="tel:+78001234567">8 800 123-45-67</a></li>
+          <li><a href="mailto:info@kedron-demo.ru">info@kedron-demo.ru</a></li>
+          <li><a href="contacts.html">Приехать в офис</a></li>
+          <li>Пн–Сб, 9:00–19:00</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot__demo">Демонстрационный проект для портфолио. «КЕДРОН» — вымышленная компания, контакты и цены приведены как пример. Вёрстка, фильтры каталога и калькулятор работают по-настоящему.</p>
+    <div class="foot__bottom">
+      <span>© <span data-year>2026</span> КЕДРОН · <a href="privacy.html">Политика конфиденциальности</a></span>
+      <span>Сайт собран на чистом коде: HTML, CSS, JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/projects.js"></script>
+<script src="js/site.js"></script>
+<script src="js/calc.js"></script>
+</body>
+</html>

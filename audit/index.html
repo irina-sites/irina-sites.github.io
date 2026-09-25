@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Аудит безопасности сайта и соответствия 152-ФЗ</title>
+<meta name="description" content="Проверка сайта на уязвимости и соответствие закону: OWASP Top-10, TLS, заголовки, утечки секретов, 152-ФЗ и cookie-практика РКН. Отчёт с планом исправлений.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Аудит безопасности сайта и соответствия 152-ФЗ">
+<meta property="og:description" content="Проверяю сайт по двум осям: уязвимости и требования закона. Отчёт с планом исправлений и помощь во внедрении.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{
+  --bg:#f5f6f9; --bg-alt:#eceff5; --surface:#ffffff; --soft:#fbfcfe;
+  --text:#1b2430; --muted:#5a6675; --faint:#8a94a3;
+  --line:#e3e7ee; --line-soft:#eceff4;
+  --acc:#4f46e5; --acc2:#0ea5e9; --acc-soft:#eef0fe; --on-acc:#ffffff;
+  --crit:#dc2626; --high:#ea580c; --med:#ca8a04; --ok:#16a34a;
+  --shadow:0 1px 2px rgba(20,30,50,.05), 0 10px 28px -14px rgba(20,30,50,.24);
+  --shadow-lift:0 2px 8px rgba(20,30,50,.08), 0 26px 52px -24px rgba(79,70,229,.36);
+  --r-s:9px; --r-m:14px; --r-l:22px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --font:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101520; --bg-alt:#161d2b; --surface:#1a2231; --soft:#1e2637;
+    --text:#eef2f8; --muted:#a8b3c4; --faint:#7d8798;
+    --line:#2a3446; --line-soft:#232c3c;
+    --acc:#8b83ff; --acc2:#4cc4f5; --acc-soft:#252a4a; --on-acc:#0c1020;
+    --crit:#f87171; --high:#fb923c; --med:#facc15; --ok:#4ade80;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -16px rgba(0,0,0,.8);
+    --shadow-lift:0 2px 10px rgba(0,0,0,.55), 0 28px 56px -26px rgba(139,131,255,.32);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101520; --bg-alt:#161d2b; --surface:#1a2231; --soft:#1e2637;
+  --text:#eef2f8; --muted:#a8b3c4; --faint:#7d8798;
+  --line:#2a3446; --line-soft:#232c3c;
+  --acc:#8b83ff; --acc2:#4cc4f5; --acc-soft:#252a4a; --on-acc:#0c1020;
+  --crit:#f87171; --high:#fb923c; --med:#facc15; --ok:#4ade80;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -16px rgba(0,0,0,.8);
+  --shadow-lift:0 2px 10px rgba(0,0,0,.55), 0 28px 56px -26px rgba(139,131,255,.32);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:86px;}
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--font); font-size:17px; line-height:1.66; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+a{color:inherit;}
+h1,h2,h3,h4{margin:0; line-height:1.16; letter-spacing:-.02em; font-weight:800; overflow-wrap:break-word;}
+p{margin:0;}
+ul,ol{margin:0; padding:0; list-style:none;}
+code{font-family:Consolas,Menlo,monospace; background:var(--bg-alt); border:1px solid var(--line); border-radius:5px; padding:1px 6px; font-size:14px;}
+
+.wrap{width:min(1120px, calc(100% - 40px)); margin-inline:auto;}
+@media (max-width:560px){ .wrap{width:calc(100% - 32px);} }
+.section{padding-block:clamp(46px,6.5vw,86px);}
+.section--alt{background:var(--bg-alt);}
+
+.eyebrow{display:inline-flex; align-items:center; gap:7px; margin-bottom:13px; padding:6px 14px; font-size:12px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--acc); background:var(--acc-soft); border:1px solid color-mix(in srgb, var(--acc) 28%, transparent); border-radius:999px;}
+.h1{font-size:clamp(31px,5.4vw,52px);}
+.h2{font-size:clamp(26px,3.8vw,38px); margin-bottom:13px;}
+.lede{max-width:64ch; color:var(--muted); font-size:clamp(16px,1.85vw,19px);}
+.section-head{margin-bottom:clamp(26px,3.6vw,44px);}
+
+/* шапка */
+.head{position:sticky; top:0; z-index:60; background:color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-bottom:1px solid transparent; transition:border-color .25s;}
+.head.is-stuck{border-bottom-color:var(--line);}
+.head__row{display:flex; align-items:center; gap:14px; height:66px;}
+.logo{display:flex; align-items:center; gap:11px; text-decoration:none; font-weight:800; font-size:17.5px; letter-spacing:-.02em;}
+.logo span.mark{display:grid; place-items:center; width:34px; height:34px; flex:none; border-radius:10px; background:linear-gradient(135deg,var(--acc),var(--acc2)); color:#fff;}
+.logo span.mark svg{width:18px; height:18px;}
+.head__act{display:flex; align-items:center; gap:9px; margin-left:auto;}
+.icon-btn{display:grid; place-items:center; width:38px; height:38px; border:1px solid var(--line); border-radius:var(--r-s); background:var(--surface); color:var(--muted); cursor:pointer;}
+.icon-btn:hover{color:var(--acc); border-color:var(--acc);}
+.icon-btn svg{width:18px; height:18px;}
+.icon-sun{display:none;}
+:root[data-theme="dark"] .icon-moon{display:none;}
+:root[data-theme="dark"] .icon-sun{display:block;}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .icon-moon{display:none;}
+  :root:not([data-theme="light"]) .icon-sun{display:block;}
+}
+
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:14px 25px; border:1px solid transparent; border-radius:var(--r-s); font-family:inherit; font-size:16px; font-weight:700; text-decoration:none; cursor:pointer; transition:transform .2s var(--ease), box-shadow .25s, background .2s, color .2s, border-color .2s;}
+.btn--primary{background:var(--acc); color:var(--on-acc); box-shadow:var(--shadow);}
+.btn--primary:hover{transform:translateY(-2px); box-shadow:var(--shadow-lift); background:color-mix(in srgb, var(--acc) 86%, #000);}
+.btn--ghost{background:var(--surface); color:var(--text); border-color:var(--line);}
+.btn--ghost:hover{border-color:var(--acc); color:var(--acc); transform:translateY(-2px);}
+.btn--sm{padding:10px 17px; font-size:15px;}
+
+/* первый экран */
+.hero{position:relative; overflow:hidden; padding-block:clamp(44px,6.5vw,84px);
+  background:
+    radial-gradient(900px 380px at 12% -20%, color-mix(in srgb, var(--acc) 12%, transparent), transparent),
+    radial-gradient(800px 360px at 92% -10%, color-mix(in srgb, var(--acc2) 12%, transparent), transparent),
+    var(--bg);
+  border-bottom:1px solid var(--line);}
+.hero h1{max-width:19ch; margin-bottom:18px;}
+.hero__lede{max-width:58ch; margin-bottom:28px; color:var(--muted); font-size:clamp(16.5px,2vw,20px);}
+/* Пометка о том, что услуга не запущена: стоит первой на странице,
+   чтобы её нельзя было прочитать как действующее предложение. */
+.notice{
+  max-width:74ch; margin:0 0 22px; padding:14px 18px;
+  background:var(--acc-soft); border-left:3px solid var(--acc);
+  border-radius:var(--r-s); color:var(--muted); font-size:15.5px; line-height:1.6;
+}
+.notice b{color:var(--text);}
+.notice a{color:var(--acc);}
+.hero__cta{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:38px;}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr)); gap:14px;}
+.tiles > *{min-width:0;}
+.tile{padding:20px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m); box-shadow:var(--shadow);}
+.tile b{display:block; font-size:27px; letter-spacing:-.03em; line-height:1.1; background:linear-gradient(135deg,var(--acc),var(--acc2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.tile span{display:block; margin-top:5px; color:var(--muted); font-size:14.5px; line-height:1.45;}
+
+/* сетки и карточки */
+.grid{display:grid; gap:18px;}
+.grid > *{min-width:0;}
+.grid--2{grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));}
+.grid--3{grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));}
+.card{padding:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m); box-shadow:var(--shadow);}
+.card h3{font-size:19px; margin-bottom:9px;}
+.card p{color:var(--muted); font-size:15.5px;}
+.card--pain em{display:block; margin-bottom:11px; padding-left:13px; border-left:3px solid var(--high); color:var(--faint); font-size:15px; font-style:italic;}
+
+/* списки проверок */
+.checks{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr)); gap:18px;}
+.checks > *{min-width:0;}
+.checkbox{padding:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-l); box-shadow:var(--shadow);}
+.checkbox__top{display:flex; align-items:center; gap:12px; margin-bottom:8px; flex-wrap:wrap;}
+/* «Кибербезопасность» — длинное неразрывное слово: на узком экране
+   уменьшаем кегль, иначе оно вылезает за край карточки */
+@media (max-width:430px){
+  .checkbox h3{font-size:17px;}
+  .checkbox{padding:20px;}
+}
+.checkbox__n{display:grid; place-items:center; width:34px; height:34px; flex:none; border-radius:10px; background:linear-gradient(135deg,var(--acc),var(--acc2)); color:#fff; font-size:13px; font-weight:800;}
+.checkbox h3{font-size:21px;}
+.checkbox > p{margin-bottom:18px; color:var(--muted); font-size:15.5px;}
+.checkbox ul{display:grid; gap:10px;}
+.checkbox li{position:relative; padding-left:27px; color:var(--muted); font-size:15.5px; line-height:1.5;}
+.checkbox li::before{content:""; position:absolute; left:2px; top:7px; width:14px; height:8px; border-left:2px solid var(--acc); border-bottom:2px solid var(--acc); transform:rotate(-45deg);}
+.checkbox li b{color:var(--text); font-weight:700;}
+
+/* этапы */
+.steps{display:grid; gap:13px;}
+.step{display:grid; grid-template-columns:auto 1fr auto; gap:19px; align-items:start; padding:22px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m); box-shadow:var(--shadow);}
+@media (max-width:640px){ .step{grid-template-columns:auto 1fr;} .step__when{grid-column:2;} }
+.step > *{min-width:0;}
+.step__n{display:grid; place-items:center; width:38px; height:38px; flex:none; border-radius:11px; background:var(--acc-soft); color:var(--acc); font-size:16px; font-weight:800;}
+.step h3{font-size:18px; margin-bottom:6px;}
+.step p{color:var(--muted); font-size:15.5px;}
+.step__when{padding:5px 12px; background:var(--bg-alt); border-radius:999px; font-size:13.5px; font-weight:700; color:var(--muted); white-space:nowrap;}
+
+/* тарифы */
+.plans{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); gap:18px;}
+.plans > *{min-width:0;}
+.plan{display:flex; flex-direction:column; padding:28px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-l); box-shadow:var(--shadow); transition:transform .28s var(--ease), border-color .28s, box-shadow .28s;}
+.plan:hover{transform:translateY(-4px); border-color:var(--acc); box-shadow:var(--shadow-lift);}
+.plan--best{border-color:var(--acc);}
+.plan__tag{align-self:flex-start; margin-bottom:13px; padding:5px 11px; border-radius:999px; background:var(--acc-soft); color:var(--acc); font-size:12px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;}
+.plan h3{font-size:22px; margin-bottom:6px;}
+.plan__price{font-size:29px; letter-spacing:-.03em; font-weight:800;}
+.plan__unit{margin-bottom:18px; color:var(--faint); font-size:14.5px;}
+.plan ul{display:grid; gap:10px; margin-bottom:24px;}
+.plan li{position:relative; padding-left:26px; color:var(--muted); font-size:15.5px; line-height:1.5;}
+.plan li::before{content:""; position:absolute; left:2px; top:7px; width:14px; height:8px; border-left:2px solid var(--acc); border-bottom:2px solid var(--acc); transform:rotate(-45deg);}
+.plan .btn{margin-top:auto;}
+
+/* предупреждения */
+.note{padding:18px 22px; background:var(--soft); border:1px solid var(--line); border-left:4px solid var(--acc2); border-radius:var(--r-m); color:var(--muted); font-size:15.5px; box-shadow:var(--shadow);}
+.note + .note{margin-top:14px;}
+.note--warn{border-left-color:var(--high); background:color-mix(in srgb, var(--high) 8%, var(--surface));}
+.note b{color:var(--text);}
+
+/* вопросы */
+.faq{display:grid; gap:12px; max-width:880px;}
+details{padding:20px 24px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m); box-shadow:var(--shadow); transition:border-color .25s;}
+details[open]{border-color:var(--acc);}
+summary{display:flex; align-items:center; justify-content:space-between; gap:16px; font-size:17px; font-weight:700; cursor:pointer; list-style:none; overflow-wrap:anywhere;}
+summary::-webkit-details-marker{display:none;}
+summary::after{content:""; flex:none; width:11px; height:11px; margin-right:3px; border-right:2px solid var(--acc); border-bottom:2px solid var(--acc); transform:rotate(45deg) translateY(-3px); transition:transform .25s var(--ease);}
+details[open] summary::after{transform:rotate(-135deg) translateY(-3px);}
+details p{margin-top:13px; color:var(--muted); font-size:16px;}
+details p + p{margin-top:10px;}
+
+/* финал */
+.cta{background:linear-gradient(135deg,var(--acc),var(--acc2)); color:#fff;}
+.cta h2{color:#fff;}
+.cta .lede{color:rgba(255,255,255,.88);}
+.cta__row{display:flex; flex-wrap:wrap; gap:13px; justify-content:center; margin-top:24px;}
+.cta .btn--ghost{background:rgba(255,255,255,.14); color:#fff; border-color:rgba(255,255,255,.45);}
+.cta .btn--ghost:hover{background:#fff; color:var(--acc);}
+
+.foot{padding-block:32px 28px; border-top:1px solid var(--line); color:var(--faint); font-size:14.5px;}
+.foot__demo{padding:13px 17px; margin-bottom:18px; background:var(--acc-soft); border-radius:var(--r-s); color:var(--muted); font-size:14.5px;}
+.foot__row{display:flex; flex-wrap:wrap; gap:13px; justify-content:space-between;}
+/* реквизиты: самозанятый обязан их указывать, а на странице про комплаенс это ещё и уместно */
+.foot__legal{margin:0 0 16px; padding-bottom:16px; border-bottom:1px solid var(--line); line-height:1.65;}
+.foot__fill{padding:1px 7px; border-radius:4px; background:#fff3cd; color:#7a5a00; font-weight:700;}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .foot__fill{background:#4a3a10; color:#ffd88a;} }
+:root[data-theme="dark"] .foot__fill{background:#4a3a10; color:#ffd88a;}
+
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .55s var(--ease), transform .55s var(--ease);}
+.reveal.is-in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important; scroll-behavior:auto!important;} .reveal{opacity:1; transform:none;} }
+:focus-visible{outline:2px solid var(--acc); outline-offset:3px; border-radius:4px;}
+.skip{position:absolute; left:-9999px; top:0; z-index:200; padding:12px 18px; background:var(--acc); color:#fff;}
+.skip:focus{left:0;}
+.center{text-align:center;}
+.center .lede{margin-inline:auto;}
+
+/* на узком экране кнопка «Образец отчёта» в шапке не помещается —
+   прячем её, в первом экране такая же кнопка остаётся */
+@media (max-width:620px){ .head__act .btn{display:none;} }
+@media (max-width:400px){
+  .head__row{gap:8px;}
+  .logo{font-size:15.5px; gap:8px;}
+  .logo span.mark{width:30px; height:30px;}
+  .icon-btn{width:34px; height:34px;}
+  .btn{padding:13px 18px; font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="head" id="head">
+  <div class="wrap head__row">
+    <a class="logo" href="#top">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.6c0 4.4-3.1 8.3-7.5 9.4-4.4-1.1-7.5-5-7.5-9.4V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+      </span>
+      Аудит безопасности сайта
+    </a>
+    <div class="head__act">
+      <a class="btn btn--ghost btn--sm" href="report.html" target="_blank" rel="noopener">Образец отчёта</a>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Переключить тёмную тему">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="notice"><b>Услуга пока не запущена.</b> Страница и <a href="report.html" target="_blank" rel="noopener">образец отчёта</a> лежат в портфолио как работа — цены сняты, заказы не принимаются.</p>
+    <span class="eyebrow">Кибербезопасность + закон</span>
+    <h1 class="h1">Проверю сайт на дыры и на то, за что штрафует Роскомнадзор</h1>
+    <p class="hero__lede">Две проверки в одном отчёте: где сайт уязвим для взлома и где он нарушает требования к персональным данным. С планом исправлений, а не просто со списком страшных слов.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="report.html" target="_blank" rel="noopener">Посмотреть образец отчёта</a>
+      <a class="btn btn--ghost" href="#plans">Что входит в проверку</a>
+    </div>
+    <ul class="tiles">
+      <li class="tile"><b>9 этапов</b><span>от разведки до готового плана</span></li>
+      <li class="tile"><b>2–4 дня</b><span>срок аудита обычного сайта</span></li>
+      <li class="tile"><b>60+ проверок</b><span>по коду, заголовкам и странице</span></li>
+      <li class="tile"><b>Без остановки сайта</b><span>пассивный режим по умолчанию</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Зачем это нужно</span>
+      <h2 class="h2">Три ситуации, в которых аудит окупается сразу</h2>
+    </div>
+    <div class="grid grid--3">
+      <article class="card card--pain reveal">
+        <em>«У нас же простой сайт, кому он нужен»</em>
+        <h3>Ломают не адресно, а массово</h3>
+        <p>Боты обходят сайты подряд и ищут типовое: открытую папку <code>.git</code>, забытый <code>.env</code> с паролями, устаревший плагин. Размер бизнеса при этом никого не интересует.</p>
+      </article>
+      <article class="card card--pain reveal">
+        <em>«Политику скачали из интернета»</em>
+        <h3>Проверяют документы, а не намерения</h3>
+        <p>Роскомнадзор смотрит на конкретное: есть ли политика, соответствует ли она тому, что сайт реально собирает, получено ли согласие до отправки данных, а не после.</p>
+      </article>
+      <article class="card card--pain reveal">
+        <em>«Разработчик всё сделал и пропал»</em>
+        <h3>Некому проверить за подрядчиком</h3>
+        <p>Сайт работает и выглядит прилично — значит, всё в порядке. Обычно так и есть, но проверить это может только третья сторона, которой незачем выгораживать чужую работу.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Что проверяю</span>
+      <h2 class="h2">Две части, и обе нужны</h2>
+      <p class="lede">Безопасный сайт может нарушать закон, а юридически чистый — стоять с открытой базой. Поэтому проверки идут парой.</p>
+    </div>
+    <div class="checks">
+      <article class="checkbox reveal">
+        <div class="checkbox__top">
+          <span class="checkbox__n">А</span>
+          <h3>Кибербезопасность</h3>
+        </div>
+        <p>По методике OWASP Top-10 — это международный список самых частых уязвимостей веб-приложений.</p>
+        <ul>
+          <li><b>Транспорт:</b> HTTPS, редирект с HTTP, версии TLS, срок сертификата</li>
+          <li><b>Заголовки безопасности:</b> CSP, HSTS, X-Frame-Options, Referrer-Policy и другие</li>
+          <li><b>Cookie:</b> флаги Secure, HttpOnly, SameSite</li>
+          <li><b>Открытые пути:</b> <code>.git</code>, <code>.env</code>, дампы базы, бэкапы, админки</li>
+          <li><b>Утечки секретов:</b> ключи, токены и пароли, попавшие в код страницы</li>
+          <li><b>Типовые уязвимости:</b> XSS, инъекции, CSRF — по шаблонам в коде</li>
+          <li><b>Зависимости:</b> устаревшие библиотеки с известными уязвимостями</li>
+          <li><b>Для ботов и ИИ-помощников:</b> внедрение команд, лишние полномочия, утечка ключей</li>
+        </ul>
+      </article>
+      <article class="checkbox reveal">
+        <div class="checkbox__top">
+          <span class="checkbox__n">Б</span>
+          <h3>Требования закона</h3>
+        </div>
+        <p>152-ФЗ о персональных данных и смежные нормы, плюс сложившаяся практика Роскомнадзора по cookie.</p>
+        <ul>
+          <li><b>Политика конфиденциальности:</b> есть ли, доступна ли, совпадает ли с тем, что сайт собирает</li>
+          <li><b>Согласие:</b> отдельная галочка, а не мелкий текст под кнопкой</li>
+          <li><b>Cookie-баннер:</b> согласие до установки счётчиков, а не после</li>
+          <li><b>Трансграничная передача:</b> куда уходят данные посетителей — шрифты, счётчики, чаты с зарубежных серверов</li>
+          <li><b>Уведомление в Роскомнадзор:</b> подано ли, актуально ли</li>
+          <li><b>Реклама:</b> маркировка и токен erid, если на сайте есть реклама</li>
+          <li><b>Возрастная маркировка</b> и обязательные сведения о продавце</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="note reveal" style="margin-top:20px">
+      <b>Про суммы штрафов честно.</b> Многомиллионные штрафы — это про утечки данных: от 3 до 15 млн ₽ за первую, оборотный штраф от 1 до 3% выручки за повторную. Малому бизнесу чаще грозит другое: штрафы за отсутствие или несоответствие политики и за обработку данных без согласия. Они измеряются десятками тысяч, но выписываются по каждому эпизоду. Точные суммы меняются — на этапе отчёта я даю ссылки на действующие нормы, а финальную оценку рисков подтверждает юрист.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Что вы получите</span>
+      <h2 class="h2">Отчёт, который можно отдать разработчику</h2>
+      <p class="lede">Не «у вас всё плохо», а список конкретных строк и файлов с готовыми исправлениями.</p>
+    </div>
+    <div class="grid grid--3">
+      <article class="card reveal">
+        <h3>Отчёт с приоритетами</h3>
+        <p>Каждая находка с оценкой серьёзности: критично, высоко, средне, информационно. Сначала чинится то, что горит, а не то, что проще.</p>
+      </article>
+      <article class="card reveal">
+        <h3>План исправлений</h3>
+        <p>Что править самим, что отдать разработчику, что согласовать с юристом. С оценкой времени по каждому пункту.</p>
+      </article>
+      <article class="card reveal">
+        <h3>Готовые заготовки</h3>
+        <p>Тексты заголовков безопасности, черновик политики, шаблон cookie-баннера и файл <code>security.txt</code> — остаётся вставить.</p>
+      </article>
+    </div>
+    <div style="margin-top:24px" class="reveal">
+      <a class="btn btn--ghost" href="report.html" target="_blank" rel="noopener">Открыть образец отчёта</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Как проходит</span>
+      <h2 class="h2">Пять шагов от письма до повторной проверки</h2>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <span class="step__n">1</span>
+        <div><h3>Разрешение и границы</h3><p>Подтверждаете, что сайт ваш, и мы договариваемся, что именно проверяю. Без этого шага работа не начинается — проверка чужого ресурса без разрешения незаконна.</p></div>
+        <span class="step__when">30 минут</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__n">2</span>
+        <div><h3>Пассивная проверка</h3><p>Смотрю сайт снаружи так же, как это делает обычный посетитель: заголовки, сертификат, код страницы, открытые пути. Нагрузки на сайт нет, посетители ничего не замечают.</p></div>
+        <span class="step__when">1 день</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__n">3</span>
+        <div><h3>Проверка по коду</h3><p>Если даёте доступ к исходникам — ищу утечки ключей, опасные места и устаревшие библиотеки с известными уязвимостями. Без доступа этот этап пропускается.</p></div>
+        <span class="step__when">1 день</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__n">4</span>
+        <div><h3>Отчёт и разбор</h3><p>Присылаю отчёт и созваниваемся на полчаса: объясняю человеческим языком, что из найденного правда срочно, а что можно отложить.</p></div>
+        <span class="step__when">1 день</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__n">5</span>
+        <div><h3>Повторная проверка</h3><p>После исправлений прогоняю проверки заново и выдаю финальный отчёт — тот самый, который можно показать проверяющим или партнёрам.</p></div>
+        <span class="step__when">через 2 недели</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="plans">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Объём работы</span>
+      <h2 class="h2">Три глубины проверки</h2>
+      <p class="lede">Так устроена услуга: от быстрого взгляда снаружи до аудита с исправлениями. Цены сняла — услуга готовится к запуску, заказать её пока нельзя.</p>
+    </div>
+    <div class="plans">
+      <article class="plan reveal">
+        <span class="plan__tag">Посмотреть, что есть</span>
+        <h3>Экспресс</h3>
+        <p class="plan__unit">1–2 дня · только снаружи</p>
+        <ul>
+          <li>Пассивная проверка безопасности</li>
+          <li>Проверка обязательных документов</li>
+          <li>Отчёт с приоритетами</li>
+          <li>Список того, что горит</li>
+        </ul>
+      </article>
+      <article class="plan plan--best reveal">
+        <span class="plan__tag">Основной объём</span>
+        <h3>Полный</h3>
+        <p class="plan__unit">3–4 дня · снаружи и по коду</p>
+        <ul>
+          <li>Всё из «Экспресса»</li>
+          <li>Проверка исходного кода</li>
+          <li>Зависимости и известные уязвимости</li>
+          <li>Приватность и трекинг</li>
+          <li>Готовые заготовки исправлений</li>
+          <li>Разбор отчёта голосом, 30 минут</li>
+        </ul>
+      </article>
+      <article class="plan reveal">
+        <span class="plan__tag">Под ключ</span>
+        <h3>С исправлением</h3>
+        <p class="plan__unit">7–10 дней · аудит и внедрение</p>
+        <ul>
+          <li>Всё из «Полного»</li>
+          <li>Сама вношу исправления в код</li>
+          <li>Настраиваю заголовки и cookie-баннер</li>
+          <li>Повторная проверка</li>
+          <li>Финальный отчёт «до и после»</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Честно</span>
+      <h2 class="h2">Чего этот аудит не делает</h2>
+      <p class="lede">Лучше узнать границы сразу, чем ждать от проверки того, чего в ней нет.</p>
+    </div>
+    <div class="note note--warn reveal">
+      <b>Это не пентест.</b> Я не взламываю сайт и не пытаюсь пробить защиту вручную. Проверка ловит типовые проблемы — те, на которых ломается большинство сайтов. Для банка, медицинской системы или платёжного сервиса нужен ручной пентест у профильной компании с лицензией.
+    </div>
+    <div class="note note--warn reveal">
+      <b>Это не юридическое заключение.</b> Я показываю, где сайт расходится с требованиями, и даю ссылки на нормы. Но юридическую оценку рисков и итоговые документы подписывает юрист — у меня нет для этого полномочий.
+    </div>
+    <div class="note reveal">
+      <b>Возможны ложные срабатывания.</b> Проверка автоматическая, часть находок приходится перепроверять руками. Всё, что попало в отчёт, я проверяю лично — но если что-то покажется странным, спорьте, разберёмся.
+    </div>
+    <div class="note reveal">
+      <b>Только с вашего разрешения.</b> Проверять можно свой ресурс или чужой с письменным разрешением владельца. Неправомерный доступ к компьютерной информации — это статьи 272–274 Уголовного кодекса. Поэтому первый этап всегда подтверждение прав, и без него я не начинаю.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Вопросы</span>
+      <h2 class="h2">О чём спрашивают до заказа</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal">
+        <summary>Сайт во время проверки будет работать?</summary>
+        <p>Да. По умолчанию проверка пассивная: я смотрю сайт снаружи так же, как обычный посетитель, только внимательнее. Нагрузки нет, посетители ничего не замечают.</p>
+        <p>Активные проверки, которые могут что-то нагрузить, включаются только по отдельному письменному согласию и в согласованное время — обычно ночью.</p>
+      </details>
+      <details class="reveal">
+        <summary>Нужно ли давать доступ к сайту и коду?</summary>
+        <p>Для «Экспресса» — нет, там всё видно снаружи. Для «Полного» нужен доступ к исходникам: без них не проверить утечки ключей и устаревшие библиотеки.</p>
+        <p>Доступ к боевой базе данных и админке не нужен никогда. Если подрядчик просит такой доступ для аудита — это повод насторожиться.</p>
+      </details>
+      <details class="reveal">
+        <summary>А если найдёте что-то серьёзное?</summary>
+        <p>Сообщу сразу, не дожидаясь конца аудита, и объясню, что делать в первую очередь. Критичные находки не ждут отчёта.</p>
+        <p>Информация о найденном остаётся между нами: я не публикую её, не показываю в портфолио и не обсуждаю с другими заказчиками. В портфолио попадают только обезличенные образцы вроде того, что по ссылке выше.</p>
+      </details>
+      <details class="reveal">
+        <summary>Мы всё исправим — и что, больше не нужно?</summary>
+        <p>Нужно, но реже. Уязвимости появляются не только из-за ошибок: выходят новые версии библиотек, меняются требования закона, добавляются новые страницы и формы.</p>
+        <p>Разумный ритм для небольшого сайта — раз в год, плюс внеплановая проверка после крупных доработок. Повторный аудит стоит дешевле первого, потому что половина работы уже сделана.</p>
+      </details>
+      <details class="reveal">
+        <summary>Мы на Tilda или другом конструкторе. Есть смысл?</summary>
+        <p>Есть, но проверяется меньше. За безопасность самой платформы отвечает конструктор, и это хорошая новость. А вот юридическая часть — политика, согласие, cookie-баннер, куда уходят данные из форм — целиком на вас, и штрафуют за неё именно владельца сайта.</p>
+      </details>
+      <details class="reveal">
+        <summary>Чем это отличается от бесплатных онлайн-сканеров?</summary>
+        <p>Сканер выдаёт список технических замечаний без контекста: непонятно, что из этого опасно именно для вас и что с этим делать. Половина пунктов окажется неважной, а важное потеряется среди них.</p>
+        <p>Я использую такие проверки как первый слой, а дальше отсеиваю ложные срабатывания, добавляю юридическую часть и перевожу всё на язык решений: вот это чините сегодня, вот это в следующем месяце, вот это можно не трогать.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section cta" id="final">
+  <div class="wrap center">
+    <h2 class="h2">Услуга готовится к запуску</h2>
+    <p class="lede">Страница и отчёт лежат в портфолио как работа: так выглядит страница услуги и так выглядит технический отчёт, который читает не инженер, а владелец бизнеса. Принимать заказы на аудит я пока не начала — сначала хочу быть уверена в каждом пункте проверки.</p>
+    <div class="cta__row">
+      <a class="btn btn--ghost" href="report.html" target="_blank" rel="noopener">Посмотреть образец отчёта</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__demo">Страница услуги из портфолио. Отчёт по ссылке — обезличенный образец: данные заменены на условные, реальные заказчики и их сайты не упоминаются.</p>
+    <p class="foot__legal">Мехоношина Ирина, самозанятая (налог на профессиональный доход). ИНН 381905819326. Аудит проводится только по письменному разрешению владельца сайта.</p>
+    <div class="foot__row">
+      <span>© <span id="year">2026</span> Аудит безопасности сайта</span>
+      <span>Собрано на чистом коде: HTML, CSS, JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  try {
+    var s = localStorage.getItem('audit-theme');
+    if (s === 'dark' || s === 'light') root.setAttribute('data-theme', s);
+  } catch (e) {}
+
+  function isDark() {
+    var a = root.getAttribute('data-theme');
+    if (a === 'dark') return true;
+    if (a === 'light') return false;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var n = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', n);
+    try { localStorage.setItem('audit-theme', n); } catch (e) {}
+  });
+
+  var head = document.getElementById('head');
+  var onScroll = function () { head.classList.toggle('is-stuck', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    Array.prototype.forEach.call(items, function (el) { io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(items, function (el) { el.classList.add('is-in'); });
+  }
+})();
+</script>
+</body>
+</html>

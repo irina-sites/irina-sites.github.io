@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#c96a7b" />
+  <title>Сияние 40+ · Уход за кожей</title>
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ЭКРАН: Онбординг / Тест -->
+  <section id="screen-quiz" class="screen screen--full is-hidden">
+    <div class="quiz" id="quiz-container"></div>
+  </section>
+
+  <!-- Основное приложение (после теста) -->
+  <div id="app" class="app is-hidden">
+
+    <!-- ЭКРАН: Мой уход -->
+    <section id="screen-routine" class="screen">
+      <header class="app-header">
+        <h1 class="app-header__title">Мой уход</h1>
+        <p class="app-header__subtitle" id="routine-date"></p>
+      </header>
+
+      <div class="streak-card" id="streak-card">
+        <div class="streak-card__flame">🔥</div>
+        <div class="streak-card__body">
+          <div class="streak-card__num" id="streak-num">0</div>
+          <div class="streak-card__label" id="streak-label">дней подряд</div>
+        </div>
+        <div class="streak-card__today" id="streak-today"></div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" data-time="morning" role="tab">☀️ Утро</button>
+        <button class="tab" data-time="evening" role="tab">🌙 Вечер</button>
+      </div>
+
+      <div id="routine-list" class="routine-list"></div>
+    </section>
+
+    <!-- ЭКРАН: Гимнастика для лица -->
+    <section id="screen-facegym" class="screen is-hidden">
+      <header class="app-header">
+        <h1 class="app-header__title">Гимнастика</h1>
+        <p class="app-header__subtitle">Упражнения для тонуса и молодости лица</p>
+      </header>
+
+      <div class="fg-intro">
+        <div class="fg-intro__emoji">💆‍♀️</div>
+        <p class="fg-intro__lead">Программа дня</p>
+        <div id="fg-info"></div>
+        <button class="btn btn--primary btn--block" id="fg-start">▶ Начать тренировку</button>
+      </div>
+
+      <h2 class="section-title">Все упражнения</h2>
+      <div id="fg-list" class="fg-list"></div>
+    </section>
+
+    <!-- ЭКРАН: Прогресс -->
+    <section id="screen-progress" class="screen is-hidden">
+      <header class="app-header">
+        <h1 class="app-header__title">Прогресс</h1>
+        <p class="app-header__subtitle">Фото «до / после» — только на вашем телефоне</p>
+      </header>
+
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat__num" id="stat-days">0</div>
+          <div class="stat__label" id="stat-days-label">дней ухода</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num" id="stat-streak">0</div>
+          <div class="stat__label">стрик</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num" id="stat-photos">0</div>
+          <div class="stat__label">фото</div>
+        </div>
+      </div>
+
+      <!-- Согласие на хранение фото. Снимок лица — чувствительные данные,
+           поэтому спрашиваем один раз перед первым фото, а не «по умолчанию». -->
+      <div class="consent-gate" id="photo-consent">
+        <p class="consent-gate__title">Прежде чем добавить первое фото</p>
+        <p class="consent-gate__text">
+          Снимки сохраняются <b>в памяти этого устройства</b> и никуда не отправляются:
+          ни на сервер, ни в облако, ни разработчику. Их видит только тот, у кого
+          есть доступ к телефону. Удалить можно по одному или все сразу —
+          в разделе «Профиль».
+        </p>
+        <label class="consent" for="photo-agree">
+          <input type="checkbox" id="photo-agree">
+          <span>Понимаю и даю согласие на обработку и хранение моих фотографий
+            на этом устройстве. Подробнее — в <a href="privacy.html" target="_blank" rel="noopener">политике конфиденциальности</a>.</span>
+        </label>
+      </div>
+
+      <label class="btn btn--primary btn--block" for="photo-input">
+        📷 Добавить фото
+        <input type="file" id="photo-input" accept="image/*" capture="user" hidden />
+      </label>
+
+      <div class="compare" id="compare-box"></div>
+
+      <h2 class="section-title">Мои снимки</h2>
+      <div id="photo-grid" class="photo-grid"></div>
+    </section>
+
+    <!-- ЭКРАН: Знания -->
+    <section id="screen-knowledge" class="screen is-hidden">
+      <header class="app-header">
+        <h1 class="app-header__title">Знания</h1>
+        <p class="app-header__subtitle">Коротко о главном для кожи 40+</p>
+      </header>
+      <div id="article-list" class="article-list"></div>
+      <article id="article-view" class="article-view is-hidden"></article>
+    </section>
+
+    <!-- ЭКРАН: Профиль -->
+    <section id="screen-profile" class="screen is-hidden">
+      <header class="app-header">
+        <h1 class="app-header__title">Профиль</h1>
+        <p class="app-header__subtitle">Ваши настройки ухода</p>
+      </header>
+      <div id="profile-body" class="profile-body"></div>
+    </section>
+
+    <!-- Нижняя навигация -->
+    <nav class="nav" role="navigation">
+      <button class="nav__item is-active" data-screen="screen-routine">
+        <span class="nav__icon">🧴</span><span class="nav__text">Уход</span>
+      </button>
+      <button class="nav__item" data-screen="screen-facegym">
+        <span class="nav__icon">💆‍♀️</span><span class="nav__text">Лицо</span>
+      </button>
+      <button class="nav__item" data-screen="screen-progress">
+        <span class="nav__icon">📸</span><span class="nav__text">Прогресс</span>
+      </button>
+      <button class="nav__item" data-screen="screen-knowledge">
+        <span class="nav__icon">📖</span><span class="nav__text">Знания</span>
+      </button>
+      <button class="nav__item" data-screen="screen-profile">
+        <span class="nav__icon">👤</span><span class="nav__text">Профиль</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Данные -->
+  <script src="data/routines.js"></script>
+  <script src="data/articles.js"></script>
+  <script src="data/exercises.js"></script>
+  <!-- Логика -->
+  <script src="js/storage.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/routine.js"></script>
+  <script src="js/facegym.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

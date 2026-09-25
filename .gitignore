@@ -1,0 +1,16 @@
+# Служебные файлы ОС
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Архивы — не нужны на публичном сайте
+*.rar
+*.zip
+
+# Личные исходники фото визитки: не для публикации.
+# Оригинал сохраните себе отдельно вне этой папки — здесь он не пропадёт,
+# просто git не будет его отслеживать и не отправит на GitHub.
+irina/foto-original.jpg
+irina/foto.jpg
+irina/foto-cutout-before.png
+irina/foto-cutout-old.png

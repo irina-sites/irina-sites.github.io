@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты КЕДРОН — вызвать замерщика на участок</title>
+<meta name="description" content="Телефон, почта, адрес производства в Клину. Бесплатный выезд на участок: замер, осмотр грунта и расчёт стоимости дома.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="КЕДРОН">
+<meta property="og:title" content="Контакты КЕДРОН">
+<meta property="og:description" content="Бесплатный выезд на участок: замер, осмотр грунта и расчёт стоимости дома.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="head" id="head">
+  <div class="wrap head__row">
+    <a class="brand" href="index.html" aria-label="КЕДРОН — на главную">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg>
+      </span>
+      <span><span class="brand__name">КЕДРОН</span><span class="brand__sub">каркасные дома</span></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Основное меню">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Проекты</a>
+      <a href="technology.html">Технология</a>
+      <a href="prices.html">Цены</a>
+      <a href="calc.html">Калькулятор</a>
+      <a href="about.html">О компании</a>
+      <a href="contacts.html" aria-current="page">Контакты</a>
+    </nav>
+    <div class="head__act">
+      <a class="head__phone" href="tel:+78001234567">8 800 123-45-67</a>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Переключить тёмную тему">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="pagehead">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Контакты</span>
+    </nav>
+    <h1 class="h1">Связаться и вызвать замерщика</h1>
+    <p class="lede" style="margin-top:12px">Выезд на участок бесплатный, в том числе если вы ещё выбираете между подрядчиками. Замерим, посмотрим грунт и подъезд, отдадим расчёт — дальше решаете сами.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="form-card reveal">
+        <h2 class="h3" style="margin-bottom:6px">Оставить заявку</h2>
+        <p style="margin-bottom:20px; color:var(--muted); font-size:15.5px">Перезвоним в течение рабочего дня и согласуем удобное время выезда.</p>
+        <form data-lead data-ok="siteOk" id="siteForm">
+          <div class="field">
+            <label for="n-name">Имя</label>
+            <input id="n-name" type="text" data-check="name" autocomplete="name" placeholder="Как к вам обращаться">
+            <span class="err">Напишите имя</span>
+          </div>
+          <div class="field">
+            <label for="n-contact">Телефон или Telegram</label>
+            <input id="n-contact" type="text" data-check="contact" autocomplete="tel" placeholder="+7 900 000-00-00 или @nickname">
+            <span class="err">Проверьте номер: нужно не меньше 10 цифр, либо ник в Telegram</span>
+          </div>
+          <div class="field">
+            <label for="n-topic">С чем помочь</label>
+            <select id="n-topic">
+              <option>Вызвать замерщика на участок</option>
+              <option>Рассчитать стоимость дома</option>
+              <option>Проверить чужую смету</option>
+              <option>Приехать на производство</option>
+              <option>Другой вопрос</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="n-msg">Комментарий</label>
+            <textarea id="n-msg" placeholder="Где участок, какая площадь дома интересует, есть ли готовый проект"></textarea>
+          </div>
+          <div class="field field--check">
+            <label class="consent" for="n-agree">
+              <input type="checkbox" id="n-agree" data-check="agree">
+              <span>Согласен с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a> и даю согласие на обработку указанных мной данных.</span>
+            </label>
+            <span class="err">Без согласия мы не имеем права обрабатывать ваши данные</span>
+          </div>
+
+          <button class="btn btn--primary btn--wide" type="submit">Отправить заявку</button>
+          <p class="form-note">Демо-сайт: заявка никуда не отправляется, данные не сохраняются.</p>
+        </form>
+        <div class="form-ok" id="siteOk">
+          <b>Заявка принята</b>
+          <p>В настоящем проекте отсюда уходит уведомление менеджеру в Telegram и письмо клиенту. На демо-сайте показываем, как это видит посетитель.</p>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="grid" style="gap:12px; margin-bottom:22px">
+          <a class="contact-line" href="tel:+78001234567">
+            <span class="contact-line__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            </span>
+            <span><b>8 800 123-45-67</b><span>Звонок по России бесплатный, Пн–Сб 9:00–19:00</span></span>
+          </a>
+          <a class="contact-line" href="mailto:info@kedron-demo.ru">
+            <span class="contact-line__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg>
+            </span>
+            <span><b>info@kedron-demo.ru</b><span>Пришлите проект или чужую смету — разберём построчно</span></span>
+          </a>
+          <div class="contact-line">
+            <span class="contact-line__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10.5c0 5.3-8 12-8 12s-8-6.7-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10.2" r="2.8"/></svg>
+            </span>
+            <span><b>Производство и офис</b><span>Московская область, Клин, Литейная улица, 12, строение 3</span></span>
+          </div>
+          <div class="contact-line">
+            <span class="contact-line__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/></svg>
+            </span>
+            <span><b>Когда работаем</b><span>Пн–Пт 9:00–19:00, Сб 10:00–16:00. Выезд на участок — и в воскресенье, по договорённости</span></span>
+          </div>
+        </div>
+
+        <div class="map-stub">
+          <div>
+            <span class="map-stub__pin" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10.5c0 5.3-8 12-8 12s-8-6.7-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10.2" r="2.8"/></svg>
+            </span>
+            <b style="display:block; color:var(--text)">Клин, Литейная улица, 12с3</b>
+            <span style="font-size:14.5px">На боевом сайте здесь стоит карта Яндекса<br>с меткой и построением маршрута</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt section--decor">
+  <span class="decor decor--branch decor--bl" data-decor="branch"></span>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Что будет дальше</span>
+      <h2 class="h2">Как проходит выезд</h2>
+      <p class="lede">Полтора часа на участке, и вы точно знаете, во сколько обойдётся дом именно у вас.</p>
+    </div>
+    <div class="grid grid--4">
+      <article class="card num-card reveal"><span class="num-card__n">1</span><h3>Созвон</h3><p>Уточняем адрес, площадь и удобный день. Занимает 5 минут.</p></article>
+      <article class="card num-card reveal"><span class="num-card__n">2</span><h3>Выезд</h3><p>Замер, проба грунта, оценка подъезда для техники и места под складирование.</p></article>
+      <article class="card num-card reveal"><span class="num-card__n">3</span><h3>Расчёт</h3><p>В течение двух дней присылаем смету с разбивкой и сроками по этапам.</p></article>
+      <article class="card num-card reveal"><span class="num-card__n">4</span><h3>Решение</h3><p>Договор или нет — расчёт остаётся у вас в любом случае.</p></article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <a class="brand" href="index.html" aria-label="КЕДРОН — на главную">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg>
+          </span>
+          <span><span class="brand__name">КЕДРОН</span><span class="brand__sub">каркасные дома</span></span>
+        </a>
+        <p class="foot__about">Строим каркасные и модульные дома под ключ в Московской, Тверской и Калужской областях с 2014 года.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="catalog.html">Проекты домов</a></li>
+          <li><a href="technology.html">Технология</a></li>
+          <li><a href="prices.html">Цены и комплектации</a></li>
+          <li><a href="calc.html">Калькулятор</a></li>
+          <li><a href="about.html">О компании</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связаться</h4>
+        <ul>
+          <li><a href="tel:+78001234567">8 800 123-45-67</a></li>
+          <li><a href="mailto:info@kedron-demo.ru">info@kedron-demo.ru</a></li>
+          <li><a href="contacts.html">Приехать в офис</a></li>
+          <li>Пн–Сб, 9:00–19:00</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot__demo">Демонстрационный проект для портфолио. «КЕДРОН» — вымышленная компания, контакты и цены приведены как пример. Вёрстка, фильтры каталога и калькулятор работают по-настоящему.</p>
+    <div class="foot__bottom">
+      <span>© <span data-year>2026</span> КЕДРОН · <a href="privacy.html">Политика конфиденциальности</a></span>
+      <span>Сайт собран на чистом коде: HTML, CSS, JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>

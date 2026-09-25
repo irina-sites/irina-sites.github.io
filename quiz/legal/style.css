@@ -1,0 +1,658 @@
+/* СТАТУС — юридический документ: бордовая шапка, поля бланка, печать, золотые орнаменты. */
+:root {
+  --background: #f2eee5;
+  --surface: #fffdf8;
+  --surfaceMuted: #ece7db;
+  --text: #1c1f26;
+  --muted: #6b6a63;
+  --primary: #6f2232;
+  --primaryDark: #4d1523;
+  --accent: #b08a4a;
+  --border: #d8d2c4;
+  --success: #2f6b4f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background:
+    repeating-linear-gradient(0deg, rgba(111, 34, 50, 0.018) 0 1px, transparent 1px 3px),
+    var(--background);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ── Шапка ───────────────────────────────────────────── */
+
+.topbar {
+  background: var(--primary);
+  border-bottom: 5px solid var(--accent);
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  width: min(900px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 22px 0;
+  color: #f6f1e6;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: var(--accent);
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-title,
+.brand-subtitle,
+.brand-meta,
+.site-footer p {
+  margin: 0;
+}
+
+.brand-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  max-width: 48ch;
+  color: rgba(246, 241, 230, 0.72);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.brand-meta {
+  padding: 6px 14px;
+  color: var(--accent);
+  border: 1px solid rgba(176, 138, 74, 0.55);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ── Карточка-бланк ──────────────────────────────────── */
+
+.app-shell,
+.site-footer {
+  width: min(900px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.app-shell {
+  padding: 44px 0 40px;
+}
+
+.screen {
+  position: relative;
+  padding: 48px 48px 48px 86px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 50px rgba(28, 31, 38, 0.1);
+}
+
+/* поле бланка слева */
+.screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 56px;
+  width: 1px;
+  background: rgba(111, 34, 50, 0.22);
+}
+
+.screen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary) 0 70%, var(--accent) 70%);
+}
+
+.seal {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 128px;
+  height: 128px;
+  color: var(--primary);
+  opacity: 0.13;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.seal svg {
+  width: 100%;
+  height: 100%;
+}
+
+.seal-result {
+  top: auto;
+  bottom: 40px;
+  right: 34px;
+  width: 104px;
+  height: 104px;
+  color: var(--accent);
+  opacity: 0.18;
+}
+
+.kicker {
+  display: inline-block;
+  margin: 0 0 22px;
+  padding: 8px 16px;
+  color: #f6f1e6;
+  background: var(--primary);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  max-width: 17ch;
+  font-size: clamp(34px, 5.4vw, 54px);
+}
+
+h2 {
+  max-width: 22ch;
+  font-size: clamp(27px, 4.2vw, 40px);
+}
+
+h3 {
+  margin: 0 0 16px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+p {
+  overflow-wrap: anywhere;
+}
+
+.ornament {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  max-width: 420px;
+  margin: 26px 0 0;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.ornament span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.lead {
+  max-width: 52ch;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.benefit-list {
+  display: grid;
+  gap: 0;
+  max-width: 620px;
+  margin: 30px 0 36px;
+  padding: 0;
+  list-style: none;
+  counter-reset: benefit;
+}
+
+.benefit-list li {
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  counter-increment: benefit;
+}
+
+.benefit-list li:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.benefit-list li::before {
+  content: counter(benefit, upper-roman);
+  min-width: 26px;
+  color: var(--accent);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ── Кнопки ──────────────────────────────────────────── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 15px 38px;
+  border: 1px solid var(--primary);
+  border-radius: 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-primary {
+  color: #f6f1e6;
+  background: var(--primary);
+  box-shadow: 5px 5px 0 rgba(176, 138, 74, 0.4);
+}
+
+.button-primary:hover {
+  background: var(--primaryDark);
+  box-shadow: 7px 7px 0 rgba(176, 138, 74, 0.55);
+}
+
+.button-secondary {
+  width: 100%;
+  max-width: 640px;
+  margin-top: 22px;
+  color: var(--primary);
+  background: transparent;
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.button-secondary:hover {
+  border-color: var(--primary);
+  background: var(--surfaceMuted);
+}
+
+.button:focus-visible,
+.answer-button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ── Вопросы ─────────────────────────────────────────── */
+
+.quiz-topline {
+  display: grid;
+  gap: 14px;
+  max-width: 640px;
+  margin-bottom: 34px;
+}
+
+.question-counter {
+  display: inline-block;
+  justify-self: start;
+  margin: 0;
+  padding: 6px 14px;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  background: var(--surfaceMuted);
+  border: 1px solid var(--border);
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--primary) 0 6px,
+    var(--primaryDark) 6px 12px
+  );
+  transition: width 0.35s ease;
+}
+
+.question-hint {
+  max-width: 50ch;
+  margin: 18px 0 32px;
+  color: var(--muted);
+  font-size: 16px;
+  font-style: italic;
+}
+
+.answer-list {
+  display: grid;
+  gap: 0;
+  max-width: 640px;
+  border-top: 1px solid var(--border);
+}
+
+.answer-button {
+  position: relative;
+  width: 100%;
+  min-height: 64px;
+  padding: 18px 24px 18px 50px;
+  color: var(--text);
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+.answer-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border: 1px solid var(--primary);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.answer-button:hover {
+  padding-left: 56px;
+  color: var(--primary);
+  background: linear-gradient(90deg, rgba(176, 138, 74, 0.14), transparent);
+}
+
+.answer-button:hover::before {
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+/* ── Результат ───────────────────────────────────────── */
+
+.result-description {
+  max-width: 56ch;
+  margin: 22px 0 32px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.recommendations {
+  position: relative;
+  max-width: 640px;
+  margin: 0 0 32px;
+  padding: 30px 32px;
+  background: var(--surfaceMuted);
+  border: 1px solid var(--border);
+  border-left: 4px double var(--primary);
+}
+
+.recommendations h3 {
+  color: var(--primary);
+}
+
+.recommendations ol {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 16px;
+}
+
+.recommendations li {
+  padding: 12px 0;
+  border-bottom: 1px dotted rgba(111, 34, 50, 0.2);
+}
+
+.recommendations li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.recommendations li::marker {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.cta-note {
+  position: relative;
+  max-width: 640px;
+  margin: 0 0 32px;
+  padding: 26px 30px;
+  color: var(--primaryDark);
+  background: rgba(176, 138, 74, 0.12);
+  border: 1px solid var(--accent);
+  font-size: 18px;
+  font-style: italic;
+}
+
+.cta-note::before {
+  content: "❝";
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  color: var(--accent);
+  font-size: 28px;
+  opacity: 0.5;
+}
+
+/* ── Форма ───────────────────────────────────────────── */
+
+.lead-form {
+  display: grid;
+  gap: 20px;
+  max-width: 640px;
+  padding: 34px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px double var(--primary);
+}
+
+.form-heading h3 {
+  color: var(--primary);
+}
+
+.form-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 13px 14px;
+  color: var(--text);
+  background: #fbf8f1;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.success-message {
+  max-width: 640px;
+  margin-top: 22px;
+  padding: 22px 24px;
+  color: var(--success);
+  background: rgba(47, 107, 79, 0.07);
+  border: 1px solid rgba(47, 107, 79, 0.3);
+  border-left: 4px double var(--success);
+  font-size: 16px;
+  font-style: italic;
+}
+
+.site-footer {
+  padding: 26px 0 36px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .site-header,
+  .app-shell,
+  .site-footer {
+    width: calc(100% - 28px);
+  }
+
+  .screen {
+    padding: 28px 20px 30px 40px;
+  }
+
+  .screen::before {
+    left: 22px;
+  }
+
+  .seal {
+    top: 14px;
+    right: 12px;
+    width: 76px;
+    height: 76px;
+  }
+
+  .seal-result {
+    top: auto;
+    bottom: 14px;
+    width: 68px;
+    height: 68px;
+  }
+
+  h1 {
+    max-width: 12ch;
+  }
+
+  .lead {
+    font-size: 16px;
+  }
+
+  .button {
+    width: 100%;
+    padding: 15px 18px;
+  }
+
+  .recommendations,
+  .lead-form {
+    padding: 22px 18px;
+  }
+
+  .cta-note {
+    padding: 22px 18px 20px;
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   Галочка согласия на обработку персональных данных.
+   152-ФЗ ст.9: согласие должно быть конкретным и осознанным, поэтому
+   отдельная галочка, а не «отправляя форму, вы соглашаетесь».
+   Ниже сбрасываются общие правила для label и input — они в этом файле
+   задают капслок и подчёркнутое поле, чекбоксу это не нужно.
+   ========================================================================== */
+.lead-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.55;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.lead-consent input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  margin-top: 1px;
+  padding: 0;
+  border: none;
+  border-bottom: none;
+  accent-color: var(--primary);
+}
+
+.lead-consent a {
+  color: var(--primary);
+}

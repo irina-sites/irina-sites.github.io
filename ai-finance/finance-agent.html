@@ -1,0 +1,552 @@
+<title>Финансовый ИИ-агент</title>
+<style>
+  :root{
+    --bg:#F5F7F8; --surface:#FFFFFF; --surface-2:#EEF2F3;
+    --border:#E1E7E9; --border-strong:#CDD6D9;
+    --ink:#172026; --ink-soft:#54606A; --ink-faint:#8A959C;
+    --accent:#0E7C6B; --accent-ink:#0A5C50; --accent-wash:#E4F1EE;
+    --amber:#B87516; --amber-wash:#FBF0DC;
+    --good:#2E8B57; --danger:#C4553F;
+    --shadow:0 1px 2px rgba(23,32,38,.04), 0 8px 28px rgba(23,32,38,.06);
+    --radius:14px;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0F1518; --surface:#161E22; --surface-2:#1C262B;
+      --border:#28343A; --border-strong:#35454C;
+      --ink:#E9EEF0; --ink-soft:#A4AFB5; --ink-faint:#6E7B81;
+      --accent:#28B79E; --accent-ink:#54D6BF; --accent-wash:#12312B;
+      --amber:#E0A94A; --amber-wash:#33280F;
+      --good:#4FC07E; --danger:#E27A63;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F5F7F8; --surface:#FFFFFF; --surface-2:#EEF2F3;
+    --border:#E1E7E9; --border-strong:#CDD6D9;
+    --ink:#172026; --ink-soft:#54606A; --ink-faint:#8A959C;
+    --accent:#0E7C6B; --accent-ink:#0A5C50; --accent-wash:#E4F1EE;
+    --amber:#B87516; --amber-wash:#FBF0DC;
+    --good:#2E8B57; --danger:#C4553F;
+    --shadow:0 1px 2px rgba(23,32,38,.04), 0 8px 28px rgba(23,32,38,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F1518; --surface:#161E22; --surface-2:#1C262B;
+    --border:#28343A; --border-strong:#35454C;
+    --ink:#E9EEF0; --ink-soft:#A4AFB5; --ink-faint:#6E7B81;
+    --accent:#28B79E; --accent-ink:#54D6BF; --accent-wash:#12312B;
+    --amber:#E0A94A; --amber-wash:#33280F;
+    --good:#4FC07E; --danger:#E27A63;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0}
+  .wrap{
+    font-family:var(--sans); color:var(--ink); background:var(--bg);
+    min-height:100vh; padding:32px 20px 64px; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .container{max-width:900px; margin:0 auto}
+
+  /* Header */
+  header{margin-bottom:28px}
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-ink); font-weight:700; margin:0 0 10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-wash)}
+  h1{font-size:clamp(26px,4.4vw,38px); line-height:1.1; margin:0 0 8px; letter-spacing:-.02em; text-wrap:balance}
+  .sub{color:var(--ink-soft); font-size:15px; max-width:60ch; margin:0}
+
+  /* Card */
+  .card{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+  }
+  .card + .card{margin-top:20px}
+  .card-head{padding:18px 22px 0}
+  .card-body{padding:22px}
+  .card-title{font-size:13px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-faint); margin:0}
+
+  /* Input */
+  label.field-label{display:block; font-size:13px; font-weight:600; color:var(--ink-soft); margin:0 0 8px}
+  textarea{
+    width:100%; min-height:150px; resize:vertical; font-family:var(--mono);
+    font-size:13.5px; line-height:1.7; color:var(--ink); background:var(--surface-2);
+    border:1px solid var(--border-strong); border-radius:10px; padding:14px 16px;
+    outline:none; transition:border-color .15s, box-shadow .15s;
+  }
+  textarea:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-wash)}
+  .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:14px}
+  button{font-family:var(--sans); cursor:pointer; border:none; border-radius:10px; font-weight:600; transition:transform .08s, background .15s, opacity .15s}
+  button:active{transform:translateY(1px)}
+  button:disabled{opacity:.55; cursor:default}
+  .btn-primary{background:var(--accent); color:#fff; font-size:15px; padding:12px 22px}
+  .btn-primary:hover:not(:disabled){background:var(--accent-ink)}
+  .btn-ghost{background:transparent; color:var(--ink-soft); font-size:13.5px; padding:12px 14px; border:1px solid var(--border-strong)}
+  .btn-ghost:hover{background:var(--surface-2)}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* Agent status */
+  #status{display:none; margin-top:18px; padding:16px; background:var(--surface-2); border-radius:10px; border:1px solid var(--border)}
+  #status.on{display:block}
+  .steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px}
+  .steps li{display:flex; align-items:center; gap:11px; font-size:14px; color:var(--ink-faint); transition:color .25s}
+  .steps li.active{color:var(--ink)}
+  .steps li.done{color:var(--ink-soft)}
+  .tick{width:18px; height:18px; border-radius:50%; border:2px solid var(--border-strong); flex-shrink:0; display:grid; place-items:center; font-size:11px; transition:all .25s}
+  .steps li.active .tick{border-color:var(--accent); animation:pulse 1s ease-in-out infinite}
+  .steps li.done .tick{border-color:var(--accent); background:var(--accent); color:#fff}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-wash)}50%{box-shadow:0 0 0 5px transparent}}
+  @media (prefers-reduced-motion:reduce){.steps li.active .tick{animation:none}}
+
+  /* Results */
+  #results{display:none; margin-top:20px}
+  #results.on{display:block; animation:fade .4s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){#results.on{animation:none}}
+
+  .tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px}
+  @media (max-width:620px){.tiles{grid-template-columns:1fr}}
+  .tile{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; box-shadow:var(--shadow)}
+  .tile .k{font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:600; margin:0 0 8px}
+  .tile .v{font-family:var(--mono); font-size:26px; font-weight:600; letter-spacing:-.01em; font-variant-numeric:tabular-nums; margin:0; line-height:1}
+  .tile .note{font-size:12.5px; color:var(--ink-soft); margin:7px 0 0}
+  .tile.savings{border-color:var(--amber); background:var(--amber-wash)}
+  .tile.savings .v{color:var(--amber)}
+
+  .chart-grid{display:grid; grid-template-columns:220px 1fr; gap:26px; align-items:center}
+  @media (max-width:560px){.chart-grid{grid-template-columns:1fr; justify-items:center}}
+  .donut-holder{position:relative; width:200px; height:200px}
+  .donut-center{position:absolute; inset:0; display:grid; place-items:center; text-align:center; pointer-events:none}
+  .donut-center .dc-k{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint); font-weight:600}
+  .donut-center .dc-v{font-family:var(--mono); font-size:19px; font-weight:600; font-variant-numeric:tabular-nums}
+  .legend{list-style:none; margin:0; padding:0; width:100%; display:flex; flex-direction:column; gap:2px}
+  .legend li{display:flex; align-items:center; gap:11px; padding:7px 0; border-bottom:1px solid var(--border)}
+  .legend li:last-child{border-bottom:none}
+  .swatch{width:11px; height:11px; border-radius:3px; flex-shrink:0}
+  .legend .name{flex:1; font-size:14px}
+  .legend .amt{font-family:var(--mono); font-size:13.5px; font-variant-numeric:tabular-nums; color:var(--ink-soft)}
+  .legend .pct{font-family:var(--mono); font-size:12px; color:var(--ink-faint); width:42px; text-align:right}
+
+  .advice{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px}
+  .advice li{display:flex; gap:13px; align-items:flex-start; font-size:14.5px; color:var(--ink); background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px}
+  .advice .lamp{flex-shrink:0; width:26px; height:26px; border-radius:8px; background:var(--accent-wash); color:var(--accent-ink); display:grid; place-items:center; font-size:15px}
+  .badge{display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600; color:var(--ink-faint); background:var(--surface-2); border:1px solid var(--border); border-radius:99px; padding:4px 10px}
+  .badge .bd{width:6px; height:6px; border-radius:50%; background:var(--good)}
+  .card-title-row{display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .err{color:var(--danger); font-size:14px; margin:14px 0 0}
+  .foot{margin-top:26px; font-size:12.5px; color:var(--ink-faint); text-align:center; line-height:1.6}
+
+  /* Two-modes explainer */
+  .modes{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px}
+  @media (max-width:620px){.modes{grid-template-columns:1fr}}
+  .mode{display:flex; gap:11px; align-items:flex-start; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:13px 15px; box-shadow:var(--shadow)}
+  .mode-ic{font-size:18px; line-height:1.25; flex-shrink:0}
+  .mode-tx b{display:block; font-size:13.5px; margin-bottom:3px}
+  .mode-tx .desc{font-size:12.5px; color:var(--ink-soft); line-height:1.45}
+  .mode-tx .desc em{font-style:normal; color:var(--accent-ink); font-weight:600}
+
+  /* Goal input */
+  .goal-input{margin-top:16px; padding:14px 16px; background:var(--accent-wash); border:1px dashed var(--accent); border-radius:10px}
+  .goal-label{font-size:13px; font-weight:600; color:var(--accent-ink); display:block; margin-bottom:10px}
+  .goal-label em{color:var(--ink-faint); font-style:normal; font-weight:400}
+  .goal-fields{display:flex; gap:10px; flex-wrap:wrap}
+  .goal-fields input{flex:1; min-width:150px; font-family:var(--sans); font-size:14px; color:var(--ink); background:var(--surface); border:1px solid var(--border-strong); border-radius:9px; padding:11px 13px; outline:none; transition:border-color .15s, box-shadow .15s}
+  .goal-fields input:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-wash)}
+
+  /* Goal result card */
+  .goal-headline{font-size:15px; margin:0 0 18px; line-height:1.55}
+  .goal-headline b{color:var(--accent-ink)}
+  .goal-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:22px}
+  @media (max-width:560px){.goal-stats{grid-template-columns:1fr}}
+  .gstat{background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:14px 16px}
+  .gk{display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:600; margin-bottom:7px}
+  .gv{font-family:var(--mono); font-size:20px; font-weight:600; font-variant-numeric:tabular-nums}
+  .proj-cap{font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); font-weight:600; margin:0 0 12px}
+  .proj{border-top:1px solid var(--border); padding-top:18px}
+  .proj-bars{display:flex; align-items:flex-end; gap:6px; height:120px}
+  .pbar{flex:1; min-width:14px; display:flex; flex-direction:column; align-items:center; gap:7px; height:100%; justify-content:flex-end}
+  .pbar .fill{width:100%; background:var(--accent); border-radius:5px 5px 0 0; min-height:3px}
+  .pbar .fill.reached{background:var(--good)}
+  .pbar .pm{font-size:10.5px; color:var(--ink-faint); font-family:var(--mono); white-space:nowrap}
+  @media (prefers-reduced-motion:no-preference){.pbar .fill{animation:grow .5s ease}}
+  @keyframes grow{from{height:0 !important}}
+</style>
+
+<div class="wrap">
+  <div class="container">
+    <header>
+      <p class="eyebrow"><span class="dot"></span>ИИ-агент · личные финансы</p>
+      <h1>Разбор трат и советы по экономии</h1>
+      <p class="sub">Вставьте список своих расходов в свободной форме. Агент сам определит категории, посчитает итоги, построит диаграмму и подскажет, где можно сэкономить.</p>
+    </header>
+
+    <div class="modes">
+      <div class="mode">
+        <span class="mode-ic">💻</span>
+        <div class="mode-tx"><b>Файл в браузере</b><span class="desc">Двойной клик по файлу — работает <em>офлайн</em>, без интернета и аккаунта. Категории и советы считает встроенный движок.</span></div>
+      </div>
+      <div class="mode">
+        <span class="mode-ic">✨</span>
+        <div class="mode-tx"><b>Онлайн-версия</b><span class="desc">Та же страница на claude.ai подключает <em>языковую модель</em> — точнее распознаёт траты и даёт более тонкие советы.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <label class="field-label" for="input">Ваши траты — по одной в строке (название и сумма)</label>
+        <textarea id="input" spellcheck="false"></textarea>
+
+        <div class="goal-input">
+          <span class="goal-label">🎯 Цель накопления <em>(необязательно)</em></span>
+          <div class="goal-fields">
+            <input id="goal-name" type="text" placeholder="На что копите? Напр. Отпуск">
+            <input id="goal-amount" type="text" inputmode="numeric" placeholder="Нужная сумма, ₽ · напр. 60000">
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="btn-primary" id="run">Анализировать траты</button>
+          <button class="btn-ghost" id="example">Подставить пример</button>
+          <button class="btn-ghost" id="clear">Очистить</button>
+        </div>
+
+        <div id="status">
+          <ul class="steps">
+            <li data-step="0"><span class="tick"></span>Читаю список трат</li>
+            <li data-step="1"><span class="tick"></span>Определяю категорию каждой траты</li>
+            <li data-step="2"><span class="tick"></span>Считаю итоги и строю диаграмму</li>
+            <li data-step="3"><span class="tick"></span>Ищу, где можно сэкономить</li>
+          </ul>
+        </div>
+        <p class="err" id="err" style="display:none"></p>
+      </div>
+    </div>
+
+    <div id="results">
+      <div class="tiles" id="tiles"></div>
+
+      <div class="card">
+        <div class="card-head"><p class="card-title">Куда уходят деньги</p></div>
+        <div class="card-body">
+          <div class="chart-grid">
+            <div class="donut-holder">
+              <canvas id="donut" width="200" height="200"></canvas>
+              <div class="donut-center"><div><div class="dc-k">Всего</div><div class="dc-v" id="donut-total"></div></div></div>
+            </div>
+            <ul class="legend" id="legend"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="goal-card" style="display:none">
+        <div class="card-head"><p class="card-title">Путь к цели</p></div>
+        <div class="card-body" id="goal-body"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title-row">
+            <p class="card-title">Советы агента</p>
+            <span class="badge" id="src-badge"><span class="bd"></span>ИИ-анализ</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul class="advice" id="advice"></ul>
+        </div>
+      </div>
+    </div>
+
+    <p class="foot">Проект «ИИ-агент личных финансов» · работает прямо в браузере, без установки и без интернета.<br>Суммы приблизительные, не является финансовой рекомендацией.</p>
+  </div>
+</div>
+
+<script>
+const EXAMPLE = `Магнит, продукты — 4200
+Кофейня возле работы — 320
+Яндекс.Такси — 610
+Пятёрочка — 2380
+Аренда квартиры — 32000
+Кофейня — 350
+Netflix подписка — 799
+Spotify — 269
+Обед в кафе — 890
+Аптека, лекарства — 1240
+Кофе с собой — 300
+Проездной метро — 2500
+Кино с друзьями — 1400
+Кофейня — 340
+Новые кроссовки — 6900
+Мобильная связь — 600
+Доставка еды, Delivery — 1150
+Кофе с собой — 310`;
+
+const CATEGORIES = ["Продукты","Кафе и рестораны","Транспорт","Жильё и коммуналка","Развлечения","Здоровье","Одежда и обувь","Связь и интернет","Подписки","Прочее"];
+const PALETTE = ["#0E9B8A","#3B82C4","#E0A22B","#E06B5A","#8B6DC4","#6FAE4A","#D06AA0","#2FA8B8","#E38A3C","#7C8A99","#C4526B","#4FA3D1"];
+
+// keyword fallback categorizer (used if the AI model is unavailable)
+const KEYWORDS = {
+  "Продукты":["магнит","пятёр","пятер","перекр","ашан","лент","продукт","дикси","spar","овощ","молоко","хлеб","супермаркет","grocery","вкусвилл","окей"," okey","азбука вкуса","мясо","фрукт","бакал","рынок","гипермаркет","красное белое","бристоль"],
+  "Кафе и рестораны":["кофе","кофейн","кафе","ресторан","бар","обед","завтрак","ужин","старбакс","старбак","бургер","пицц","суши","роллы","доставка еды","delivery","достав","макдон","kfc","кфс","столов","шаурм","вкусно и точка","бургер кинг","додо","кофикс","шоколадниц","ланч","перекус","фастфуд","кебаб"],
+  "Транспорт":["такси","метро","автобус","проезд","бензин","заправ","парков","яндекс.такси","uber","убер","троллейб","трамвай","каршер","самокат","электричк","ржд","аэроэксп","маршрут","проездн","тройка","делимобиль","ситимобил"],
+  "Жильё и коммуналка":["аренда","квартир","коммунал","жкх","электрич","отопл","ипотек","съём","съем","интернет дом","газ","вода","домофон","капремонт","управляющ","найм"],
+  "Развлечения":["кино","игр","концерт","театр","клуб","боулинг","развлеч","бассейн","музей","аттракц","steam","playstation","xbox","квест","караоке","выставк","парк развлеч","бильярд","настольн"],
+  "Здоровье":["аптек","лекарств","врач","стоматол","клиник","анализ","витамин","массаж","spa","спа","фитнес","зал","спорт","стомат","окулист","терапевт","узи","прививк","линзы","очки","пластыр"],
+  "Одежда и обувь":["одежд","кроссов","обув","куртк","джинс","футбол","zara","h&m","платье","бренд","магазин одежды","спортмастер","обувь","рубашк","бельё","белье","аксессуар","сумк","uniqlo","юникло","lamoda","ламода","wildberries обувь"],
+  "Связь и интернет":["связь","мобильн","мтс","мегафон","билайн","tele2","теле2","йота","yota","интернет","роутер","тариф","симкарт","пополнение телефон"],
+  "Подписки":["netflix","spotify","подписк","яндекс.плюс","яндекс плюс","плюс","youtube premium","icloud","apple music","ivi","okko","кинопоиск","чатгпт","chatgpt","subscription","premium","букмейт","литрес","storytel","патреон","patreon"],
+};
+
+function fallbackCategorize(text){
+  const items=[];
+  text.split(/\n+/).forEach(line=>{
+    line=line.trim(); if(!line) return;
+    const m=line.match(/(-?\d[\d\s.,]*)\s*(?:₽|руб|р\.?)?\s*$/i) || line.match(/(-?\d[\d\s.,]*)/);
+    if(!m) return;
+    const amount=parseFloat(m[1].replace(/\s/g,"").replace(",","."));
+    if(!isFinite(amount)||amount<=0) return;
+    const name=line.replace(m[0],"").replace(/[-–—:]\s*$/,"").trim()||"Без названия";
+    const low=(name+" "+line).toLowerCase();
+    let cat="Прочее";
+    for(const c in KEYWORDS){ if(KEYWORDS[c].some(k=>low.includes(k))){cat=c;break;} }
+    items.push({name,amount,category:cat});
+  });
+  const advice=buildFallbackAdvice(items);
+  const total=items.reduce((s,i)=>s+i.amount,0);
+  return {items,advice,potentialSavings:Math.round(total*0.12/50)*50,source:"rules"};
+}
+function buildFallbackAdvice(items){
+  const by={}; items.forEach(i=>by[i.category]=(by[i.category]||0)+i.amount);
+  const total=items.reduce((s,i)=>s+i.amount,0);
+  const pct=v=>total?Math.round(v/total*100):0;
+  const tips=[];
+  if(by["Кафе и рестораны"]) tips.push(`На кафе, доставку и кофе с собой ушло ${fmt(by["Кафе и рестораны"])} (${pct(by["Кафе и рестораны"])}% бюджета). Если готовить и брать кофе из дома хотя бы через раз, за месяц можно сберечь заметную сумму.`);
+  if(by["Подписки"]) tips.push(`Подписки съедают ${fmt(by["Подписки"])} в месяц. Проверьте, всеми ли вы реально пользуетесь — часть можно отключить или объединить в семейный тариф.`);
+  if(by["Транспорт"]) tips.push(`Транспорт — ${fmt(by["Транспорт"])}. Единый проездной вместо разовых поездок на такси обычно выгоднее.`);
+  if(by["Продукты"] && pct(by["Продукты"])>=25) tips.push(`Продукты — ${fmt(by["Продукты"])} (${pct(by["Продукты"])}%). Список покупок заранее и закупка раз в неделю помогают не брать лишнее.`);
+  if(by["Одежда и обувь"]) tips.push(`На одежду и обувь ушло ${fmt(by["Одежда и обувь"])}. Такие траты легко планировать под распродажи, а не покупать импульсивно.`);
+  if(by["Развлечения"]) tips.push(`Развлечения — ${fmt(by["Развлечения"])}. Заранее заложенный лимит на месяц помогает не выходить за рамки, не отказываясь от отдыха.`);
+  const sorted=Object.entries(by).sort((a,b)=>b[1]-a[1]);
+  if(sorted[0]) tips.push(`Самая крупная категория — «${sorted[0][0]}» (${fmt(sorted[0][1])}, ${pct(sorted[0][1])}%). Начните оптимизацию именно с неё — даже небольшой процент здесь даёт ощутимую экономию.`);
+  tips.push("Заведите правило 24 часов: перед необязательной покупкой подождите день — часть желаний отпадёт сама.");
+  return tips.slice(0,5);
+}
+
+function buildPrompt(text, goal){
+  const hasGoal = goal && goal.amount>0;
+  const lines = [
+    "Ты — ИИ-агент по личным финансам. Пользователь даёт список своих трат в свободной форме (примерно одна трата на строку).",
+    "Твои задачи:",
+    "1. Извлеки каждую трату: краткое название и сумму как число (без пробелов и валюты).",
+    "2. Определи категорию строго из этого списка: "+CATEGORIES.join(", ")+". Если ничего не подходит — «Прочее».",
+    "3. Проанализируй траты и дай 4–5 КОНКРЕТНЫХ советов по экономии, опираясь на реальные цифры и категории этого пользователя (называй суммы и категории).",
+    "4. Оцени реалистичную потенциальную экономию в месяц (одно число в рублях)."
+  ];
+  if(hasGoal){
+    lines.push(
+      "5. Пользователь хочет накопить "+goal.amount+" рублей на цель «"+goal.name+"». Учитывай эту цель: советы должны помогать её достичь (на чём именно урезать траты). Добавь поле \"goalMonthlyTarget\" — сколько рублей в месяц ему реалистично откладывать на эту цель, урезав расходы."
+    );
+  }
+  lines.push(
+    "Ответь СТРОГО валидным JSON без пояснений, вида:",
+    hasGoal
+      ? '{"items":[{"name":"строка","amount":число,"category":"строка"}],"advice":["строка"],"potentialSavings":число,"goalMonthlyTarget":число}'
+      : '{"items":[{"name":"строка","amount":число,"category":"строка"}],"advice":["строка"],"potentialSavings":число}',
+    "Валюта — рубли. Советы пиши на русском, дружелюбно и по делу.",
+    "",
+    "Траты пользователя:",
+    text
+  );
+  return lines.join("\n");
+}
+
+const fmt = n => Math.round(n).toLocaleString("ru-RU")+" ₽";
+
+let stepTimer=null;
+function setStep(n){
+  document.querySelectorAll(".steps li").forEach((li,i)=>{
+    li.classList.toggle("done",i<n);
+    li.classList.toggle("active",i===n);
+    const t=li.querySelector(".tick");
+    t.textContent = i<n ? "✓" : "";
+  });
+}
+
+async function analyze(text, goal){
+  let sample=null;
+  try{ sample = await claude.use("sample"); }catch(e){ sample=null; }
+  if(sample){
+    try{
+      const data = await sample.json(buildPrompt(text, goal), {modelTier:"default", cache:false});
+      if(data && Array.isArray(data.items) && data.items.length){
+        return {
+          items: data.items.filter(i=>i && isFinite(+i.amount) && +i.amount>0)
+                           .map(i=>({name:String(i.name||"Без названия"), amount:+i.amount, category:i.category||"Прочее"})),
+          advice: Array.isArray(data.advice)&&data.advice.length ? data.advice : buildFallbackAdvice(data.items),
+          potentialSavings: +data.potentialSavings || 0,
+          goalMonthlyTarget: +data.goalMonthlyTarget || 0,
+          source:"ai"
+        };
+      }
+    }catch(e){ console.warn("sample failed",e); }
+  }
+  return fallbackCategorize(text);
+}
+
+function render(res, goal){
+  const items=res.items;
+  const total=items.reduce((s,i)=>s+i.amount,0);
+  // aggregate by category
+  const byCat={};
+  items.forEach(i=>byCat[i.category]=(byCat[i.category]||0)+i.amount);
+  const cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
+  const colorFor={}; cats.forEach(([c],i)=>colorFor[c]=PALETTE[i%PALETTE.length]);
+  const top=cats[0];
+  const savings=res.potentialSavings|| Math.round(total*0.12/50)*50;
+
+  // tiles
+  document.getElementById("tiles").innerHTML=`
+    <div class="tile"><p class="k">Всего расходов</p><p class="v">${fmt(total)}</p><p class="note">${items.length} трат в ${cats.length} категориях</p></div>
+    <div class="tile"><p class="k">Крупнейшая категория</p><p class="v" style="font-size:20px">${top?top[0]:"—"}</p><p class="note">${top?fmt(top[1])+" · "+Math.round(top[1]/total*100)+"% бюджета":""}</p></div>
+    <div class="tile savings"><p class="k">Можно сэкономить</p><p class="v">${fmt(savings)}</p><p class="note">в месяц по оценке агента</p></div>`;
+
+  // donut
+  drawDonut(cats,colorFor,total);
+  document.getElementById("donut-total").textContent=fmt(total).replace(" ₽","");
+
+  // legend
+  document.getElementById("legend").innerHTML=cats.map(([c,v])=>`
+    <li><span class="swatch" style="background:${colorFor[c]}"></span>
+    <span class="name">${c}</span>
+    <span class="amt">${fmt(v)}</span>
+    <span class="pct">${Math.round(v/total*100)}%</span></li>`).join("");
+
+  // goal card
+  renderGoal(goal, res, total, savings);
+
+  // advice
+  document.getElementById("advice").innerHTML=res.advice.map(a=>`<li><span class="lamp">💡</span><span>${escapeHtml(a)}</span></li>`).join("");
+
+  // source badge
+  const badge=document.getElementById("src-badge");
+  if(res.source==="ai"){ badge.innerHTML='<span class="bd"></span>Анализ с помощью ИИ'; }
+  else{ badge.innerHTML='<span class="bd"></span>Быстрый разбор · работает офлайн'; }
+
+  document.getElementById("results").classList.add("on");
+  document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function renderGoal(goal, res, total, savings){
+  const card=document.getElementById("goal-card");
+  if(!goal || !(goal.amount>0)){ card.style.display="none"; return; }
+
+  // how much can realistically be put aside monthly toward the goal
+  let monthly = res.goalMonthlyTarget || savings || Math.round(total*0.1);
+  monthly = Math.min(monthly, goal.amount); // don't overshoot in one month for display
+  if(monthly<=0) monthly=Math.max(500, Math.round(total*0.1));
+
+  const months = Math.max(1, Math.ceil(goal.amount/monthly));
+  const d=new Date(); d.setMonth(d.getMonth()+months);
+  const targetDate=d.toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+
+  const showN=Math.min(months,12);
+  let bars="";
+  for(let m=1;m<=showN;m++){
+    const cum=Math.min(m*monthly, goal.amount);
+    const h=Math.max(4, cum/goal.amount*100);
+    const reached=m*monthly>=goal.amount;
+    bars+=`<div class="pbar"><div class="fill ${reached?"reached":""}" style="height:${h}%"></div><span class="pm">${m}</span></div>`;
+  }
+  if(months>showN) bars+=`<div class="pbar" style="justify-content:flex-end"><div class="fill reached" style="height:100%"></div><span class="pm">…${months}</span></div>`;
+
+  document.getElementById("goal-body").innerHTML=`
+    <p class="goal-headline">Чтобы накопить <b>${fmt(goal.amount)}</b> на «${escapeHtml(goal.name||"цель")}», откладывайте примерно <b>${fmt(monthly)}</b> в месяц из сэкономленного.</p>
+    <div class="goal-stats">
+      <div class="gstat"><span class="gk">Срок</span><span class="gv">≈ ${months} мес.</span></div>
+      <div class="gstat"><span class="gk">Цель достигнута к</span><span class="gv" style="font-size:16px">${targetDate}</span></div>
+      <div class="gstat"><span class="gk">Откладывать в месяц</span><span class="gv">${fmt(monthly)}</span></div>
+    </div>
+    <div class="proj">
+      <p class="proj-cap">Как будут расти накопления по месяцам</p>
+      <div class="proj-bars">${bars}</div>
+    </div>`;
+  card.style.display="";
+}
+
+function drawDonut(cats,colorFor,total){
+  const cv=document.getElementById("donut");
+  const dpr=window.devicePixelRatio||1, size=200;
+  cv.width=size*dpr; cv.height=size*dpr; cv.style.width=size+"px"; cv.style.height=size+"px";
+  const ctx=cv.getContext("2d"); ctx.scale(dpr,dpr); ctx.clearRect(0,0,size,size);
+  const cx=size/2, cy=size/2, R=92, r=60;
+  let a=-Math.PI/2;
+  cats.forEach(([c,v])=>{
+    const slice=v/total*Math.PI*2;
+    ctx.beginPath();
+    ctx.arc(cx,cy,R,a,a+slice);
+    ctx.arc(cx,cy,r,a+slice,a,true);
+    ctx.closePath();
+    ctx.fillStyle=colorFor[c];
+    ctx.fill();
+    // separator
+    ctx.strokeStyle=getComputedStyle(document.body).getPropertyValue("--surface")||"#fff";
+    ctx.lineWidth=2; ctx.stroke();
+    a+=slice;
+  });
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));}
+
+// ---- events ----
+const input=document.getElementById("input");
+const runBtn=document.getElementById("run");
+input.value=EXAMPLE;
+
+document.getElementById("example").onclick=()=>{input.value=EXAMPLE; input.focus();};
+document.getElementById("clear").onclick=()=>{input.value=""; input.focus(); document.getElementById("results").classList.remove("on");};
+
+runBtn.onclick=async ()=>{
+  const text=input.value.trim();
+  const err=document.getElementById("err");
+  err.style.display="none";
+  if(!text){ err.textContent="Сначала вставьте список трат."; err.style.display="block"; return; }
+
+  // read optional savings goal
+  const goalName=document.getElementById("goal-name").value.trim();
+  const goalAmount=parseFloat((document.getElementById("goal-amount").value||"").replace(/[^\d.,]/g,"").replace(",","."));
+  const goal = (isFinite(goalAmount)&&goalAmount>0) ? {name:goalName||"цель", amount:goalAmount} : null;
+
+  runBtn.disabled=true; runBtn.textContent="Агент работает…";
+  document.getElementById("results").classList.remove("on");
+  const status=document.getElementById("status"); status.classList.add("on");
+  setStep(0);
+  // animate steps while awaiting
+  let s=0; setStep(0);
+  stepTimer=setInterval(()=>{ s=Math.min(s+1,2); setStep(s); },900);
+
+  try{
+    const res=await analyze(text, goal);
+    clearInterval(stepTimer);
+    setStep(3); await new Promise(r=>setTimeout(r,350)); setStep(4);
+    if(!res.items.length){
+      status.classList.remove("on");
+      err.textContent="Не удалось распознать траты. Пишите каждую с новой строки, например: «Кофейня — 320».";
+      err.style.display="block";
+    }else{
+      setTimeout(()=>status.classList.remove("on"),300);
+      render(res, goal);
+    }
+  }catch(e){
+    clearInterval(stepTimer); status.classList.remove("on");
+    err.textContent="Что-то пошло не так при анализе. Попробуйте ещё раз."; err.style.display="block";
+    console.error(e);
+  }finally{
+    runBtn.disabled=false; runBtn.textContent="Анализировать траты";
+  }
+};
+</script>

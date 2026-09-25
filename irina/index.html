@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ирина Мехоношина — сайты под ключ для малого бизнеса</title>
+<meta name="description" content="Лендинги, многостраничные сайты, визитки и квизы для сбора заявок. Дизайн, вёрстка и тексты — в одни руки. Визитка от 2 дней, лендинг от 3.">
+<meta name="author" content="Ирина Мехоношина">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Ирина Мехоношина — сайты под ключ для малого бизнеса">
+<meta property="og:description" content="Лендинги, многостраничники, визитки и квизы. Дизайн, вёрстка и тексты в одни руки. Визитка от 2 дней, лендинг от 3.">
+<meta name="twitter:card" content="summary_large_image">
+<!-- ЗАМЕНИТЬ ПЕРЕД ПУБЛИКАЦИЕЙ: добавить og:url и og:image (1200x630) с реальным адресом сайта -->
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{
+  --bg:#fbfbfc;
+  --bg-alt:#f2f4f3;
+  --surface:#ffffff;
+  --text:#14201e;
+  --muted:#5c6b68;
+  --faint:#8a9895;
+  --line:#e2e7e5;
+  --brand:#107a6d;
+  --brand-ink:#0b5a50;
+  --brand-wash:#e6f3f1;
+  --on-brand:#ffffff;
+  --accent:#d2502a;
+  --accent-wash:#fdeee9;
+  --photo-a:#dcc0a0;   /* верх плашки: глубже, чтобы отделялись волосы */
+  --photo-b:#f6ecdc;   /* низ: светлее, на нём читается тёмный пиджак */
+  --shadow:0 1px 2px rgba(20,32,30,.05), 0 12px 32px -16px rgba(20,32,30,.22);
+  --shadow-lift:0 2px 6px rgba(20,32,30,.07), 0 28px 60px -26px rgba(16,122,109,.42);
+  --r-s:10px; --r-m:16px; --r-l:26px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --font:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1514; --bg-alt:#131d1b; --surface:#16211f; --text:#eef4f2; --muted:#a3b4b0;
+    --faint:#7e908c; --line:#253330; --brand:#37b8a4; --brand-ink:#5fd3c0; --brand-wash:#12302c;
+    --on-brand:#04100e; --accent:#ff8560; --accent-wash:#2e1c16;
+    --photo-a:#443324; --photo-b:#2a1e14;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px -18px rgba(0,0,0,.7);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.45), 0 30px 64px -28px rgba(55,184,164,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1514; --bg-alt:#131d1b; --surface:#16211f; --text:#eef4f2; --muted:#a3b4b0;
+  --faint:#7e908c; --line:#253330; --brand:#37b8a4; --brand-ink:#5fd3c0; --brand-wash:#12302c;
+  --on-brand:#04100e; --accent:#ff8560; --accent-wash:#2e1c16;
+    --photo-a:#443324; --photo-b:#2a1e14;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px -18px rgba(0,0,0,.7);
+  --shadow-lift:0 2px 8px rgba(0,0,0,.45), 0 30px 64px -28px rgba(55,184,164,.35);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+[hidden]{display:none !important;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--font); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%;}
+a{color:inherit;}
+h1,h2,h3{margin:0; line-height:1.15; letter-spacing:-.025em; font-weight:800;}
+p{margin:0;}
+ul,ol{margin:0; padding:0; list-style:none;}
+
+.wrap{width:min(1120px, calc(100% - 40px)); margin-inline:auto;}
+@media (max-width:560px){ .wrap{width:calc(100% - 32px);} }
+
+section{padding-block:clamp(56px,8vw,104px);}
+.eyebrow{
+  display:inline-block; margin-bottom:14px; padding:6px 14px;
+  font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brand-ink); background:var(--brand-wash); border-radius:999px;
+}
+.h2{font-size:clamp(27px,4.2vw,42px); margin-bottom:14px;}
+.lede{max-width:62ch; color:var(--muted); font-size:clamp(16px,1.9vw,19px);}
+.section-head{margin-bottom:clamp(30px,4vw,52px);}
+
+/* ---------- шапка ---------- */
+.site-head{
+  position:sticky; top:0; z-index:60;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent; transition:border-color .25s;
+}
+.site-head.is-stuck{border-bottom-color:var(--line);}
+.nav{display:flex; align-items:center; gap:18px; height:66px;}
+.logo{display:flex; align-items:center; gap:11px; letter-spacing:-.02em; font-size:19px; text-decoration:none;}
+.logo-mark{width:36px; height:36px; flex:none; display:block;}
+.logo-mark svg{width:100%; height:100%; display:block;}
+.logo-text b{font-weight:800;}
+.logo-text span{font-weight:600; color:var(--muted);}
+.logo:hover .logo-text span{color:var(--text);}
+.nav-links{display:flex; gap:4px; margin-left:auto;}
+.nav-links a{
+  padding:8px 13px; border-radius:var(--r-s); color:var(--muted);
+  font-size:15px; font-weight:600; text-decoration:none; transition:color .2s, background .2s;
+}
+.nav-links a:hover{color:var(--text); background:var(--bg-alt);}
+@media (max-width:900px){ .nav-links{display:none;} }
+.theme-toggle{
+  display:grid; place-items:center; width:38px; height:38px; margin-left:auto;
+  border:1px solid var(--line); border-radius:var(--r-s); background:var(--surface);
+  color:var(--muted); cursor:pointer; transition:color .2s, border-color .2s;
+}
+@media (min-width:901px){ .theme-toggle{margin-left:8px;} }
+.theme-toggle:hover{color:var(--brand); border-color:var(--brand);}
+.theme-toggle svg{width:18px; height:18px;}
+.icon-sun{display:none;}
+:root[data-theme="dark"] .icon-moon{display:none;}
+:root[data-theme="dark"] .icon-sun{display:block;}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .icon-moon{display:none;}
+  :root:not([data-theme="light"]) .icon-sun{display:block;}
+}
+
+/* ---------- кнопки ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  padding:14px 26px; border:1px solid transparent; border-radius:var(--r-s);
+  font-family:inherit; font-size:16px; font-weight:700; text-decoration:none;
+  cursor:pointer; transition:transform .2s var(--ease), box-shadow .25s, background .2s, color .2s, border-color .2s;
+}
+.btn-primary{background:var(--brand); color:var(--on-brand); box-shadow:var(--shadow);}
+.btn-primary:hover{background:var(--brand-ink); transform:translateY(-2px); box-shadow:var(--shadow-lift);}
+.btn-ghost{background:var(--surface); color:var(--text); border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--brand); color:var(--brand); transform:translateY(-2px);}
+
+/* ---------- первый экран ---------- */
+.hero{position:relative; padding-block:clamp(48px,7vw,86px) clamp(52px,7vw,92px); overflow:hidden;}
+.hero::before{
+  content:""; position:absolute; top:-320px; right:-180px; width:720px; height:720px;
+  background:radial-gradient(circle, color-mix(in srgb, var(--brand) 20%, transparent), transparent 62%);
+  pointer-events:none; z-index:0;
+}
+.hero>*{position:relative; z-index:1;}
+.hero h1{font-size:clamp(33px,6.2vw,62px); margin-bottom:20px; max-width:17ch;}
+.hero h1 em{font-style:normal; color:var(--brand);}
+.hero-lede{max-width:56ch; color:var(--muted); font-size:clamp(17px,2.1vw,21px); margin-bottom:32px;}
+.hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:46px;}
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr)); gap:14px;}
+.fact{padding:22px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m);}
+.fact b{display:block; font-size:28px; letter-spacing:-.03em; color:var(--brand); line-height:1.1;}
+.fact span{display:block; margin-top:6px; color:var(--muted); font-size:15px; line-height:1.45;}
+
+/* ---------- боли ---------- */
+.pains{background:var(--bg-alt);}
+.pain-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); gap:16px;}
+.pain{padding:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m);}
+.pain h3{font-size:18px; margin-bottom:9px;}
+.pain p{color:var(--muted); font-size:15.5px;}
+.pain-quote{
+  display:block; margin-bottom:12px; padding-left:14px;
+  border-left:3px solid var(--accent); color:var(--faint);
+  font-size:15px; font-style:italic;
+}
+
+/* ---------- услуги ---------- */
+.svc-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:18px; margin-bottom:22px;}
+.svc{
+  display:flex; flex-direction:column; padding:30px;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-l);
+  transition:transform .28s var(--ease), border-color .28s, box-shadow .28s;
+}
+.svc:hover{transform:translateY(-4px); border-color:var(--brand); box-shadow:var(--shadow-lift);}
+.svc.is-featured{border-color:var(--brand); box-shadow:var(--shadow);}
+.svc-tag{
+  align-self:flex-start; margin-bottom:14px; padding:5px 11px; border-radius:999px;
+  background:var(--accent-wash); color:var(--accent); font-size:12px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+}
+.svc h3{font-size:22px; margin-bottom:8px;}
+.svc-price{margin-bottom:4px; font-size:26px; font-weight:800; letter-spacing:-.03em; color:var(--brand);}
+.svc-term{margin-bottom:18px; color:var(--faint); font-size:14px;}
+.svc ul{display:grid; gap:10px; margin-bottom:24px;}
+.svc li{position:relative; padding-left:26px; color:var(--muted); font-size:15.5px; line-height:1.5;}
+.svc li::before{
+  content:""; position:absolute; left:2px; top:7px; width:14px; height:8px;
+  border-left:2px solid var(--brand); border-bottom:2px solid var(--brand);
+  transform:rotate(-45deg);
+}
+.svc .btn{margin-top:auto;}
+.extras{
+  display:flex; flex-wrap:wrap; gap:10px; padding:24px;
+  background:var(--brand-wash); border-radius:var(--r-m); align-items:center;
+}
+.extras b{font-size:15.5px;}
+.extras span{
+  padding:7px 14px; background:var(--surface); border:1px solid var(--line);
+  border-radius:999px; font-size:14.5px; color:var(--muted);
+}
+
+/* ---------- сроки: примечание под ценами ---------- */
+.term-note{
+  max-width:74ch; margin-top:18px; padding-left:16px;
+  border-left:3px solid var(--brand); color:var(--faint); font-size:15px;
+}
+
+/* ---------- блок с фотографией ---------- */
+.me-card{
+  display:grid; grid-template-columns:minmax(0,268px) minmax(0,1fr);
+  gap:clamp(24px,4vw,46px); align-items:center;
+  padding:clamp(24px,3.4vw,42px);
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-l);
+  box-shadow:var(--shadow);
+}
+@media (max-width:760px){ .me-card{grid-template-columns:1fr; justify-items:center;} }
+
+/* Подложка под вырезанное фото.
+   Глубокий бирюзовый выбран не случайно: он дополнительный к рыжему,
+   поэтому волосы и лицо на нём выходят вперёд, а тёмный пиджак
+   не сливается с фоном. */
+/* Арка на песочном фоне.
+   Градиент идёт сверху вниз от глубокого песка к светлому. Это не украшение:
+   за головой фон темнее, поэтому рыжие волосы отделяются от него — на ровном
+   светлом песке они бы слились. Внизу светлее, и тёмный пиджак там читается. */
+.me-plate{
+  position:relative;
+  width:100%; max-width:252px;
+  aspect-ratio:1/1.05;
+  margin-top:56px;                     /* место для фигуры, выходящей за верх */
+  border-radius:126px 126px 20px 20px;
+  background:
+    radial-gradient(86% 52% at 50% 100%, rgba(255,255,255,.5), transparent 64%),
+    linear-gradient(180deg, var(--photo-a) 0%, var(--photo-b) 78%);
+  box-shadow:0 18px 44px -22px rgba(120,84,44,.62);
+}
+
+/* Тонкая арка-контур позади: приём «двойной арки».
+   z-index:0, а не -1 — с отрицательным она уходит под фон карточки
+   и просто не видна. */
+.me-plate__ring{
+  position:absolute; inset:-15px -15px 13px -15px; z-index:0;
+  border:2px solid var(--accent); border-radius:141px 141px 25px 25px;
+  opacity:.72; pointer-events:none;
+}
+
+/* Горизонтальная штриховка: фон перестаёт быть плоским пятном.
+   Тон тёплый тёмный — на светлом песке белая штриховка не видна. */
+.me-plate::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background-image:repeating-linear-gradient(to bottom, rgba(94,62,28,.10) 0 1px, transparent 1px 11px);
+  mask-image:linear-gradient(#000 16%, transparent 76%);
+  -webkit-mask-image:linear-gradient(#000 16%, transparent 76%);
+}
+
+/* Фигура стоит на нижней кромке и выходит за верхнюю.
+   Приём работает только с вырезанным фото — им и показываем, что оно вырезано. */
+.me-photo{
+  position:absolute; z-index:1;
+  left:50%; bottom:0; transform:translateX(-50%);
+  /* 135%, а не 100%: у вырезки по бокам пустые поля, фигура занимает
+     примерно 70% ширины кадра. Пустое поле свисает за арку, а сама
+     фигура садится ровно в неё и выходит за верхний край. */
+  width:128%; max-width:none; height:auto;
+  margin-top:0;
+  filter:drop-shadow(0 12px 22px rgba(112,76,38,.42));
+}
+
+@media (max-width:760px){
+  .me-plate{max-width:232px;}
+}
+
+.me-text p{color:var(--muted); font-size:16.5px;}
+.me-text p + p{margin-top:14px;}
+.me-text .h2{margin-bottom:16px;}
+
+/* ---------- работы ---------- */
+.work{background:var(--bg-alt);}
+.work-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr)); gap:18px;}
+.card{
+  display:flex; flex-direction:column; overflow:hidden; text-decoration:none; color:inherit;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m);
+  transition:transform .28s var(--ease), border-color .28s, box-shadow .28s;
+}
+.card:hover{transform:translateY(-4px); border-color:var(--brand); box-shadow:var(--shadow-lift);}
+.card-top{
+  position:relative; display:grid; place-items:center; height:128px;
+  background:linear-gradient(135deg, var(--brand-wash), var(--bg-alt));
+  border-bottom:1px solid var(--line);
+}
+.card-top>b{font-size:40px; line-height:1; opacity:.85;}
+.card-kind{
+  position:absolute; top:12px; left:12px; padding:5px 11px; border-radius:999px;
+  background:var(--surface); border:1px solid var(--line); font-style:normal;
+  font-size:12px; font-weight:700; color:var(--muted); letter-spacing:.05em; text-transform:uppercase;
+}
+.card-body{display:flex; flex-direction:column; flex:1; padding:22px;}
+.card-body h3{font-size:19px; margin-bottom:7px;}
+.card-body p{flex:1; color:var(--muted); font-size:15px; margin-bottom:16px;}
+.card-open{display:inline-flex; align-items:center; gap:7px; color:var(--brand); font-weight:700; font-size:15px;}
+.card:hover .card-open{gap:11px;}
+.card-open i{font-style:normal; transition:transform .25s var(--ease);}
+.card:hover .card-open i{transform:translateX(3px);}
+.work-note{margin-top:22px; color:var(--faint); font-size:14.5px;}
+
+/* ---------- процесс ---------- */
+.steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr)); gap:18px; counter-reset:s;}
+.step{padding:26px 22px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m);}
+.step::before{
+  counter-increment:s; content:counter(s);
+  display:grid; place-items:center; width:34px; height:34px; margin-bottom:14px;
+  background:var(--brand); color:var(--on-brand); border-radius:9px; font-size:15px; font-weight:800;
+}
+.step h3{font-size:17px; margin-bottom:7px;}
+.step p{color:var(--muted); font-size:15px;}
+
+/* ---------- вопросы ---------- */
+.faq{background:var(--bg-alt);}
+.faq-list{display:grid; gap:12px; max-width:860px;}
+details{
+  padding:20px 24px; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--r-m); transition:border-color .25s;
+}
+details[open]{border-color:var(--brand);}
+summary{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  font-size:17px; font-weight:700; cursor:pointer; list-style:none;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{
+  content:""; flex:none; width:11px; height:11px; margin-right:3px;
+  border-right:2px solid var(--brand); border-bottom:2px solid var(--brand);
+  transform:rotate(45deg) translateY(-3px); transition:transform .25s var(--ease);
+}
+details[open] summary::after{transform:rotate(-135deg) translateY(-3px);}
+details p{margin-top:13px; color:var(--muted); font-size:16px;}
+
+/* ---------- контакты ---------- */
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start;}
+@media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
+.contact-card{padding:clamp(24px,3.4vw,38px); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-l);}
+.field{margin-bottom:16px;}
+.field label{display:block; margin-bottom:7px; font-size:14.5px; font-weight:600;}
+.field input,.field textarea,.field select{
+  width:100%; padding:13px 15px; font-family:inherit; font-size:16px;
+  color:var(--text); background:var(--bg); border:1px solid var(--line);
+  border-radius:var(--r-s); transition:border-color .2s, box-shadow .2s;
+}
+.field textarea{min-height:112px; resize:vertical;}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none; border-color:var(--brand);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent);
+}
+.field .err{display:none; margin-top:6px; color:var(--accent); font-size:13.5px;}
+.field.is-bad input,.field.is-bad textarea{border-color:var(--accent);}
+.field.is-bad .err{display:block;}
+.form-note{margin-top:12px; color:var(--faint); font-size:13.5px;}
+/* согласие на обработку данных: явная галочка, а не «нажимая кнопку» */
+.consent{display:flex; align-items:flex-start; gap:10px; font-size:14px; font-weight:400; color:var(--muted); cursor:pointer; margin-bottom:0;}
+.consent input{width:18px; height:18px; margin-top:2px; flex:none; accent-color:var(--brand);}
+.consent a{color:var(--brand);}
+.field--check.is-bad .consent span{color:var(--accent);}
+.field--check.is-bad .consent input{outline:2px solid var(--accent); outline-offset:2px;}
+.form-ok{
+  display:none; padding:22px; background:var(--brand-wash);
+  border-radius:var(--r-m); color:var(--brand-ink); font-size:16px;
+}
+.form-ok.is-on{display:block;}
+.form-ok b{display:block; margin-bottom:6px; font-size:19px;}
+.direct{display:grid; gap:12px;}
+.direct-link{
+  display:flex; align-items:center; gap:15px; padding:19px 22px; text-decoration:none;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-m);
+  transition:border-color .25s, transform .25s var(--ease);
+}
+a.direct-link:hover{border-color:var(--brand); transform:translateX(3px);}
+.direct-ico{
+  display:grid; place-items:center; width:44px; height:44px; flex:none;
+  background:var(--brand-wash); border-radius:12px; font-size:21px;
+}
+.direct-txt b{display:block; font-size:16px;}
+.direct-txt span{display:block; color:var(--muted); font-size:14.5px; overflow-wrap:anywhere;}
+
+/* ---------- подвал ---------- */
+.site-foot{padding-block:34px; border-top:1px solid var(--line); color:var(--faint); font-size:14.5px;}
+.foot-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center;}
+
+/* реквизиты: самозанятый обязан их указывать, а заказчику это ещё и сигнал, что работа легальная */
+.foot-legal{margin:0 0 16px; padding-bottom:16px; border-bottom:1px solid var(--line); line-height:1.65;}
+.foot-legal a{color:var(--muted); text-decoration:underline; text-underline-offset:3px;}
+.foot-legal a:hover{color:var(--accent);}
+.foot-fill{padding:1px 7px; border-radius:4px; background:#fff3cd; color:#7a5a00; font-weight:700;}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .foot-fill{background:#4a3a10; color:#ffd88a;} }
+:root[data-theme="dark"] .foot-fill{background:#4a3a10; color:#ffd88a;}
+
+/* очень узкие окна: имя в шапке длиннее, чем было, — ужимаем */
+@media (max-width:430px){
+  .nav{gap:10px;}
+  .logo{gap:8px; font-size:16px;}
+  .logo-mark{width:31px; height:31px;}
+  .theme-toggle{width:34px; height:34px;}
+  .btn{padding:13px 18px; font-size:15px;}
+}
+@media (max-width:330px){
+  .logo{font-size:14.5px;}
+  .logo-mark{width:28px; height:28px;}
+}
+
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .6s var(--ease), transform .6s var(--ease);}
+.reveal.is-in{opacity:1; transform:none;}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  .reveal{opacity:1; transform:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-head" id="head">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Ирина Мехоношина — в начало страницы">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#14907f"/>
+              <stop offset="1" stop-color="#0b5a50"/>
+            </linearGradient>
+          </defs>
+          <rect width="36" height="36" rx="9.5" fill="url(#lg)"/>
+          <g stroke-linecap="round" fill="none">
+            <path d="M11.2 10.7v14.6M24.8 10.7v14.6" stroke="#ffffff" stroke-width="3.2"/>
+            <path d="M11.2 25.3 26.1 9.7" stroke="#ff7a52" stroke-width="3.2"/>
+          </g>
+        </svg>
+      </span>
+      <span class="logo-text"><b>Ирина</b> <span>Мехоношина</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Услуги и цены</a>
+      <a href="#work">Работы</a>
+      <a href="#process">Как работаем</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contact">Связаться</a>
+    </nav>
+    <button class="theme-toggle" id="themeBtn" type="button" aria-label="Переключить тёмную тему">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Разработка сайтов под ключ</span>
+    <h1>Сайт, с которого <em>приходят заявки</em>, а не просто «красиво»</h1>
+    <p class="hero-lede">Делаю лендинги, многостраничные сайты, визитки и квизы для малого бизнеса. Дизайн, вёрстку и тексты беру на себя — искать отдельно копирайтера и верстальщика не нужно.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Обсудить задачу</a>
+      <a class="btn btn-ghost" href="#work">Посмотреть работы</a>
+    </div>
+    <ul class="facts">
+      <li class="fact"><b>от 3 дней</b><span>срок сайта-визитки под ключ</span></li>
+      <li class="fact"><b>10 работ</b><span>в портфолио: сайты, квизы, приложения</span></li>
+      <li class="fact"><b>0 ₽</b><span>за копирайтера — тексты пишу сама</span></li>
+      <li class="fact"><b>360 px</b><span>минимальная ширина, на которой всё работает</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="pains">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Знакомо?</span>
+      <h2 class="h2">Что обычно идёт не так с сайтом</h2>
+      <p class="lede">Четыре ситуации, с которыми приходят чаще всего. Если узнали свою — нам есть о чём поговорить.</p>
+    </div>
+    <ul class="pain-grid">
+      <li class="pain reveal">
+        <em class="pain-quote">«Сайт есть, а заявок нет»</em>
+        <h3>Красиво, но непонятно, что делать</h3>
+        <p>Посетитель не находит цену, не видит кнопку и уходит к конкуренту. Собираю страницу так, чтобы следующий шаг был очевиден на каждом экране.</p>
+      </li>
+      <li class="pain reveal">
+        <em class="pain-quote">«С телефона всё разъезжается»</em>
+        <h3>Половина клиентов не доходит</h3>
+        <p>С мобильного приходит больше половины посетителей. Проверяю каждую страницу от 360 пикселей — на маленьком экране ничего не наезжает и не обрезается.</p>
+      </li>
+      <li class="pain reveal">
+        <em class="pain-quote">«Пришлите ваши тексты»</em>
+        <h3>Верстальщик ждёт контент, проект стоит</h3>
+        <p>Классический тупик: дизайн готов, текстов нет, сайт висит месяцами. Я пишу тексты сама — по структуре «боль → решение → доказательство».</p>
+      </li>
+      <li class="pain reveal">
+        <em class="pain-quote">«Поменять телефон — 3 000 ₽»</em>
+        <h3>Каждая правка через кассу</h3>
+        <p>Правки по согласованному макету входят в стоимость. После сдачи показываю, что и где менять самому, — и остаюсь на связи.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Услуги</span>
+      <h2 class="h2">Что заказывают чаще всего</h2>
+      <p class="lede">Цены — ориентир для типовой задачи. Точную назову после короткого разговора: часто выходит дешевле, потому что часть «хотелок» оказывается не нужна.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <span class="svc-tag">Быстрый старт</span>
+        <h3>Сайт-визитка</h3>
+        <p class="svc-price">от 5 000 ₽</p>
+        <p class="svc-term">3 дня · одна страница</p>
+        <ul>
+          <li>Услуги, цены, контакты на одном экране прокрутки</li>
+          <li>Адаптив под телефон и планшет</li>
+          <li>Тексты и фотографии — ваши. Напишу сама за 4 000 ₽</li>
+          <li>Форма заявки на почту или в Telegram</li>
+          <li>Подключение к вашему домену</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">Обсудить визитку</a>
+      </article>
+      <article class="svc is-featured reveal">
+        <span class="svc-tag">Чаще всего берут</span>
+        <h3>Лендинг под задачу</h3>
+        <p class="svc-price">от 12 500 ₽</p>
+        <p class="svc-term">5 дней · одна длинная страница</p>
+        <ul>
+          <li>Продающая структура: боль → решение → доказательства</li>
+          <li>Отзывы, вопросы-ответы, снятие возражений</li>
+          <li>Тексты пишу сама, картинки подбираю сама</li>
+          <li>Аккуратные анимации при прокрутке</li>
+          <li>Микроразметка и превью для мессенджеров</li>
+          <li>Две итерации правок в стоимости</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact">Обсудить лендинг</a>
+      </article>
+      <article class="svc reveal">
+        <span class="svc-tag">Для роста</span>
+        <h3>Многостраничный сайт</h3>
+        <p class="svc-price">от 35 000 ₽</p>
+        <p class="svc-term">от 8 дней · 5–10 страниц</p>
+        <ul>
+          <li>Каталог товаров, услуг или проектов</li>
+          <li>Фильтры и поиск по каталогу</li>
+          <li>Калькулятор или квиз для расчёта</li>
+          <li>Сквозное меню, единый стиль страниц</li>
+          <li>SEO-разметка каждой страницы</li>
+          <li>Инструкция, как добавлять новые страницы</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">Обсудить сайт</a>
+      </article>
+    </div>
+    <div class="extras reveal">
+      <b>Отдельно или в дополнение:</b>
+      <span>Тексты для лендинга — 4 000 ₽</span>
+      <span>Дополнительный экран — 1 200 ₽</span>
+      <span>Квиз-калькулятор — 6 000 ₽</span>
+      <span>Домен и хостинг под ключ — 2 000 ₽</span>
+      <span>Исходники и памятка по правкам — 1 500 ₽</span>
+      <span>Срочно, в два раза быстрее — 5 000 ₽</span>
+      <span>Тексты для чужого сайта — от 1 500 ₽ за экран</span>
+      <span>Корректура — от 50 ₽ за 1000 знаков</span>
+      <span>Инфографика — от 1 200 ₽</span>
+      <span>Презентация — от 6 000 ₽</span>
+    </div>
+    <p class="term-note reveal">Срок считается с того дня, когда согласована структура и у меня на руках ваши фото, доступы и пожелания. Если материалы приходят частями, срок сдвигается ровно на это время — предупреждаю сразу, а не в день сдачи.</p>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Портфолио</span>
+      <h2 class="h2">Работы, которые можно открыть и потыкать</h2>
+      <p class="lede">Не картинки, а живые сайты. Откройте любой, пролистайте, попробуйте с телефона.</p>
+    </div>
+    <div class="work-grid">
+      <a class="card reveal" href="../kedron/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">🏡</b><em class="card-kind">Многостраничник</em></div>
+        <div class="card-body">
+          <h3>Каркасные и модульные дома</h3>
+          <p>Восемь страниц: каталог проектов с фильтрами, технология строительства, комплектации, калькулятор стоимости дома.</p>
+          <span class="card-open">Открыть сайт <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../shop/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">🏺</b><em class="card-kind">Интернет-магазин</em></div>
+        <div class="card-body">
+          <h3>ГЛИНА — керамика ручной работы</h3>
+          <p>Каталог с фильтрами, окно товара, корзина с пересчётом суммы, выбор доставки и оформление заказа с проверкой полей.</p>
+          <span class="card-open">Открыть магазин <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../vireo/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">◆</b><em class="card-kind">Сайт студии</em></div>
+        <div class="card-body">
+          <h3>Vireo Studio</h3>
+          <p>Сайт digital-агентства: услуги, процесс, кейсы с рабочими демо внутри, вопросы-ответы с микроразметкой для поиска.</p>
+          <span class="card-open">Открыть сайт <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../quiz/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">◈</b><em class="card-kind">Шесть квизов</em></div>
+        <div class="card-body">
+          <h3>Квизы для сбора заявок</h3>
+          <p>Шесть ниш, у каждой свой бренд и палитра: косметология, стоматология, фитнес, юристы, онлайн-школа, недвижимость.</p>
+          <span class="card-open">Открыть подборку <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../deck/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">📑</b><em class="card-kind">Презентация</em></div>
+        <div class="card-body">
+          <h3>Коммерческое предложение на 12 слайдов</h3>
+          <p>Презентация для клиента: проект, смета по статьям, комплектации, сроки. Листается стрелками и печатается в PDF.</p>
+          <span class="card-open">Открыть презентацию <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../infographic/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">📊</b><em class="card-kind">Инфографика</em></div>
+        <div class="card-body">
+          <h3>Из чего складывается цена дома</h3>
+          <p>Лист A4: разбор сметы по статьям, что двигает цену сильнее всего. Все цифры посчитаны из данных калькулятора.</p>
+          <span class="card-open">Открыть инфографику <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../rastsvet/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">✦</b><em class="card-kind">Лендинг</em></div>
+        <div class="card-body">
+          <h3>«Расцвет» — курс для аудитории 40+</h3>
+          <p>Лендинг с анимацией, мягкой палитрой и структурой под тёплую аудиторию, которая не любит давление и спешку.</p>
+          <span class="card-open">Открыть лендинг <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../audit/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">🛡</b><em class="card-kind">Аудит и отчёт</em></div>
+        <div class="card-body">
+          <h3>Аудит безопасности сайта и 152-ФЗ</h3>
+          <p>Страница услуги и обезличенный отчёт: проверка на уязвимости и на соответствие требованиям к персональным данным.</p>
+          <span class="card-open">Открыть работу <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../beauty-app/index.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">◐</b><em class="card-kind">Веб-приложение</em></div>
+        <div class="card-body">
+          <h3>Приложение с офлайн-режимом</h3>
+          <p>Ставится на телефон как обычное приложение, работает без интернета, помнит прогресс пользователя между запусками.</p>
+          <span class="card-open">Открыть приложение <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+      <a class="card reveal" href="../ai-finance/finance-agent.html" target="_blank" rel="noopener">
+        <div class="card-top"><b aria-hidden="true">◇</b><em class="card-kind">Интерфейс</em></div>
+        <div class="card-body">
+          <h3>ИИ-помощник по финансам</h3>
+          <p>Интерфейс помощника с диалогом и сценариями. К проекту сделаны описание и презентация для заказчика.</p>
+          <span class="card-open">Открыть проект <i aria-hidden="true">→</i></span>
+        </div>
+      </a>
+    </div>
+    <p class="work-note">Демо-проекты сделаны для портфолио: названия компаний и контакты в них вымышленные, вёрстка и логика — настоящие.</p>
+  </div>
+</section>
+
+<!-- Блок с фотографией. Положите рядом с index.html файл foto.jpg — блок появится сам.
+     Пока файла нет, блок скрыт: посетитель не увидит ни пустого места,
+     ни значка сломанной картинки. -->
+<section class="section me" id="me" hidden>
+  <div class="wrap">
+    <div class="me-card reveal">
+      <div class="me-plate">
+        <span class="me-plate__ring" aria-hidden="true"></span>
+        <img class="me-photo" src="foto-cutout.png" alt="Ирина Мехоношина"
+             onload="this.closest('.me').hidden = false"
+             onerror="this.closest('.me').remove()">
+      </div>
+      <div class="me-text">
+        <span class="eyebrow">Кто будет делать</span>
+        <h2 class="h2">Ирина Мехоношина</h2>
+        <p>Работаю с малым бизнесом: салоны, студии, частные мастера, строительные компании. Знаю, что у вас нет отдела маркетинга и лишнего месяца на согласования, — поэтому веду проект сама от первого разговора до запуска.</p>
+        <p>Тексты, дизайн и вёрстка в одних руках. Это значит, что никто не переводит стрелки: если что-то не работает, спрашивать нужно с меня.</p>
+        <a class="btn btn-primary" href="#contact" style="margin-top:22px">Обсудить задачу</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Процесс</span>
+      <h2 class="h2">Как строится работа</h2>
+      <p class="lede">Никаких «пропала на две недели и прислала непонятно что». На каждом шаге вы видите промежуточный результат.</p>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">
+        <h3>Разговор</h3>
+        <p>15 минут в переписке: что за бизнес, кто клиенты, что должен сделать посетитель. Называю срок и цену.</p>
+      </li>
+      <li class="step reveal">
+        <h3>Структура</h3>
+        <p>Присылаю список экранов и что будет на каждом. Здесь дешевле всего что-то поменять — правим до отрисовки.</p>
+      </li>
+      <li class="step reveal">
+        <h3>Дизайн и тексты</h3>
+        <p>Собираю первый экран, показываю. Согласовали стиль — доделываю остальные и пишу тексты.</p>
+      </li>
+      <li class="step reveal">
+        <h3>Правки</h3>
+        <p>Две итерации входят в стоимость. Собираю замечания списком и правлю пакетом, а не по одному сообщению.</p>
+      </li>
+      <li class="step reveal">
+        <h3>Запуск</h3>
+        <p>Публикую на ваш домен, проверяю формы и телефоны, показываю, как менять текст самостоятельно.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Вопросы</span>
+      <h2 class="h2">О чём спрашивают до заказа</h2>
+    </div>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>А если мне не понравится дизайн?</summary>
+        <p>Поэтому я не рисую весь сайт сразу. Сначала показываю один первый экран — на нём видно шрифты, цвета и общий характер. Если не то, переделываю до согласования, и только потом иду дальше. Переделать один экран — полдня. Переделать готовый сайт — неделя.</p>
+      </details>
+      <details class="reveal">
+        <summary>У меня нет текстов и фотографий. Это проблема?</summary>
+        <p>Нет, это обычная ситуация. Тексты пишу сама: вы отвечаете на вопросы про бизнес голосом или в переписке, остальное моя работа. Фотографии подбираю из бесплатных стоков с лицензией на коммерческое использование. Свои снимки производства, товара или команды, если они есть, всегда работают лучше стоковых.</p>
+      </details>
+      <details class="reveal">
+        <summary>Сколько правок входит в стоимость?</summary>
+        <p>Две итерации: вы присылаете замечания списком, я правлю пакетом. Правка — это изменение текста, цвета, порядка блоков, замена фотографии. Если после согласования структуры вы решаете добавить три новых раздела, это уже новая задача, обсуждаем отдельно. Такое бывает редко и всегда проговаривается заранее.</p>
+      </details>
+      <details class="reveal">
+        <summary>На чём вы делаете сайты?</summary>
+        <p>Собираю на чистом коде — HTML, CSS и JavaScript. Такой сайт быстро грузится, не зависит от чужого конструктора и не требует ежемесячной подписки за шаблон. Если вам удобнее менять содержимое самостоятельно через визуальный редактор, собираю на Tilda. Решаем на этапе разговора — исходя из того, кто будет вести сайт дальше.</p>
+      </details>
+      <details class="reveal">
+        <summary>Что будет с сайтом после сдачи?</summary>
+        <p>Все файлы остаются у вас, доступы передаю полностью — вы ничем ко мне не привязаны. Показываю, где менять текст, телефон и цены. Понадобится доработка через полгода — пишите, помогу. Отдельно можно договориться о поддержке: обновления и мелкие правки по мере необходимости.</p>
+      </details>
+      <details class="reveal">
+        <summary>Сайт будет в топе Яндекса?</summary>
+        <p>Честный ответ: сам по себе — нет, и никто не может это гарантировать. Я делаю техническую часть, от которой зависит продвижение: быструю загрузку, корректные заголовки, мета-теги, адаптив, читаемые адреса страниц, микроразметку. Это фундамент. Дальше нужны время, регулярный контент и бюджет на продвижение — здесь помогу с текстами под ключевые запросы.</p>
+      </details>
+      <details class="reveal">
+        <summary>Как происходит оплата?</summary>
+        <p>Предоплата 50%, остаток после сдачи и вашей приёмки. Это защищает обе стороны: вы не платите всё вперёд, я не трачу неделю на проект, от которого откажутся на полпути. Если работаем через биржу, оплата идёт по правилам площадки — деньги резервируются и переходят мне только после того, как вы приняли работу.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Связаться</span>
+      <h2 class="h2">Расскажите о задаче</h2>
+      <p class="lede">Отвечаю в течение рабочего дня. В ответ скажу срок, цену и что понадобится от вас — без обязательств и без «оставьте телефон, вам перезвонят».</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <form id="leadForm" novalidate>
+          <div class="field">
+            <label for="f-name">Как к вам обращаться</label>
+            <input id="f-name" name="who" type="text" autocomplete="name" placeholder="Имя">
+            <span class="err">Напишите имя — так удобнее общаться</span>
+          </div>
+          <div class="field">
+            <label for="f-contact">Telegram или почта для ответа</label>
+            <input id="f-contact" name="contact" type="text" placeholder="@nickname или mail@example.com">
+            <span class="err">Без этого я не смогу ответить</span>
+          </div>
+          <div class="field">
+            <label for="f-kind">Что нужно</label>
+            <select id="f-kind" name="kind">
+              <option>Сайт-визитка</option>
+              <option selected>Лендинг</option>
+              <option>Многостраничный сайт</option>
+              <option>Интернет-магазин</option>
+              <option>Квиз или калькулятор</option>
+              <option>Тексты, корректура, инфографика</option>
+              <option>Пока не знаю, нужен совет</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-msg">Пара слов о задаче</label>
+            <textarea id="f-msg" name="msg" placeholder="Чем занимаетесь, что должен сделать посетитель сайта, есть ли примеры, которые нравятся"></textarea>
+            <span class="err">Опишите задачу хотя бы в двух предложениях</span>
+          </div>
+          <div class="field field--check">
+            <label class="consent" for="f-agree">
+              <input type="checkbox" id="f-agree" data-check="agree">
+              <span>Согласна с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a> и даю согласие на обработку указанных мной данных для ответа на обращение.</span>
+            </label>
+            <span class="err">Без согласия я не имею права обрабатывать ваши данные</span>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
+          <p class="form-note">Автоматически никуда ничего не уходит — откроется письмо в вашей почтовой программе. Данные нигде не сохраняются, кроме моего почтового ящика.</p>
+        </form>
+        <div class="form-ok" id="formOk">
+          <b>Готово!</b>
+          <p>Открылось окно почтовой программы с заполненным письмом — осталось нажать «Отправить». Если окно не появилось, напишите в Telegram, так быстрее.</p>
+        </div>
+      </div>
+      <div class="direct reveal">
+        <a class="direct-link" id="lnkTg" href="#contact">
+          <span class="direct-ico" aria-hidden="true">✈</span>
+          <span class="direct-txt"><b>Telegram</b><span id="tgLabel">@irinameh</span></span>
+        </a>
+        <a class="direct-link" id="lnkMail" href="#contact">
+          <span class="direct-ico" aria-hidden="true">✉</span>
+          <span class="direct-txt"><b>Почта</b><span id="mailLabel">virmech@yandex.ru</span></span>
+        </a>
+        <div class="direct-link">
+          <span class="direct-ico" aria-hidden="true">◷</span>
+          <span class="direct-txt"><b>Когда отвечаю</b><span>Будни 10:00–17:00 по Москве. В выходные — если задача срочная, напишите, посмотрю.</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p class="foot-legal">
+      Мехоношина Ирина, самозанятая (налог на профессиональный доход).
+      ИНН 381905819326. Работаю по договору, чек выдаю через «Мой налог».
+      <a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
+    </p>
+    <div class="foot-row">
+      <span>© <span id="year">2026</span> Ирина Мехоношина — разработка сайтов</span>
+      <span>Собрано на чистом коде: HTML, CSS, JavaScript. Без конструкторов и шаблонов.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   КОНТАКТЫ МЕНЯТЬ ЗДЕСЬ — больше нигде по файлу искать не надо
+   telegram — ник без символа @
+   email    — рабочая почта
+   ========================================================== */
+var CONTACTS = {
+  telegram: 'irinameh',
+  email:    'virmech@yandex.ru'
+};
+
+(function () {
+  'use strict';
+
+  /* --- контакты в разметку --- */
+  var tg = document.getElementById('lnkTg');
+  tg.href = 'https://t.me/' + CONTACTS.telegram;
+  tg.target = '_blank';
+  tg.rel = 'noopener';
+  document.getElementById('tgLabel').textContent = '@' + CONTACTS.telegram;
+
+  var ml = document.getElementById('lnkMail');
+  ml.href = 'mailto:' + CONTACTS.email;
+  document.getElementById('mailLabel').textContent = CONTACTS.email;
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* --- тема: светлая, тёмная или как в системе --- */
+  var root = document.documentElement;
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  } catch (e) {}
+
+  function isDarkNow() {
+    var attr = root.getAttribute('data-theme');
+    if (attr === 'dark') return true;
+    if (attr === 'light') return false;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDarkNow() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  /* --- граница у шапки при прокрутке --- */
+  var head = document.getElementById('head');
+  function onScroll() { head.classList.toggle('is-stuck', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* --- плавное появление блоков --- */
+  var items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  /* --- форма ---
+     Статический сайт не умеет сам отправлять письма, поэтому собираем
+     готовое письмо и открываем почтовую программу. Чтобы заявки падали
+     на почту без участия посетителя, подключите Formspree или FormCarry:
+     замените тело обработчика на fetch к их адресу. */
+  var form = document.getElementById('leadForm');
+  var okBox = document.getElementById('formOk');
+  var fName = document.getElementById('f-name');
+  var fContact = document.getElementById('f-contact');
+  var fKind = document.getElementById('f-kind');
+  var fMsg = document.getElementById('f-msg');
+
+  var fAgree = document.getElementById('f-agree');
+
+  function mark(el, isBad) {
+    // у галочки согласия родитель — <label>, поэтому ищем блок .field
+    var box = el.closest ? el.closest('.field') : el.parentNode;
+    if (box) box.classList.toggle('is-bad', isBad);
+    return !isBad;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var ok = true;
+    ok = mark(fName, fName.value.trim().length < 2) && ok;
+    ok = mark(fContact, fContact.value.trim().length < 3) && ok;
+    ok = mark(fMsg, fMsg.value.trim().length < 10) && ok;
+    ok = mark(fAgree, !fAgree.checked) && ok;
+    if (!ok) {
+      var first = form.querySelector('.is-bad input, .is-bad textarea');
+      if (first) first.focus();
+      return;
+    }
+
+    var subject = 'Заявка с сайта: ' + fKind.value;
+    var body = 'Имя: ' + fName.value.trim() + '\n' +
+               'Связь: ' + fContact.value.trim() + '\n' +
+               'Задача: ' + fKind.value + '\n\n' +
+               fMsg.value.trim();
+
+    window.location.href = 'mailto:' + CONTACTS.email +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+
+    form.style.display = 'none';
+    okBox.classList.add('is-on');
+  });
+
+  [fName, fContact, fMsg, fAgree].forEach(function (el) {
+    el.addEventListener(el === fAgree ? 'change' : 'input', function () {
+      var box = this.closest('.field');
+      if (box) box.classList.remove('is-bad');
+    });
+  });
+})();
+</script>
+</body>
+</html>

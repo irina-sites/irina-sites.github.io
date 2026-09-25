@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>МЕРИДИАН — подбор недвижимости</title>
+    <meta
+      name="description"
+      content="Демо-квиз агентства недвижимости МЕРИДИАН: подбор направления по цели, бюджету и срокам."
+    >
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M20 6 L24 20 L20 34 L16 20 Z" fill="currentColor"/>
+            <circle cx="20" cy="20" r="2.5" fill="#0a1420"/>
+          </svg>
+        </span>
+        <div>
+          <p class="brand-title" id="headerTitle"></p>
+          <p class="brand-subtitle" id="headerSubtitle"></p>
+        </div>
+      </div>
+      <p class="brand-meta">Агентство недвижимости · Москва</p>
+    </header>
+
+    <main class="app-shell">
+      <section class="screen screen-start" id="startScreen">
+        <p class="kicker" id="projectTagline"></p>
+        <h1 id="startTitle"></h1>
+        <p class="lead" id="startSubtitle"></p>
+        <ul class="benefit-list" id="startBenefits"></ul>
+        <button class="button button-primary" id="startButton" type="button"></button>
+      </section>
+
+      <section class="screen screen-question is-hidden" id="questionScreen" aria-live="polite">
+        <div class="quiz-topline">
+          <p class="question-counter" id="questionCounter"></p>
+          <div class="progress" aria-hidden="true">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <h2 id="questionTitle"></h2>
+        <p class="question-hint" id="questionHint"></p>
+        <div class="answer-list" id="answerList"></div>
+      </section>
+
+      <section class="screen screen-result is-hidden" id="resultScreen" aria-live="polite">
+        <p class="kicker" id="resultKicker"></p>
+        <h2 id="resultTitle"></h2>
+        <p class="result-description" id="resultDescription"></p>
+
+        <div class="recommendations">
+          <h3 id="recommendationsTitle"></h3>
+          <ol id="recommendationsList"></ol>
+        </div>
+
+        <p class="cta-note" id="resultCta"></p>
+
+        <form class="lead-form" id="leadForm">
+          <div class="form-heading">
+            <h3 id="formTitle"></h3>
+            <p id="formDescription"></p>
+          </div>
+
+          <label>
+            <span id="nameLabel"></span>
+            <input id="leadName" name="name" type="text" autocomplete="name" required>
+          </label>
+
+          <label>
+            <span id="contactLabel"></span>
+            <input id="leadContact" name="contact" type="text" autocomplete="tel" required>
+          </label>
+
+          <label>
+            <span id="commentLabel"></span>
+            <textarea id="leadComment" name="comment" rows="4"></textarea>
+          </label>
+
+          <label class="lead-consent" for="leadConsent">
+            <input type="checkbox" id="leadConsent" name="consent" required>
+            <span>Даю согласие на обработку персональных данных в соответствии с <a href="../privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>. Ответы на вопросы квиза передаются вместе с заявкой.</span>
+          </label>
+
+          <button class="button button-primary" id="submitButton" type="submit"></button>
+        </form>
+
+        <div class="success-message is-hidden" id="successMessage"></div>
+        <button class="button button-secondary" id="restartButton" type="button"></button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p id="footerText"></p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

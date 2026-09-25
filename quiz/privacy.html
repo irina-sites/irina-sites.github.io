@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Политика конфиденциальности — шаблон для квиза</title>
+<meta name="description" content="Шаблон политики конфиденциальности, который идёт в комплекте с квизом-лидогенератором.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{
+  --bg:#f7f6f4; --surface:#fff; --text:#1d1c1a; --muted:#5d5a55; --faint:#8b8781;
+  --line:#e3e0da; --brand:#6c3ef4; --brand-wash:#efeaff; --fill:#fff3cd; --fill-ink:#7a5a00;
+  --font:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#131318; --surface:#1b1b22; --text:#f1f0f4; --muted:#a8a5b0; --faint:#807d89;
+    --line:#2b2b35; --brand:#a98cff; --brand-wash:#221c3a; --fill:#453818; --fill-ink:#ffd88a;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--font); font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased;}
+.wrap{width:min(780px, calc(100% - 40px)); margin-inline:auto; padding-block:40px 72px;}
+@media (max-width:560px){ .wrap{width:calc(100% - 32px);} }
+a{color:var(--brand);}
+h1{margin:0 0 10px; font-size:clamp(25px,4.2vw,36px); line-height:1.16; letter-spacing:-.02em;}
+h2{margin:34px 0 10px; font-size:clamp(18px,2.3vw,22px); line-height:1.25; letter-spacing:-.015em;}
+p{margin:0 0 14px;}
+ul{margin:0 0 14px; padding-left:22px;}
+li{margin-bottom:7px;}
+.back{display:inline-block; margin-bottom:24px; color:var(--muted); text-decoration:none; font-size:15px; font-weight:600;}
+.back:hover{color:var(--brand);}
+.meta{margin-bottom:26px; padding-bottom:22px; border-bottom:1px solid var(--line); color:var(--faint); font-size:15px;}
+.box{padding:18px 22px; margin:22px 0; background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--brand); border-radius:10px; color:var(--muted); font-size:16px;}
+.box b{color:var(--text);}
+.box p:last-child{margin-bottom:0;}
+/* шаблон: места под данные заказчика подсвечены, чтобы их нельзя было пропустить */
+.fill{padding:1px 8px; border-radius:4px; background:var(--fill); color:var(--fill-ink); font-weight:700; font-size:15px; white-space:nowrap;}
+.tpl{padding:18px 22px; margin:0 0 26px; border:1px dashed var(--brand); border-radius:10px; background:var(--brand-wash); color:var(--text); font-size:15.5px; line-height:1.65;}
+.tpl p:last-child{margin-bottom:0;}
+.foot{margin-top:40px; padding-top:20px; border-top:1px solid var(--line); color:var(--faint); font-size:14.5px;}
+.legal-formal{display:block; margin-bottom:6px; font-size:0.92em; opacity:.85;}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="index.html">← Все квизы</a>
+
+  <h1>Политика конфиденциальности</h1>
+  <p class="meta"><span class="legal-formal">Полное название документа по закону — «Политика в отношении обработки персональных данных» (152-ФЗ, ст. 18.1).</span> Шаблон, который идёт в комплекте с квизом.</p>
+
+  <div class="tpl">
+    <p><b>Это шаблон, а не готовая политика.</b> Квизы в портфолио — демонстрационные,
+    бренды вымышленные, поэтому реквизитов здесь нет. Вместо них
+    <span class="fill">жёлтые места</span>, куда вписываются данные компании.</p>
+    <p>При покупке квиза эта страница идёт вместе с ним: остаётся подставить
+    название, ИНН, адрес и почту — и повесить ссылку рядом с галочкой согласия,
+    как это уже сделано в каждом демо.</p>
+  </div>
+
+  <div class="box">
+    <p><b>Коротко.</b> Квиз собирает то, что человек сам вводит на последнем шаге:
+    имя, телефон или мессенджер и комментарий. Плюс его ответы на вопросы квиза —
+    они и есть смысл заявки. Эти данные нужны, чтобы перезвонить и сделать предложение.</p>
+  </div>
+
+  <h2>1. Кто обрабатывает данные</h2>
+  <p>
+    <span class="fill">название компании</span><br>
+    ИНН <span class="fill">ИНН</span>, ОГРН <span class="fill">ОГРН</span><br>
+    Адрес: <span class="fill">адрес</span><br>
+    Почта для обращений по персональным данным: <span class="fill">почта</span><br>
+    Телефон: <span class="fill">телефон</span>
+  </p>
+
+  <h2>2. Какие данные собирает квиз</h2>
+  <ul>
+    <li>имя — как обращаться при звонке;</li>
+    <li>телефон, почта или ник в мессенджере — чтобы ответить;</li>
+    <li>комментарий, если человек его написал;</li>
+    <li><b>ответы на вопросы квиза</b> — какой запрос, бюджет, сроки, ситуация.</li>
+  </ul>
+  <p>
+    Ответы на вопросы — тоже персональные данные, когда они привязаны к имени
+    и телефону. В некоторых темах они попадают в <b>особые категории</b>:
+    вопросы о здоровье в медицинском квизе, о судебном споре — в юридическом.
+    Для таких данных 152-ФЗ требует отдельного письменного согласия
+    (ч. 2 ст. 10), поэтому в чувствительных нишах вопросы формулируются так,
+    чтобы не собирать диагноз и не фиксировать обстоятельства дела.
+  </p>
+
+  <h2>3. Зачем они нужны</h2>
+  <ul>
+    <li>связаться и уточнить задачу;</li>
+    <li>подготовить предложение под ответы, которые человек дал в квизе;</li>
+    <li>записать на приём, консультацию или показ;</li>
+    <li>заключить и исполнить договор, если стороны договорятся.</li>
+  </ul>
+  <p>
+    Для рекламных рассылок данные не используются. Если рассылка планируется,
+    на неё нужна <b>отдельная галочка</b> — одним согласием оба случая не закрываются.
+  </p>
+
+  <h2>4. На каком основании</h2>
+  <p>
+    Согласие, которое человек даёт галочкой перед отправкой формы
+    (ст. 9 Федерального закона № 152-ФЗ «О персональных данных»).
+    Галочка не проставлена заранее и не является обязательной для просмотра
+    сайта — только для отправки заявки.
+  </p>
+
+  <h2>5. Кому передаются</h2>
+  <p>
+    <span class="fill">перечислите: CRM, телефония, мессенджер</span> — те сервисы,
+    куда квиз отправляет заявку. Это важный пункт: как только заявка уходит
+    в стороннюю CRM или телеграм-бот, сервис становится обработчиком,
+    и его нужно назвать здесь поимённо.
+  </p>
+  <p>
+    Данные хранятся на серверах в России. За пределы страны не передаются.
+  </p>
+
+  <h2>6. Сколько хранятся</h2>
+  <ul>
+    <li>заявка без сделки — <span class="fill">срок</span>, обычно от 6 месяцев до года;</li>
+    <li>данные по заключённому договору — сколько требует отраслевой
+        и налоговый учёт;</li>
+    <li>по требованию человека — удаляются раньше, см. пункт 7.</li>
+  </ul>
+
+  <h2>7. Как отозвать согласие и удалить данные</h2>
+  <p>
+    Достаточно письма на <span class="fill">почта</span> с того адреса
+    или телефона, что указаны в заявке. Срок ответа —
+    <b>10 рабочих дней</b>. Отказать можно только в том, что компания обязана
+    хранить по закону.
+  </p>
+
+  <h2>8. Как защищаются</h2>
+  <ul>
+    <li>сайт работает по защищённому протоколу HTTPS;</li>
+    <li>доступ к заявкам — по паролю, у ограниченного круга сотрудников;</li>
+    <li>сторонние счётчики и рекламные пиксели <span class="fill">указать, если есть</span>;</li>
+    <li>шрифты и скрипты загружаются со своего сервера, а не со сторонних.</li>
+  </ul>
+
+  <h2>9. Файлы cookie</h2>
+  <p>
+    Демо-квизы не используют cookie и ничего не сохраняют в браузере.
+    Если на рабочем сайте стоит Яндекс.Метрика или рекламный пиксель —
+    их нужно назвать здесь и добавить баннер об использовании cookie.
+  </p>
+
+  <h2>10. Изменения политики</h2>
+  <p>
+    Новая версия появляется на этой странице с новой датой в начале.
+  </p>
+
+  <div class="box">
+    <p><b>Оговорка.</b> Шаблон закрывает типовой случай: квиз собирает контакт
+    и ответы, заявка уходит в CRM. Если бизнес работает с медицинскими данными,
+    детьми или биометрией, текст нужно показать юристу — там начинаются
+    отдельные требования 152-ФЗ.</p>
+  </div>
+
+  <p class="foot">
+    Демонстрационный проект для портфолио · <a href="index.html">вернуться к квизам</a>
+  </p>
+
+</div>
+</body>
+</html>

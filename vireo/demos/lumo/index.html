@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMO — лендинг коллекции (демо-проект VIREO STUDIO)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../../fonts/fonts.css">
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #f4f2ee;
+    --white: #ffffff;
+    --lime: #d6ff3f;
+    --gray: #7a776f;
+    --border: rgba(17,17,17,0.12);
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+  .demo-banner {
+    background: var(--ink); color: var(--paper);
+    text-align: center; font-size: 13px; padding: 10px 16px;
+  }
+  .demo-banner a { color: var(--lime); font-weight: 700; text-decoration: underline; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 26px 0;
+  }
+  .logo { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 2px; }
+  nav { display: flex; gap: 30px; }
+  nav a { font-size: 13.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 28px; border-radius: 100px; font-size: 13.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    background: var(--ink); color: var(--paper); border: 1px solid var(--ink); cursor: pointer;
+    transition: all 0.3s var(--ease);
+  }
+  .btn:hover { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+  .btn--outline { background: transparent; color: var(--ink); }
+  .btn--outline:hover { background: var(--ink); color: var(--paper); }
+
+  .hero { padding: 60px 0 90px; text-align: center; }
+  .eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 22px; }
+  h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.6rem, 8vw, 6rem); line-height: 0.98; letter-spacing: -1px;
+    margin: 0 0 26px;
+  }
+  .hero p { max-width: 480px; margin: 0 auto 40px; color: var(--gray); font-size: 1.02rem; }
+
+  .countdown { display: flex; justify-content: center; gap: 16px; margin: 46px 0; }
+  .count-box { background: var(--ink); color: var(--paper); border-radius: 14px; padding: 18px 22px; min-width: 78px; }
+  .count-box strong { display: block; font-family: var(--font-display); font-size: 1.8rem; }
+  .count-box span { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); }
+
+  section { padding: 70px 0; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 12px; }
+  h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2.2rem); margin: 0; }
+  .section-head p { color: var(--gray); font-size: 0.92rem; margin: 0; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .product { background: var(--white); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+  .product__cover { height: 220px; position: relative; }
+  .p1 { background: linear-gradient(150deg, #d6ff3f, #111111 120%); }
+  .p2 { background: linear-gradient(150deg, #111111, #7a776f); }
+  .p3 { background: linear-gradient(150deg, #f4f2ee, #111111 140%); }
+  .product__body { padding: 20px 22px 24px; }
+  .product__body h3 { font-family: var(--font-display); font-size: 1.1rem; margin: 0 0 4px; }
+  .product__body .price { color: var(--gray); font-size: 0.9rem; margin: 0 0 16px; }
+  .waitlist-btn {
+    width: 100%; padding: 11px; border-radius: 100px; border: 1px solid var(--ink);
+    background: transparent; font-size: 12.5px; font-weight: 700; text-transform: uppercase;
+    cursor: pointer; transition: all 0.25s ease;
+  }
+  .waitlist-btn.is-active { background: var(--lime); border-color: var(--lime); }
+
+  .usp-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; text-align: center; }
+  .usp { padding: 30px 20px; border: 1px solid var(--border); border-radius: 18px; background: var(--white); }
+  .usp strong { display: block; font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 8px; }
+  .usp span { font-size: 0.88rem; color: var(--gray); }
+
+  .preorder { background: var(--ink); color: var(--paper); border-radius: 28px; padding: 56px; text-align: center; }
+  .preorder h2 { color: var(--paper); }
+  .preorder p { color: rgba(244,242,238,0.65); max-width: 440px; margin: 12px auto 30px; }
+  .preorder-form { display: flex; gap: 12px; max-width: 420px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  /* только поле почты: раньше правило ловило и галочку согласия,
+     и min-width: 220px растягивал чекбокс на пол-формы */
+  .preorder-form input[type="email"] {
+    flex: 1; min-width: 220px; padding: 14px 18px; border-radius: 100px; border: 1px solid rgba(244,242,238,0.25);
+    background: rgba(244,242,238,0.06); color: var(--paper); font-size: 14px;
+  }
+  .preorder-form input::placeholder { color: rgba(244,242,238,0.45); }
+  /* галочка согласия: почта — персональные данные, 152-ФЗ ст.9 */
+  .preorder-consent { flex: 1 0 100%; display: flex; align-items: flex-start; gap: 10px; margin: 6px 0 0; text-align: left; font-size: 12.5px; line-height: 1.55; color: rgba(244,242,238,0.6); cursor: pointer; }
+  .preorder-consent input { width: 16px; height: 16px; min-width: 0; margin-top: 1px; flex: none; accent-color: var(--lime); }
+  .preorder-consent a { color: var(--lime); }
+  .preorder-success { margin-top: 16px; font-size: 13.5px; color: var(--lime); font-weight: 600; display: none; }
+  .preorder-success.is-visible { display: block; }
+
+  footer { padding: 40px 0; text-align: center; font-size: 13px; color: var(--gray); }
+  footer a { color: var(--ink); font-weight: 700; text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    nav { display: none; }
+    .products-grid, .usp-row { grid-template-columns: 1fr; }
+    .preorder { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">Демо-проект студии <a href="../../index.html">VIREO STUDIO</a> — учебный кейс, не реальный бренд · <a href="../../index.html#portfolio">← Вернуться в портфолио</a></div>
+
+<header class="container">
+  <div class="logo">LUMO</div>
+  <nav>
+    <a href="#collection">Коллекция</a>
+    <a href="#usp">Почему LUMO</a>
+    <a href="#preorder">Предзаказ</a>
+  </nav>
+  <a href="#preorder" class="btn">Оформить предзаказ</a>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Коллекция SS26 · Ограниченный тираж</span>
+    <h1>СВЕТ<br>ВНУТРИ</h1>
+    <p>LUMO — капсульная коллекция из 12 вещей. Тираж ограничен, повторного выпуска не будет.</p>
+
+    <div class="countdown" id="countdown">
+      <div class="count-box"><strong id="cd-days">05</strong><span>дней</span></div>
+      <div class="count-box"><strong id="cd-hours">00</strong><span>часов</span></div>
+      <div class="count-box"><strong id="cd-min">00</strong><span>минут</span></div>
+      <div class="count-box"><strong id="cd-sec">00</strong><span>секунд</span></div>
+    </div>
+
+    <a href="#collection" class="btn btn--outline">Смотреть коллекцию</a>
+  </div>
+</section>
+
+<section id="collection">
+  <div class="container">
+    <div class="section-head">
+      <h2>Капсула из 12 вещей</h2>
+      <p>Добавьте вещь в лист ожидания — сообщим о старте продаж первыми</p>
+    </div>
+    <div class="products-grid">
+      <div class="product">
+        <div class="product__cover p1"></div>
+        <div class="product__body">
+          <h3>Куртка LUMO-01</h3>
+          <p class="price">18 900 ₽</p>
+          <button class="waitlist-btn">В лист ожидания</button>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product__cover p2"></div>
+        <div class="product__body">
+          <h3>Брюки LUMO-02</h3>
+          <p class="price">9 400 ₽</p>
+          <button class="waitlist-btn">В лист ожидания</button>
+        </div>
+      </div>
+      <div class="product">
+        <div class="product__cover p3"></div>
+        <div class="product__body">
+          <h3>Худи LUMO-03</h3>
+          <p class="price">7 200 ₽</p>
+          <button class="waitlist-btn">В лист ожидания</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usp">
+  <div class="container">
+    <div class="section-head"><h2>Почему LUMO</h2></div>
+    <div class="usp-row">
+      <div class="usp"><strong>Тираж 300 экземпляров</strong><span>Каждая вещь пронумерована, повтора не будет</span></div>
+      <div class="usp"><strong>Производство в РФ</strong><span>Ткани и пошив — без посредников за рубежом</span></div>
+      <div class="usp"><strong>Доставка за 2 дня</strong><span>По России — бесплатно от 12 000 ₽</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="preorder">
+  <div class="container">
+    <div class="preorder">
+      <h2>Узнайте о старте продаж первыми</h2>
+      <p>Оставьте почту — пришлём доступ за 24 часа до официального старта.</p>
+      <form class="preorder-form" id="preorderForm">
+        <input type="email" placeholder="you@email.com" required>
+        <button type="submit" class="btn" style="background:var(--lime); color:var(--ink); border-color:var(--lime);">Отправить</button>
+        <label class="preorder-consent" for="lumo-agree">
+          <input type="checkbox" id="lumo-agree" required>
+          <span>Даю согласие на обработку адреса почты для уведомления о старте продаж — <a href="../../privacy.html" target="_blank" rel="noopener">политика конфиденциальности</a></span>
+        </label>
+      </form>
+      <p class="preorder-success" id="preorderSuccess">Готово — сообщим первыми. Это демо-форма, реальная отправка не настроена.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="container">
+  LUMO — демонстрационный проект. Дизайн и разработка: <a href="../../index.html">VIREO STUDIO</a>
+</footer>
+
+<script>
+  // waitlist toggle
+  document.querySelectorAll('.waitlist-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const active = btn.classList.toggle('is-active');
+      btn.textContent = active ? 'Вы в списке ✓' : 'В лист ожидания';
+    });
+  });
+
+  // preorder form
+  const form = document.getElementById('preorderForm');
+  const success = document.getElementById('preorderSuccess');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    success.classList.add('is-visible');
+    form.reset();
+  });
+
+  // countdown to a fixed future point (5 days from load)
+  const target = new Date().getTime() + (5 * 24 * 60 * 60 * 1000);
+  const tick = () => {
+    const diff = Math.max(target - new Date().getTime(), 0);
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const min = Math.floor((diff % 3600000) / 60000);
+    const sec = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-min').textContent = String(min).padStart(2, '0');
+    document.getElementById('cd-sec').textContent = String(sec).padStart(2, '0');
+  };
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>

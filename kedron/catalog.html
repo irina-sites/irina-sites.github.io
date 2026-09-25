@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проекты каркасных и модульных домов — каталог КЕДРОН</title>
+<meta name="description" content="8 готовых проектов домов от 36 до 120 м²: планировки, площадь, сроки и цены. Фильтр по типу дома, площади, этажности и бюджету.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="КЕДРОН">
+<meta property="og:title" content="Проекты каркасных и модульных домов — каталог КЕДРОН">
+<meta property="og:description" content="8 готовых проектов от 36 до 120 м²: планировки, сроки и цены. Фильтр по типу, площади и бюджету.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="head" id="head">
+  <div class="wrap head__row">
+    <a class="brand" href="index.html" aria-label="КЕДРОН — на главную">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg>
+      </span>
+      <span><span class="brand__name">КЕДРОН</span><span class="brand__sub">каркасные дома</span></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Основное меню">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" aria-current="page">Проекты</a>
+      <a href="technology.html">Технология</a>
+      <a href="prices.html">Цены</a>
+      <a href="calc.html">Калькулятор</a>
+      <a href="about.html">О компании</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <div class="head__act">
+      <a class="head__phone" href="tel:+78001234567">8 800 123-45-67</a>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Переключить тёмную тему">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="pagehead">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a><span aria-hidden="true">/</span><span>Проекты</span>
+    </nav>
+    <h1 class="h1">Проекты домов</h1>
+    <p class="lede" style="margin-top:12px">Восемь проектов с готовыми планировками и просчитанными сметами. Любой можно взять за основу и поменять под свой участок и семью — это не увеличит срок.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    <form class="filters" id="filters" aria-label="Фильтр проектов">
+      <div>
+        <label for="f-type">Тип дома</label>
+        <select id="f-type">
+          <option value="all">Любой</option>
+          <option value="frame">Каркасный</option>
+          <option value="module">Модульный</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-area">Площадь</label>
+        <select id="f-area">
+          <option value="all">Любая</option>
+          <option value="0-50">до 50 м²</option>
+          <option value="50-80">50–80 м²</option>
+          <option value="80-999">от 80 м²</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-floors">Этажность</label>
+        <select id="f-floors">
+          <option value="all">Любая</option>
+          <option value="1">Один этаж</option>
+          <option value="2">Два этажа или мансарда</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-price">Бюджет</label>
+        <select id="f-price">
+          <option value="all">Любой</option>
+          <option value="0-2000000">до 2 млн ₽</option>
+          <option value="2000000-3500000">2–3,5 млн ₽</option>
+          <option value="3500000-99000000">от 3,5 млн ₽</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-sort">Сортировка</label>
+        <select id="f-sort">
+          <option value="pop">Сначала популярные</option>
+          <option value="cheap">Сначала дешевле</option>
+          <option value="rich">Сначала дороже</option>
+          <option value="fast">Сначала быстрее построить</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="filters__foot">
+      <p class="filters__count" id="count" role="status" aria-live="polite">Показано <b>8</b> проектов</p>
+      <button class="btn btn--ghost btn--sm" id="reset" type="button">Сбросить фильтры</button>
+    </div>
+
+    <div class="grid grid--3" id="list"></div>
+
+    <p style="margin-top:26px; color:var(--faint); font-size:15px">
+      Не нашли подходящий? Пришлём расчёт по вашему эскизу или наброску на салфетке —
+      <a href="contacts.html" style="color:var(--brand)">напишите нам</a>.
+    </p>
+  </div>
+</section>
+
+<section class="section cta section--decor">
+  <span class="decor decor--branch decor--tr" data-decor="branch"></span>
+  <div class="wrap center">
+    <h2 class="h2">Не знаете, какая площадь нужна?</h2>
+    <p class="lede">Ответьте на 6 вопросов в калькуляторе — предложим проект и назовём порядок цены.</p>
+    <div class="cta__row">
+      <a class="btn btn--primary" href="calc.html">Подобрать дом за 2 минуты</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <a class="brand" href="index.html" aria-label="КЕДРОН — на главную">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5V14h4v5.5"/></svg>
+          </span>
+          <span><span class="brand__name">КЕДРОН</span><span class="brand__sub">каркасные дома</span></span>
+        </a>
+        <p class="foot__about">Строим каркасные и модульные дома под ключ в Московской, Тверской и Калужской областях с 2014 года.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="catalog.html">Проекты домов</a></li>
+          <li><a href="technology.html">Технология</a></li>
+          <li><a href="prices.html">Цены и комплектации</a></li>
+          <li><a href="calc.html">Калькулятор</a></li>
+          <li><a href="about.html">О компании</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связаться</h4>
+        <ul>
+          <li><a href="tel:+78001234567">8 800 123-45-67</a></li>
+          <li><a href="mailto:info@kedron-demo.ru">info@kedron-demo.ru</a></li>
+          <li><a href="contacts.html">Приехать в офис</a></li>
+          <li>Пн–Сб, 9:00–19:00</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot__demo">Демонстрационный проект для портфолио. «КЕДРОН» — вымышленная компания, контакты и цены приведены как пример. Вёрстка, фильтры каталога и калькулятор работают по-настоящему.</p>
+    <div class="foot__bottom">
+      <span>© <span data-year>2026</span> КЕДРОН · <a href="privacy.html">Политика конфиденциальности</a></span>
+      <span>Сайт собран на чистом коде: HTML, CSS, JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/projects.js"></script>
+<script src="js/site.js"></script>
+<script src="js/catalog.js"></script>
+</body>
+</html>
