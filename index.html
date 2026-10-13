@@ -465,7 +465,20 @@ var WORKS = [
     });
   });
 
-  render('all');
+  // ссылка вида index.html#app открывает портфолио сразу с нужным фильтром
+  var wanted = (location.hash || '').slice(1), startTab = null;
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) {
+    if (t.getAttribute('data-filter') === wanted && wanted !== 'all') startTab = t;
+  });
+  if (startTab) {
+    startTab.click();
+    // 'auto' подчиняется CSS scroll-behavior: smooth, а плавная прокрутка при загрузке сбрасывается:
+    // ждём load и встаём на блок работ сразу
+    var toWork = function () { document.getElementById('work').scrollIntoView({ behavior: 'instant', block: 'start' }); };
+    if (document.readyState === 'complete') toWork(); else window.addEventListener('load', toWork);
+  } else {
+    render('all');
+  }
 })();
 </script>
 </body>
