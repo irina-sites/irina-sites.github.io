@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ПУЛЬС — онбординг тренера</title>
+<meta name="description" content="Онбординг для новых тренеров студии «Пульс»: правила зала, первая неделя, структура занятия, работа с новичками, инструменты и чек-лист. 8 слайдов. Демо для портфолио.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../fitness/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../deck.css">
+<style>
+:root {
+  --page: #050608; --bg: #0b0d10; --surface: #161a1f; --surface-2: #1d2128;
+  --text: #f4f6f1; --muted: #9aa3ae; --faint: #6b747f; --line: #262b33;
+  --lime: #c8ff2f; --orange: #ff5c28; --mint: #6ee7b7; --on-lime: #0b0d10;
+  --accent: #c8ff2f;
+  --font: "Inter", system-ui, sans-serif; --display: "Manrope", "Inter", sans-serif;
+}
+.deck { background: radial-gradient(900px 600px at 90% -15%, rgba(200, 255, 47, .12), transparent 60%), radial-gradient(800px 600px at -10% 110%, rgba(255, 92, 40, .1), transparent 60%), var(--bg); }
+.slide { font-size: 22px; line-height: 1.5; }
+.foot { position: absolute; left: 112px; right: 112px; bottom: 40px; display: flex; justify-content: space-between; align-items: center; color: var(--faint); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.foot__brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); }
+.foot__brand svg { width: 34px; height: 17px; color: var(--lime); }
+.foot__n { font-family: var(--display); font-weight: 800; letter-spacing: .04em; }
+.foot__n b { color: var(--lime); }
+
+.label { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 22px; color: var(--lime); font-size: 16px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.label::before { content: ""; width: 12px; height: 12px; background: var(--lime); transform: skewX(-12deg); }
+.h2 { font-family: var(--display); font-size: 76px; font-weight: 800; line-height: .95; letter-spacing: -.035em; text-transform: uppercase; }
+.h2 span, .lime { color: var(--lime); }
+.sk { display: inline-block; transform: skewX(-9deg); transform-origin: 0 100%; }
+.lead { margin-top: 26px; max-width: 30em; color: var(--muted); font-size: 24px; }
+.cap { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; }
+
+/* 1 — обложка */
+.ecg { position: absolute; left: 0; right: 0; bottom: 120px; width: 100%; height: 230px; }
+.ecg path { fill: none; stroke: var(--lime); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0 0 10px rgba(200, 255, 47, .55)); }
+.ecg .ecg__ghost { stroke: var(--line); stroke-width: 2; filter: none; }
+.brandrow { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.brandrow svg { width: 48px; height: 24px; color: var(--lime); }
+.brandrow b { color: var(--text); font-family: var(--display); font-size: 26px; font-weight: 800; letter-spacing: .04em; }
+.mega { margin-top: 70px; font-family: var(--display); font-size: 128px; font-weight: 800; line-height: .88; letter-spacing: -.045em; text-transform: uppercase; }
+.mega span { display: block; transform: skewX(-9deg); transform-origin: 0 100%; }
+.mega .lime { text-shadow: 0 0 60px rgba(200, 255, 47, .35); }
+.cover-card { position: absolute; right: 112px; top: 250px; z-index: 2; width: 420px; padding: 32px 34px; border-radius: 22px; background: rgba(22, 26, 31, .92); box-shadow: inset 0 0 0 1px var(--line), 0 40px 80px -30px rgba(0, 0, 0, .8); }
+.cover-card small { display: block; color: var(--orange); font-size: 15px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.cover-card b { display: block; margin-top: 10px; font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1; text-transform: uppercase; letter-spacing: -.02em; }
+.cover-card p { margin-top: 14px; color: var(--muted); font-size: 19px; }
+.cover-card hr { margin: 22px 0; border: 0; border-top: 1px solid var(--line); }
+.who { display: flex; align-items: center; gap: 16px; }
+.ava { display: grid; place-items: center; width: 64px; height: 64px; flex: none; border-radius: 50%; background: linear-gradient(135deg, var(--lime), var(--mint)); color: var(--on-lime); font-family: var(--display); font-size: 22px; font-weight: 800; }
+.who strong { display: block; font-size: 20px; }
+.who em { display: block; font-style: normal; color: var(--muted); font-size: 16px; }
+
+/* 2 — кто мы */
+.nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+.nums li { padding: 26px 28px; border-radius: 20px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.nums b { display: block; font-family: var(--display); font-size: 76px; font-weight: 800; line-height: 1; letter-spacing: -.04em; color: var(--lime); }
+.nums p { margin-top: 12px; color: var(--muted); font-size: 20px; line-height: 1.35; }
+.band { position: absolute; left: -40px; right: -40px; bottom: 116px; display: flex; gap: 28px; padding: 18px 60px; background: var(--lime); color: var(--on-lime); transform: rotate(-2.2deg); box-shadow: 0 20px 50px -20px rgba(200, 255, 47, .5); white-space: nowrap; }
+.band i { font-family: var(--display); font-size: 32px; font-style: normal; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; }
+.band i::after { content: "✱"; margin-left: 28px; font-size: 26px; }
+.band-note { position: absolute; left: 112px; bottom: 216px; color: var(--faint); font-size: 16px; }
+
+/* 3 — правила */
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+.rule { position: relative; display: grid; grid-template-columns: 120px 1fr; gap: 24px; align-items: start; min-height: 222px; padding: 34px 36px; border-radius: 22px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.rule__n { font-family: var(--display); font-size: 92px; font-weight: 800; line-height: .9; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 2px var(--lime); }
+.rule h3 { font-family: var(--display); font-size: 34px; font-weight: 800; line-height: 1.05; letter-spacing: -.02em; text-transform: uppercase; }
+.rule p { margin-top: 12px; color: var(--muted); font-size: 21px; line-height: 1.45; }
+.rule--hot { background: linear-gradient(135deg, rgba(255, 92, 40, .16), rgba(255, 92, 40, .04)), var(--surface); box-shadow: inset 0 0 0 1px rgba(255, 92, 40, .45); }
+.rule--hot .rule__n { -webkit-text-stroke-color: var(--orange); }
+
+/* 4 — первая неделя */
+.week { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 48px; align-items: end; }
+.day { display: flex; flex-direction: column; min-height: 400px; padding: 24px 22px; border-radius: 20px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.day__d { font-family: var(--display); font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -.03em; text-transform: uppercase; }
+.day h3 { margin-top: 18px; font-size: 22px; font-weight: 700; line-height: 1.25; }
+.day p { margin-top: 8px; color: var(--muted); font-size: 18px; line-height: 1.4; }
+.day__lvl { margin-top: auto; padding-top: 18px; }
+.day__lvl small { display: block; color: var(--faint); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.meter { display: flex; gap: 6px; margin-top: 8px; }
+.meter i { width: 30px; height: 10px; border-radius: 2px; background: var(--line); transform: skewX(-20deg); }
+.meter i.on { background: var(--lime); }
+.day--go { background: var(--lime); color: var(--on-lime); box-shadow: 0 30px 60px -30px rgba(200, 255, 47, .6); }
+.day--go p, .day--go .day__lvl small { color: rgba(11, 13, 16, .7); }
+.day--go .meter i.on { background: var(--on-lime); }
+
+/* 5 — структура занятия */
+.ticks { position: relative; height: 30px; margin-top: 34px; color: var(--faint); font-family: var(--display); font-size: 18px; font-weight: 800; }
+.ticks span { position: absolute; bottom: 0; transform: translateX(-50%); }
+.ticks span:first-child { transform: none; }
+.ticks span:last-child { transform: translateX(-100%); }
+.bar { display: flex; height: 108px; margin-top: 10px; border-radius: 18px; overflow: hidden; }
+.bar div { display: flex; align-items: center; padding: 0 24px; font-family: var(--display); font-size: 30px; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; white-space: nowrap; }
+.bar small { margin-left: 12px; font-size: 18px; opacity: .7; }
+.seg-1 { width: 18.18%; background: var(--orange); color: var(--on-lime); }
+.seg-2 { width: 54.55%; background: var(--lime); color: var(--on-lime); }
+.seg-3 { width: 18.18%; background: var(--mint); color: var(--on-lime); }
+.seg-4 { width: 9.09%; background: var(--surface-2); color: var(--text); box-shadow: inset 0 0 0 2px var(--line); }
+.parts { display: grid; grid-template-columns: 18.18fr 54.55fr 18.18fr 9.09fr; gap: 0; margin-top: 30px; }
+.parts li { padding: 0 22px 0 0; }
+.parts li + li { padding-left: 22px; border-left: 1px solid var(--line); }
+.parts h3 { font-family: var(--display); font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+.parts h3::before { content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 10px; border-radius: 3px; background: var(--c); transform: skewX(-12deg); }
+.parts p { margin-top: 10px; color: var(--muted); font-size: 18px; line-height: 1.45; }
+.tips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
+.tips li { padding: 20px 24px; border-radius: 16px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); font-size: 19px; line-height: 1.4; }
+.tips b { display: block; margin-bottom: 6px; color: var(--lime); font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.total { position: absolute; right: 112px; top: 92px; text-align: right; }
+.total b { display: block; font-family: var(--display); font-size: 120px; font-weight: 800; line-height: .9; letter-spacing: -.05em; color: var(--lime); }
+.total small { color: var(--muted); font-size: 18px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+
+/* 6 — новички */
+.s6 { display: grid; grid-template-columns: 1fr 440px; gap: 48px; margin-top: 40px; }
+.say { border-radius: 22px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.say__head, .say__row { display: grid; grid-template-columns: 1fr 1fr; }
+.say__head div { padding: 18px 28px; font-size: 15px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.say__head div:first-child { color: var(--lime); }
+.say__head div:last-child { color: var(--orange); border-left: 1px solid var(--line); }
+.say__row { border-top: 1px solid var(--line); }
+.say__row p { padding: 20px 28px 20px 62px; font-size: 21px; line-height: 1.35; background: no-repeat 26px 23px / 22px; }
+.say__row p:first-child { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c8ff2f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E"); }
+.say__row p:last-child { border-left: 1px solid var(--line); color: var(--muted); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff5c28' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E"); }
+.first { padding: 30px 32px; border-radius: 22px; background: var(--lime); color: var(--on-lime); transform: rotate(1.2deg); box-shadow: 0 30px 60px -30px rgba(200, 255, 47, .6); }
+.first h3 { font-family: var(--display); font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; }
+.first ol { display: grid; gap: 14px; margin-top: 22px; counter-reset: f; }
+.first li { position: relative; padding-left: 46px; font-size: 20px; line-height: 1.4; font-weight: 500; }
+.first li::before { counter-increment: f; content: counter(f); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--on-lime); color: var(--lime); font-family: var(--display); font-size: 16px; font-weight: 800; }
+
+/* 7 — инструменты */
+.tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+.tool { padding: 28px 30px; border-radius: 22px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.tool__ico { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 16px; background: rgba(200, 255, 47, .12); color: var(--lime); }
+.tool__ico svg { width: 30px; height: 30px; }
+.tool h3 { margin-top: 20px; font-family: var(--display); font-size: 28px; font-weight: 800; line-height: 1.05; letter-spacing: -.02em; text-transform: uppercase; }
+.tool p { margin-top: 10px; color: var(--muted); font-size: 19px; line-height: 1.45; }
+.tool p b { color: var(--text); font-weight: 600; }
+.alarm { grid-column: 1 / -1; display: grid; grid-template-columns: 300px 1fr; gap: 36px; align-items: center; padding: 28px 32px; border-radius: 22px; background: linear-gradient(135deg, rgba(255, 92, 40, .2), rgba(255, 92, 40, .05)), var(--surface); box-shadow: inset 0 0 0 1px rgba(255, 92, 40, .5); }
+.alarm h3 { font-family: var(--display); font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; color: var(--orange); }
+.alarm h3 small { display: block; margin-top: 10px; color: var(--muted); font-family: var(--font); font-size: 17px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.alarm ol { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: s; }
+.alarm li { position: relative; padding: 16px 18px 16px 18px; border-radius: 14px; background: rgba(11, 13, 16, .55); font-size: 19px; line-height: 1.35; }
+.alarm li::before { counter-increment: s; content: "0" counter(s); display: block; margin-bottom: 6px; color: var(--orange); font-family: var(--display); font-size: 18px; font-weight: 800; }
+
+/* 8 — финал */
+.s8 { display: grid; grid-template-columns: 1fr 470px; gap: 64px; margin-top: 44px; }
+.check { display: grid; gap: 14px; }
+.check li { display: grid; grid-template-columns: 44px 1fr; gap: 18px; align-items: center; padding: 16px 22px; border-radius: 16px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); font-size: 22px; }
+.check li::before { content: ""; width: 40px; height: 40px; border-radius: 10px; background: var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0d10' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 24px no-repeat; transform: skewX(-8deg); }
+.mentor { padding: 34px 36px; border-radius: 26px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line), 0 40px 80px -40px rgba(0, 0, 0, .9); }
+.mentor small { display: block; color: var(--lime); font-size: 15px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.mentor .ava { width: 112px; height: 112px; margin-top: 22px; font-size: 38px; }
+.mentor h3 { margin-top: 22px; font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; }
+.mentor p { margin-top: 10px; color: var(--muted); font-size: 20px; }
+.mentor blockquote { margin: 24px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-size: 21px; line-height: 1.45; }
+.demo { position: absolute; left: 112px; bottom: 96px; color: var(--faint); font-size: 16px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 48 24"><path d="M2 12h8l4-9 6 18 5-13 4 8h17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3M8 17h6"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></g></symbol>
+  </defs>
+</svg>
+<div class="stage"><div class="deck">
+
+  <!-- 1 -->
+  <section class="slide">
+    <svg class="ecg" viewBox="0 0 1600 230" preserveAspectRatio="none" aria-hidden="true">
+      <path class="ecg__ghost" d="M0 150H1600"/>
+      <path d="M0 150H520L548 150L566 80L592 210L622 20L650 190L670 150H1010L1024 150L1036 124L1050 176L1064 150H1600"/>
+    </svg>
+    <p class="brandrow a"><svg><use href="#logo"/></svg><b>Пульс</b> · студия тренировок · Самара</p>
+    <h1 class="mega a" style="--d:100ms"><span>Добро</span><span>пожаловать</span><span class="lime">в команду</span></h1>
+    <div class="cover-card a" style="--d:240ms">
+      <small>Онбординг тренера</small>
+      <b>Неделя&nbsp;1</b>
+      <p>Правила зала, первые занятия и&nbsp;всё, что нужно знать до&nbsp;самостоятельной группы.</p>
+      <hr>
+      <div class="who"><span class="ava">МС</span><div><strong>Максим Соловьёв</strong><em>старший тренер, твой наставник</em></div></div>
+    </div>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>01</b> / 08</span></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <p class="label a">Кто мы</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">Студия у&nbsp;дома,</span><br><span class="sk lime">а не фабрика фитнеса</span></h2>
+    <ul class="nums">
+      <li class="a" style="--d:180ms"><b>8</b><p>человек максимум в&nbsp;группе — тренер видит каждого</p></li>
+      <li class="a" style="--d:240ms"><b>45–55</b><p>минут длится занятие, без марафонов на&nbsp;два часа</p></li>
+      <li class="a" style="--d:300ms"><b>7–23</b><p>открыты каждый день, утренние группы с&nbsp;7:30</p></li>
+      <li class="a" style="--d:360ms"><b>6</b><p>направлений: от&nbsp;силового старта до&nbsp;йоги</p></li>
+    </ul>
+    <p class="band-note a" style="--d:420ms">Это мы обещаем клиентам на&nbsp;сайте — и&nbsp;держим в&nbsp;зале</p>
+    <div class="band a" style="--d:460ms" aria-hidden="true"><i>Без фанатизма</i><i>Без абонемента на год</i><i>Первая тренировка бесплатно</i><i>Тренер рядом</i><i>Без фанатизма</i></div>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>02</b> / 08</span></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide">
+    <p class="label a">Правила зала</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">Четыре правила, <span>без исключений</span></span></h2>
+    <div class="rules">
+      <div class="rule a" style="--d:160ms"><span class="rule__n">01</span><div><h3>Разминка — всегда</h3><p>Даже если группа опоздала и&nbsp;времени мало. Сокращаем основную часть, а&nbsp;не&nbsp;разминку.</p></div></div>
+      <div class="rule a" style="--d:220ms"><span class="rule__n">02</span><div><h3>Техника важнее веса</h3><p>Первый месяц новичок работает без рекордов. Вес растёт, только когда движение стабильное.</p></div></div>
+      <div class="rule rule--hot a" style="--d:280ms"><span class="rule__n">03</span><div><h3>Спроси про самочувствие</h3><p>Перед занятием: травмы, давление, как спал. Диагнозов не&nbsp;ставим — при сомнениях советуем сходить к&nbsp;врачу.</p></div></div>
+      <div class="rule a" style="--d:340ms"><span class="rule__n">04</span><div><h3>Без стыда</h3><p>Не сравниваем людей между собой и&nbsp;не&nbsp;комментируем фигуру и&nbsp;вес. Хвалим за&nbsp;технику и&nbsp;регулярность.</p></div></div>
+    </div>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>03</b> / 08</span></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide">
+    <p class="label a">Первая неделя</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">От ассистента <span>до своей группы</span></span></h2>
+    <ol class="week">
+      <li class="day a" style="--d:160ms"><span class="day__d">Пн</span><h3>Знакомство</h3><p>Зал, инвентарь, CRM, инструктаж по&nbsp;технике безопасности</p><div class="day__lvl"><small>Самостоятельность</small><div class="meter"><i class="on"></i><i></i><i></i><i></i><i></i></div></div></li>
+      <li class="day a" style="--d:220ms"><span class="day__d">Вт</span><h3>Ассистент</h3><p>Помогаешь наставнику на&nbsp;двух группах, страхуешь, поправляешь технику</p><div class="day__lvl"><small>Самостоятельность</small><div class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div></li>
+      <li class="day a" style="--d:280ms"><span class="day__d">Ср</span><h3>Разминка и&nbsp;заминка</h3><p>Ведёшь начало и&nbsp;конец занятия, наставник рядом</p><div class="day__lvl"><small>Самостоятельность</small><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div></li>
+      <li class="day a" style="--d:340ms"><span class="day__d">Чт</span><h3>Целое занятие</h3><p>Проводишь «Силовой старт», наставник наблюдает и&nbsp;не&nbsp;вмешивается</p><div class="day__lvl"><small>Самостоятельность</small><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div></li>
+      <li class="day day--go a" style="--d:400ms"><span class="day__d">Пт</span><h3>Своя группа</h3><p>Разбор недели с&nbsp;наставником и&nbsp;первая группа в&nbsp;расписании</p><div class="day__lvl"><small>Самостоятельность</small><div class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></li>
+    </ol>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>04</b> / 08</span></div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <p class="label a">Структура занятия</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">Каждое занятие —<br><span>по одной схеме</span></span></h2>
+    <div class="total a" style="--d:160ms"><b>55</b><small>минут</small></div>
+    <div class="ticks a" style="--d:200ms"><span style="left:0">0</span><span style="left:18.18%">10</span><span style="left:72.73%">40</span><span style="left:90.91%">50</span><span style="left:100%">55</span></div>
+    <div class="bar a" style="--d:240ms"><div class="seg-1">10<small>мин</small></div><div class="seg-2">30<small>мин</small></div><div class="seg-3">10<small>мин</small></div><div class="seg-4">5</div></div>
+    <ol class="parts">
+      <li class="a" style="--c:var(--orange);--d:300ms"><h3>Разминка</h3><p>Суставы, пульс вверх, движения из&nbsp;основной части без веса</p></li>
+      <li class="a" style="--c:var(--lime);--d:350ms"><h3>Основная часть</h3><p>3–4 упражнения или круговая. Показываешь каждое, потом ходишь по&nbsp;залу и&nbsp;поправляешь технику. У&nbsp;новичков — облегчённый вариант.</p></li>
+      <li class="a" style="--c:var(--mint);--d:400ms"><h3>Заминка</h3><p>Растяжка, дыхание, пульс вниз</p></li>
+      <li class="a" style="--c:var(--faint);--d:450ms"><h3>Итог</h3><p>Что получилось, что дома</p></li>
+    </ol>
+    <ul class="tips">
+      <li class="a" style="--d:500ms"><b>Опоздали</b>Встраиваешь человека в&nbsp;разминку на&nbsp;ходу — группу не&nbsp;задерживаем</li>
+      <li class="a" style="--d:550ms"><b>Новое упражнение</b>Сначала показываешь сам, потом объясняешь, потом смотришь у&nbsp;каждого</li>
+      <li class="a" style="--d:600ms"><b>Время</b>Держишь по&nbsp;таймеру на&nbsp;стене, а&nbsp;не&nbsp;по&nbsp;ощущениям</li>
+    </ul>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>05</b> / 08</span></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <p class="label a">Новички</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">Слова, после которых <span>возвращаются</span></span></h2>
+    <div class="s6">
+      <div class="say a" style="--d:180ms">
+        <div class="say__head"><div>Говорим</div><div>Не говорим</div></div>
+        <div class="say__row"><p>«Отлично держишь спину — запомни это положение»</p><p>«Давай, не ленись»</p></div>
+        <div class="say__row"><p>«Сделаем 8 повторов вместо 12 — это нормально»</p><p>«Все смогли — и&nbsp;ты сможешь»</p></div>
+        <div class="say__row"><p>«Как колено после прошлого раза?»</p><p>«Терпи, это мышцы растут»</p></div>
+        <div class="say__row"><p>«В четверг попробуем добавить вес»</p><p>«Тебе бы похудеть сначала»</p></div>
+      </div>
+      <div class="first a" style="--d:280ms">
+        <h3>Первое занятие новичка</h3>
+        <ol><li>Запомни имя и&nbsp;спроси, зачем пришёл</li><li>Нагрузка ниже, чем у&nbsp;группы, — первый раз должен быть в&nbsp;радость</li><li>После занятия — одна конкретная похвала</li><li>Скажи, что будем делать в&nbsp;следующий раз</li></ol>
+      </div>
+    </div>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>06</b> / 08</span></div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide">
+    <p class="label a">Инструменты</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">Чем пользуемся <span>каждый день</span></span></h2>
+    <div class="tools">
+      <div class="tool a" style="--d:160ms"><span class="tool__ico"><svg><use href="#i-cal"/></svg></span><h3>CRM</h3><p>Расписание и&nbsp;записи. <b>Посещения отмечаешь в&nbsp;день занятия</b>, а&nbsp;не&nbsp;в&nbsp;конце недели.</p></div>
+      <div class="tool a" style="--d:220ms"><span class="tool__ico"><svg><use href="#i-chat"/></svg></span><h3>Рабочий чат</h3><p>Замены, вопросы, новости. <b>Отвечаем в&nbsp;течение двух часов</b> в&nbsp;рабочее время.</p></div>
+      <div class="tool a" style="--d:280ms"><span class="tool__ico"><svg><use href="#i-doc"/></svg></span><h3>Журнал инструктажа</h3><p>Новый клиент <b>расписывается до&nbsp;первого занятия</b>. Без подписи — не&nbsp;допускаем.</p></div>
+      <div class="alarm a" style="--d:340ms">
+        <h3>Если травма<small>Порядок висит у&nbsp;аптечки на&nbsp;ресепшене</small></h3>
+        <ol><li>Остановить занятие для&nbsp;этого человека</li><li>Оказать первую помощь</li><li>При&nbsp;необходимости — звонок 112</li><li>Сообщить администратору и&nbsp;записать в&nbsp;журнал</li></ol>
+      </div>
+    </div>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>07</b> / 08</span></div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide">
+    <p class="label a">Итог недели</p>
+    <h2 class="h2 a" style="--d:100ms"><span class="sk">К пятнице <span>ты&nbsp;уже</span></span></h2>
+    <div class="s8">
+      <ul class="check">
+        <li class="a" style="--d:160ms">знаешь зал, инвентарь и&nbsp;где лежит аптечка</li>
+        <li class="a" style="--d:210ms">провёл разминку и&nbsp;заминку для&nbsp;группы</li>
+        <li class="a" style="--d:260ms">провёл целое занятие под&nbsp;наблюдением</li>
+        <li class="a" style="--d:310ms">отмечаешь посещения в&nbsp;CRM в&nbsp;тот же день</li>
+        <li class="a" style="--d:360ms">знаешь порядок действий при&nbsp;травме</li>
+      </ul>
+      <div class="mentor a" style="--d:260ms">
+        <small>Вопросы — наставнику</small>
+        <span class="ava">МС</span>
+        <h3>Максим Соловьёв</h3>
+        <p>старший тренер · силовые · 9&nbsp;лет в&nbsp;профессии</p>
+        <blockquote>«Глупых вопросов в&nbsp;первую неделю не&nbsp;бывает. Пиши в&nbsp;рабочий чат — разберёмся».</blockquote>
+      </div>
+    </div>
+    <p class="demo">Демо-презентация для портфолио: студия, люди и&nbsp;правила вымышленные.</p>
+    <div class="foot"><span class="foot__brand"><svg><use href="#logo"/></svg>Пульс · онбординг тренера</span><span class="foot__n"><b>08</b> / 08</span></div>
+  </section>
+
+</div></div>
+<script src="../deck.js"></script>
+</body>
+</html>

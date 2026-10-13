@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1420">
+<meta name="color-scheme" content="dark">
+<title>Меридиан — подбор квартиры</title>
+<meta name="description" content="Приложение агентства «Меридиан»: подбор квартир с планировками, избранное и сравнение, ипотечный калькулятор, запись на просмотр. Демо для портфолио.">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-app="realty">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M12 5l3 7-3 7-3-7z" stroke-linejoin="round"/></g></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></g></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+    <symbol id="i-heart-f" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h1M12 12h1M15.5 12h0M8.5 16h1M12 16h1M15.5 16h0"/></g></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2.5 2.5M14 9l2 2"/></g></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <main class="screens">
+
+    <!-- Подбор -->
+    <section class="screen" id="s-search" aria-labelledby="h-search">
+      <header class="top">
+        <div><p class="top__over"><svg class="top__logo"><use href="#logo"/></svg>Меридиан · Краснодар</p><h1 class="title" id="h-search">Подбор <em>квартиры</em></h1></div>
+      </header>
+      <div class="chips" id="rooms" role="group" aria-label="Комнат"></div>
+      <div class="budget">
+        <div class="budget__row"><label for="budget">Бюджет</label><output id="budget-out" for="budget"></output></div>
+        <input type="range" id="budget" min="4" max="12" step="0.5" value="12">
+      </div>
+      <div class="list-head"><p id="found"></p><button class="sort" type="button" id="sort"><svg><use href="#i-sort"/></svg><span id="sort-label">Сначала дешевле</span></button></div>
+      <ul class="flats" id="flats"></ul>
+    </section>
+
+    <!-- Квартира -->
+    <section class="screen" id="s-flat" data-tab="search" aria-labelledby="flat-title">
+      <div class="bar"><button class="back" type="button" data-back><svg><use href="#i-back"/></svg>Назад</button><button class="fav fav--lg" type="button" id="flat-fav" aria-pressed="false" aria-label="В избранное"><svg><use href="#i-heart"/></svg></button></div>
+      <figure class="plan" id="flat-plan"></figure>
+      <p class="eyebrow" id="flat-eyebrow"></p>
+      <h1 class="flat__title" id="flat-title"></h1>
+      <p class="flat__addr" id="flat-addr"></p>
+      <div class="flat__price"><b id="flat-price"></b><span id="flat-ppm"></span></div>
+      <button class="mort-link" type="button" id="flat-mort"><svg><use href="#i-calc"/></svg><span id="flat-mort-text"></span><svg><use href="#i-chevron"/></svg></button>
+      <dl class="params" id="flat-params"></dl>
+      <p class="flat__text" id="flat-text"></p>
+      <div class="agent"><span class="agent__ava" aria-hidden="true">ОВ</span><div><b>Олег Воронин</b><span>агент · отвечает в течение часа</span></div></div>
+      <button class="btn btn--gold btn--block" type="button" id="flat-view"><svg><use href="#i-key"/></svg>Записаться на просмотр</button>
+    </section>
+
+    <!-- Избранное -->
+    <section class="screen" id="s-fav" aria-labelledby="h-fav">
+      <header class="top"><div><p class="top__over" id="fav-sum"></p><h1 class="title" id="h-fav">Избранное</h1></div></header>
+      <div id="fav-box"></div>
+    </section>
+
+    <!-- Ипотека -->
+    <section class="screen" id="s-mort" aria-labelledby="h-mort">
+      <header class="top"><div><p class="top__over">Ежемесячный платёж</p><h1 class="title" id="h-mort">Ипотека</h1></div></header>
+      <section class="pay" aria-live="polite">
+        <svg class="donut" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="48" class="donut__bg" pathLength="100"/><circle cx="60" cy="60" r="48" class="donut__fg" id="donut-fg" pathLength="100"/></svg>
+        <div class="pay__main"><span>в месяц</span><b id="m-pay"></b></div>
+      </section>
+      <ul class="legend">
+        <li><i class="legend__a"></i>Кредит<b id="m-credit"></b></li>
+        <li><i class="legend__b"></i>Переплата<b id="m-over"></b></li>
+      </ul>
+      <div class="calc">
+        <label class="rng"><span>Стоимость квартиры<output id="o-price"></output></span><input type="range" id="m-price" min="3" max="20" step="0.1" value="8.9"></label>
+        <label class="rng"><span>Первый взнос<output id="o-first"></output></span><input type="range" id="m-first" min="10" max="90" step="5" value="20"></label>
+        <label class="rng"><span>Срок<output id="o-term"></output></span><input type="range" id="m-term" min="5" max="30" step="1" value="20"></label>
+        <label class="rate"><span>Ставка, % годовых</span><input type="text" id="m-rate" value="14" inputmode="decimal" autocomplete="off" aria-describedby="rate-hint"></label>
+      </div>
+      <p class="fine" id="rate-hint">Ставка — от 1 до 40%. Расчёт примерный и&nbsp;не&nbsp;является офертой. Ставку и&nbsp;условия кредита определяет банк после рассмотрения заявки.</p>
+      <button class="btn btn--line btn--block" type="button" id="m-match">Квартиры под этот бюджет</button>
+    </section>
+
+    <!-- Заявки -->
+    <section class="screen" id="s-req" aria-labelledby="h-req">
+      <header class="top"><div><p class="top__over">Просмотры и звонки</p><h1 class="title" id="h-req">Заявки</h1></div></header>
+      <ul class="reqs" id="reqs"></ul>
+      <section class="howto" aria-labelledby="howto-h"><h2 class="sect" id="howto-h">Как проходит просмотр</h2><ol><li><b>Звонок агента</b>Перезвонит в течение часа и подтвердит время.</li><li><b>Встреча на месте</b>Покажет квартиру и документы на неё — выписку ЕГРН и план БТИ.</li><li><b>Решение без спешки</b>Вопросы после просмотра — в чате или по телефону.</li></ol></section>
+      <button class="link-btn" type="button" data-sheet="privacy">Как мы храним ваши данные</button>
+    </section>
+
+    <!-- UI-кит для портфолио -->
+    <section class="screen kit" id="s-kit" aria-label="Компоненты">
+      <div class="kit__grid">
+        <div class="kit__box"><p class="kit__cap">Кнопки</p><div class="kit__row"><button class="btn btn--gold" type="button">Записаться</button><button class="btn btn--line" type="button">Сравнить</button></div><div class="chips chips--kit"><button class="chip is-on" type="button">Все</button><button class="chip" type="button">Студии</button><button class="chip" type="button">1К</button><button class="chip" type="button">2К</button></div></div>
+        <div class="kit__box"><p class="kit__cap">Поля</p><label class="rng"><span>Первый взнос<output>20% · 1,8 млн</output></span><input type="range" min="10" max="90" value="20" tabindex="-1"></label><div class="kit__row" style="margin-top:12px"><span class="pill pill--ok">Подтверждено</span><span class="pill">Ждёт агента</span></div></div>
+        <div class="kit__box kit__box--wide"><p class="kit__cap">Карточка квартиры</p><ul class="flats" id="kit-flat"></ul></div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="tabs" aria-label="Разделы">
+    <button type="button" data-go="search"><svg><use href="#i-search"/></svg>Подбор</button>
+    <button type="button" data-go="fav"><svg><use href="#i-heart"/></svg>Избранное<i class="tabs__count" id="fav-count" hidden></i></button>
+    <button type="button" data-go="mort"><svg><use href="#i-calc"/></svg>Ипотека</button>
+    <button type="button" data-go="req"><svg><use href="#i-cal"/></svg>Заявки</button>
+  </nav>
+
+  <!-- Лист: просмотр -->
+  <div class="sheet-wrap" id="sh-view">
+    <div class="sheet-bg" data-close></div>
+    <form class="sheet" role="dialog" aria-modal="true" aria-labelledby="view-title" id="view-form" novalidate>
+      <div class="sheet__grip"></div>
+      <p class="eyebrow">Просмотр с агентом</p>
+      <h2 class="sheet__title" id="view-title"></h2>
+      <p class="sheet__cap">День</p>
+      <div class="slots" id="v-days" role="radiogroup" aria-label="День"></div>
+      <p class="sheet__cap">Время</p>
+      <div class="slots" id="v-times" role="radiogroup" aria-label="Время"></div>
+      <label class="field"><span>Имя</span><input id="v-name" autocomplete="given-name" placeholder="Как к вам обращаться"></label>
+      <label class="field"><span>Телефон</span><input id="v-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></label>
+      <label class="consent"><input type="checkbox" id="v-agree"><span>Согласен на&nbsp;обработку персональных данных для связи по&nbsp;заявке — <button type="button" class="inline-link" data-sheet="privacy">политика конфиденциальности</button></span></label>
+      <p class="field__err" id="v-err" role="alert"></p>
+      <button class="btn btn--gold btn--block" type="submit">Отправить заявку</button>
+    </form>
+  </div>
+
+  <!-- Лист: политика -->
+  <div class="sheet-wrap" id="sh-privacy">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="priv-title">Политика конфиденциальности</h2>
+      <div class="doc">
+        <p>Это демонстрационное приложение. Заявки никуда не&nbsp;отправляются: ни&nbsp;агенту, ни&nbsp;на&nbsp;сервер.</p>
+        <p><b>Что хранится.</b> Избранные квартиры, параметры расчёта и&nbsp;заявки на&nbsp;просмотр с&nbsp;именем и&nbsp;телефоном — только в&nbsp;памяти браузера на&nbsp;этом устройстве.</p>
+        <p><b>Как удалить.</b> Отмените заявку на&nbsp;экране «Заявки» или очистите данные сайта в&nbsp;настройках браузера.</p>
+        <p><b>В рабочей версии</b> здесь будет политика агентства: оператор, цели обработки, срок хранения заявок и&nbsp;контакты для обращений по&nbsp;152-ФЗ. Согласие на&nbsp;обработку — отдельной галочкой, как в&nbsp;форме выше.</p>
+      </div>
+      <button class="btn btn--line btn--block" type="button" id="priv-ok">Понятно</button>
+    </div>
+  </div>
+</div>
+
+<p class="desk-note">Демо мобильного приложения «Меридиан» · откройте на телефоне и установите на главный экран</p>
+<script src="../core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

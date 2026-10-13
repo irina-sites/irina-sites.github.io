@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10">
+<meta name="color-scheme" content="dark">
+<title>Пульс — запись и прогресс</title>
+<meta name="description" content="Приложение клиента студии «Пульс»: запись на групповые тренировки, пропуск, абонемент и прогресс. Демо для портфолио.">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-app="pulse">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo" viewBox="0 0 48 24"><path d="M2 12h8l4-9 6 18 5-13 4 8h17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.5"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.5"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.5"/><path d="M14 14h2.5v2.5H14zM18 18h2.5v2.5H18zM14 18.5h1.5M20.5 14v2" stroke-linecap="round"/></g></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V12M10 20V6M15 20v-9M20 20V4"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></g></symbol>
+    <symbol id="i-snow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/></g></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1.5A3.5 3.5 0 0 0 7.5 11M17 6h3v1.5a3.5 3.5 0 0 1-3.5 3.5M12 14v3M8 20h8M9.5 17h5"/></g></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <main class="screens">
+
+    <!-- Главная -->
+    <section class="screen" id="s-home" aria-labelledby="h-home">
+      <header class="top">
+        <div><p class="top__date" id="home-date"></p><h1 class="top__title" id="h-home">Привет, Аня</h1></div>
+        <button class="ava" type="button" data-sheet="profile" aria-label="Профиль">АЛ</button>
+      </header>
+      <div id="home-next"></div>
+      <section class="card sub" aria-label="Абонемент">
+        <div class="sub__head">
+          <div><p class="eyebrow">Абонемент</p><h2 class="h3">8 тренировок</h2></div>
+          <p class="sub__left"><b id="sub-left">5</b><span>из 8</span></p>
+        </div>
+        <div class="segs" id="sub-segs" aria-hidden="true"></div>
+        <p class="muted small" id="sub-until"></p>
+      </section>
+      <section class="card week" aria-label="Эта неделя">
+        <div class="week__head"><h2 class="h3">Эта неделя</h2><p class="week__goal" id="week-goal"></p></div>
+        <ol class="week__days" id="week-days"></ol>
+      </section>
+      <button class="btn btn--lime btn--block" type="button" data-go="schedule"><svg><use href="#i-cal"/></svg>Записаться на тренировку</button>
+    </section>
+
+    <!-- Расписание -->
+    <section class="screen" id="s-schedule" aria-labelledby="h-schedule">
+      <header class="top"><div><p class="top__date" id="sch-month"></p><h1 class="top__title" id="h-schedule">Расписание</h1></div></header>
+      <div class="dates" id="dates" role="tablist" aria-label="День"></div>
+      <div class="chips" id="filters" role="group" aria-label="Направление"></div>
+      <ul class="classes" id="classes"></ul>
+    </section>
+
+    <!-- Пропуск -->
+    <section class="screen" id="s-pass" aria-labelledby="h-pass">
+      <header class="top"><div><p class="top__date">Карта № 0247</p><h1 class="top__title" id="h-pass">Пропуск</h1></div></header>
+      <section class="pass">
+        <div class="pass__code" id="qr" role="img" aria-label="Код пропуска"></div>
+        <p class="pass__hint">Покажите код на ресепшене</p>
+        <div class="pass__who"><span class="ava ava--sm" aria-hidden="true">АЛ</span><div><b>Аня Лебедева</b><span id="pass-status"></span></div></div>
+      </section>
+      <div class="pass__acts">
+        <button class="btn btn--ghost" type="button" data-sheet="freeze"><svg><use href="#i-snow"/></svg><span id="freeze-label">Заморозить</span></button>
+        <button class="btn btn--ghost" type="button" data-go="schedule"><svg><use href="#i-cal"/></svg>Записаться</button>
+      </div>
+      <h2 class="h3 sect">Последние посещения</h2>
+      <ul class="visits" id="visits"></ul>
+    </section>
+
+    <!-- Прогресс -->
+    <section class="screen" id="s-progress" aria-labelledby="h-progress">
+      <header class="top"><div><p class="top__date">За последние 30 дней</p><h1 class="top__title" id="h-progress">Прогресс</h1></div></header>
+      <ul class="stats">
+        <li><b>11</b><span>тренировок</span></li>
+        <li><b>605</b><span>минут</span></li>
+        <li class="stats__hot"><b>4</b><span>недели подряд</span></li>
+      </ul>
+      <section class="card">
+        <div class="week__head"><h2 class="h3">По неделям</h2><p class="week__goal">цель — 3</p></div>
+        <div class="bars" id="bars" role="img" aria-label="Тренировки за 8 недель: 2, 3, 2, 3, 3, 2, 3 и 1 на этой неделе"></div>
+      </section>
+      <div class="week__head sect"><h2 class="h3">Личные рекорды</h2><button class="link" type="button" data-sheet="record"><svg><use href="#i-plus"/></svg>Добавить</button></div>
+      <ul class="records" id="records"></ul>
+      <p class="muted small note">Рекорды видите только вы — они хранятся на этом телефоне.</p>
+    </section>
+
+    <!-- UI-кит для портфолио -->
+    <section class="screen kit" id="s-kit" data-tab="none" aria-label="Компоненты">
+      <div class="kit__grid">
+        <div class="kit__box"><p class="kit__cap">Кнопки</p><div class="kit__row"><button class="btn btn--lime" type="button">Записаться</button><button class="btn btn--ghost" type="button">Отменить</button></div><div class="kit__row"><button class="cls__btn" type="button">Записаться</button><button class="cls__btn is-booked" type="button"><svg><use href="#i-check"/></svg>Вы идёте</button><button class="cls__btn is-wait" type="button">Лист ожидания</button></div></div>
+        <div class="kit__box"><p class="kit__cap">Фильтры и даты</p><div class="chips chips--wrap"><button class="chip is-on" type="button">Все</button><button class="chip" type="button">Силовые</button><button class="chip" type="button">Йога</button><button class="chip" type="button">Бокс</button></div><div class="dates dates--kit"><button class="date" type="button"><span>пн</span><b>12</b></button><button class="date" type="button"><span>вт</span><b>13</b></button><button class="date is-on" type="button"><span>ср</span><b>14</b></button><button class="date" type="button"><span>чт</span><b>15</b></button></div></div>
+        <div class="kit__box kit__box--wide"><p class="kit__cap">Карточка занятия</p><ul class="classes" id="kit-class"></ul></div>
+        <div class="kit__box"><p class="kit__cap">Абонемент</p><div class="segs"><i class="is-used"></i><i class="is-used"></i><i class="is-used"></i><i></i><i></i><i></i><i></i><i></i></div><p class="muted small" style="margin-top:10px">5 из 8 · до 14 ноября</p></div>
+        <div class="kit__box"><p class="kit__cap">Показатели</p><ul class="stats stats--kit"><li><b>11</b><span>тренировок</span></li><li class="stats__hot"><b>4</b><span>недели</span></li></ul></div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="tabs" aria-label="Разделы">
+    <button type="button" data-go="home"><svg><use href="#i-home"/></svg>Главная</button>
+    <button type="button" data-go="schedule"><svg><use href="#i-cal"/></svg>Расписание</button>
+    <button type="button" data-go="pass"><svg><use href="#i-qr"/></svg>Пропуск</button>
+    <button type="button" data-go="progress"><svg><use href="#i-chart"/></svg>Прогресс</button>
+  </nav>
+
+  <!-- Лист: запись -->
+  <div class="sheet-wrap" id="sh-book">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="book-title">
+      <div class="sheet__grip"></div>
+      <p class="eyebrow" id="book-when"></p>
+      <h2 class="sheet__title" id="book-title"></h2>
+      <ul class="facts" id="book-facts"></ul>
+      <p class="callout" id="book-note"></p>
+      <button class="btn btn--lime btn--block" type="button" id="book-ok">Записаться</button>
+      <button class="btn btn--text btn--block" type="button" data-close>Не сейчас</button>
+    </div>
+  </div>
+
+  <!-- Лист: отмена -->
+  <div class="sheet-wrap" id="sh-cancel">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cancel-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="cancel-title">Отменить запись?</h2>
+      <p class="sheet__text" id="cancel-text"></p>
+      <button class="btn btn--danger btn--block" type="button" id="cancel-ok">Отменить запись</button>
+      <button class="btn btn--text btn--block" type="button" data-close>Оставить</button>
+    </div>
+  </div>
+
+  <!-- Лист: заморозка -->
+  <div class="sheet-wrap" id="sh-freeze">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="freeze-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="freeze-title">Заморозка абонемента</h2>
+      <p class="sheet__text">Срок действия сдвинется на&nbsp;столько же дней. Бесплатно, до&nbsp;14 дней за&nbsp;абонемент.</p>
+      <div class="stepper" role="group" aria-label="Количество дней">
+        <button type="button" id="fz-minus" aria-label="Меньше">−</button>
+        <output id="fz-days" aria-live="polite">7</output>
+        <button type="button" id="fz-plus" aria-label="Больше">+</button>
+      </div>
+      <p class="stepper__cap" id="fz-cap"></p>
+      <button class="btn btn--lime btn--block" type="button" id="fz-ok">Заморозить</button>
+      <button class="btn btn--text btn--block" type="button" data-close>Отмена</button>
+    </div>
+  </div>
+
+  <!-- Лист: новый рекорд -->
+  <div class="sheet-wrap" id="sh-record">
+    <div class="sheet-bg" data-close></div>
+    <form class="sheet" role="dialog" aria-modal="true" aria-labelledby="rec-title" id="rec-form" novalidate>
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="rec-title">Новый результат</h2>
+      <label class="field"><span>Упражнение</span>
+        <select id="rec-ex"></select>
+      </label>
+      <label class="field"><span id="rec-unit">Вес, кг</span>
+        <input id="rec-val" inputmode="decimal" autocomplete="off" placeholder="Например, 55">
+      </label>
+      <p class="field__err" id="rec-err" role="alert"></p>
+      <button class="btn btn--lime btn--block" type="submit">Сохранить</button>
+      <button class="btn btn--text btn--block" type="button" data-close>Отмена</button>
+    </form>
+  </div>
+
+  <!-- Лист: профиль -->
+  <div class="sheet-wrap" id="sh-profile">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="prof-title">
+      <div class="sheet__grip"></div>
+      <div class="prof"><span class="ava ava--lg" aria-hidden="true">АЛ</span><div><h2 class="sheet__title" id="prof-title">Аня Лебедева</h2><p class="muted small">в «Пульсе» с марта 2026</p></div></div>
+      <ul class="menu">
+        <li><button type="button" data-go="pass">Абонемент и пропуск<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" data-install>Установить на телефон<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" data-sheet="privacy">Политика конфиденциальности<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" class="is-danger" id="wipe">Удалить данные с устройства</button></li>
+      </ul>
+      <p class="muted small note"><svg class="note__logo"><use href="#logo"/></svg>Демо-приложение для портфолио: студия, расписание и&nbsp;люди вымышленные.</p>
+    </div>
+  </div>
+
+  <!-- Лист: политика -->
+  <div class="sheet-wrap" id="sh-privacy">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="priv-title">Политика конфиденциальности</h2>
+      <div class="doc">
+        <p>Это демонстрационное приложение. Оно не&nbsp;передаёт данные ни&nbsp;на&nbsp;сервер, ни&nbsp;третьим лицам.</p>
+        <p><b>Что хранится.</b> Ваши записи на&nbsp;занятия, заморозка абонемента и&nbsp;личные рекорды — в&nbsp;памяти браузера на&nbsp;этом устройстве.</p>
+        <p><b>Как удалить.</b> Профиль → «Удалить данные с&nbsp;устройства» или очистка данных сайта в&nbsp;настройках браузера.</p>
+        <p><b>В рабочей версии</b> здесь будет полный текст политики студии: оператор, цели, сроки хранения и&nbsp;контакты для обращений по&nbsp;152-ФЗ.</p>
+      </div>
+      <button class="btn btn--ghost btn--block" type="button" data-sheet="profile">Назад</button>
+    </div>
+  </div>
+</div>
+
+<p class="desk-note">Демо мобильного приложения «Пульс» · откройте на телефоне и установите на главный экран</p>
+<script src="../core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>СТАТУС — вебинар «Как вернуть деньги за товар»</title>
+<meta name="description" content="Слайды обучающего вебинара юридической компании «Статус»: случаи возврата, сроки, претензия, сроки ответа продавца, неустойка и штраф. 9 слайдов. Демо для портфолио.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../law/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../deck.css">
+<style>
+:root {
+  --page: #d6cfc1; --bg: #f3efe6; --text: #1b1d24; --muted: #5d5b55; --faint: #8d897f;
+  --wine: #6f2232; --wine-2: #4d1523; --gold: #b08a4a; --gold-ink: #7a5c2a; --sheet: #fffdf8; --paper2: #ebe5d8;
+  --line: #d9d2c3; --accent: #6f2232;
+  --font: "Inter", system-ui, sans-serif; --display: "Playfair Display", Georgia, serif;
+}
+.deck { background: radial-gradient(900px 600px at 100% -10%, rgba(176, 138, 74, .16), transparent 60%), repeating-linear-gradient(0deg, rgba(111, 34, 50, .025) 0 1px, transparent 1px 5px), var(--bg); }
+.slide { font-size: 22px; line-height: 1.5; }
+.slide::before { content: ""; position: absolute; left: 56px; top: 0; bottom: 0; width: 2px; background: rgba(111, 34, 50, .18); }
+.foot { position: absolute; left: 112px; right: 112px; bottom: 44px; display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--line); color: var(--faint); font-size: 16px; font-weight: 500; }
+.foot b { color: var(--text); font-family: var(--display); font-weight: 700; letter-spacing: .14em; }
+.foot__n { font-family: var(--display); font-style: italic; color: var(--wine); font-size: 20px; }
+.src { position: absolute; left: 112px; bottom: 100px; color: var(--faint); font-size: 15px; }
+
+.label { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px; color: var(--gold-ink); font-size: 16px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.label::before { content: "§"; color: var(--wine); font-family: var(--display); font-size: 24px; letter-spacing: 0; }
+.h1 { font-family: var(--display); font-size: 86px; font-weight: 600; line-height: 1.04; letter-spacing: -.015em; }
+.h2 { font-family: var(--display); font-size: 60px; font-weight: 600; line-height: 1.08; letter-spacing: -.01em; }
+.h1 em, .h2 em { font-style: italic; font-weight: 500; color: var(--wine); }
+.lead { margin-top: 24px; color: var(--muted); font-size: 26px; }
+.art { color: var(--wine); font-size: 16px; font-weight: 600; letter-spacing: .04em; }
+
+/* 1 */
+.s1 { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; align-items: center; height: 100%; padding-bottom: 60px; }
+.speaker { display: flex; align-items: center; gap: 22px; margin-top: 50px; padding-top: 28px; border-top: 2px solid var(--text); }
+.speaker .mono { display: grid; place-items: center; width: 96px; height: 96px; flex: none; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--line), inset 0 0 0 7px var(--sheet), inset 0 0 0 8px rgba(176, 138, 74, .6); font-family: var(--display); font-size: 40px; font-style: italic; color: var(--wine); }
+.speaker b { display: block; font-family: var(--display); font-size: 30px; }
+.speaker span { color: var(--muted); font-size: 20px; }
+.ticket { padding: 40px; background: var(--wine); color: #f3efe6; box-shadow: 0 40px 80px -40px rgba(27, 29, 36, .6); transform: rotate(1.5deg); }
+.ticket small { display: block; color: #e3c48d; font-size: 16px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.ticket b { display: block; margin-top: 12px; font-family: var(--display); font-size: 54px; font-weight: 600; line-height: 1; }
+.ticket p { margin-top: 10px; font-size: 22px; opacity: .85; }
+.ticket hr { margin: 26px 0; border: 0; border-top: 1px dashed rgba(243, 239, 230, .4); }
+.ticket ul { display: grid; gap: 10px; font-size: 20px; }
+.ticket li::before { content: "— "; color: #e3c48d; }
+
+/* 2 */
+.plan { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 56px; border-top: 2px solid var(--text); }
+.plan li { padding: 28px 22px 0 0; }
+.plan li + li { padding-left: 22px; border-left: 1px solid var(--line); }
+.plan .plan__n { display: block; margin: 0; font-family: var(--display); font-size: 88px; font-style: italic; line-height: 1; color: var(--gold); }
+.plan b { display: block; margin-top: 18px; font-family: var(--display); font-size: 27px; line-height: 1.2; }
+.plan span { display: block; margin-top: 8px; color: var(--muted); font-size: 18px; }
+.abbr { position: absolute; left: 112px; right: 112px; bottom: 110px; padding: 20px 26px; background: var(--sheet); box-shadow: inset 3px 0 0 var(--wine); font-size: 20px; color: var(--muted); }
+.abbr b { color: var(--text); }
+
+/* 3 */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin-top: 40px; }
+.case { padding: 34px 36px; background: var(--sheet); box-shadow: 0 1px 2px rgba(27, 29, 36, .06), 0 24px 48px -30px rgba(27, 29, 36, .5); }
+.case--wine { background: var(--wine); color: #f3efe6; }
+.case--wine .art { color: #e3c48d; }
+.case h3 { margin-top: 10px; font-family: var(--display); font-size: 40px; line-height: 1.15; }
+.case ul { display: grid; gap: 14px; margin-top: 26px; }
+.case li { position: relative; padding-left: 28px; font-size: 23px; }
+.two .case { padding: 36px 42px 38px; }
+.hint { display: flex; gap: 22px; align-items: baseline; margin-top: 30px; font-size: 22px; color: var(--muted); }
+.hint b { flex: none; color: var(--gold-ink); font-size: 16px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.hint em { font-style: normal; color: var(--text); font-weight: 600; }
+.case li::before { content: ""; position: absolute; left: 0; top: .6em; width: 12px; height: 2px; background: currentColor; opacity: .7; }
+
+/* 4 */
+.tl { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 78px; }
+.tl::before { content: ""; position: absolute; left: 0; right: 0; top: -34px; height: 2px; background: var(--text); }
+.tl li { position: relative; }
+.tl li::before { content: ""; position: absolute; left: 0; top: -44px; width: 20px; height: 20px; border: 2px solid var(--text); border-radius: 50%; background: var(--bg); }
+.tl li:nth-child(4)::before { background: var(--wine); border-color: var(--wine); }
+.tl b { display: block; font-family: var(--display); font-size: 60px; font-weight: 600; line-height: 1; color: var(--wine); }
+.tl p { margin-top: 14px; font-size: 21px; font-weight: 500; }
+.tl .art { display: block; margin-top: 10px; }
+
+.nope { display: grid; grid-template-columns: 300px 1fr; gap: 14px 40px; margin-top: 44px; padding: 28px 34px; background: var(--sheet); box-shadow: inset 4px 0 0 var(--wine); }
+.nope h3 { grid-row: span 2; font-family: var(--display); font-size: 30px; line-height: 1.15; }
+.nope h3 small { display: block; margin-top: 10px; color: var(--wine); font-family: var(--font); font-size: 16px; font-weight: 600; letter-spacing: .04em; }
+.nope ul { display: flex; flex-wrap: wrap; gap: 10px; align-content: start; }
+.nope li { padding: 6px 13px; border: 1px solid var(--line); font-size: 18px; }
+.nope p { grid-column: 2; color: var(--muted); font-size: 17px; }
+
+/* 5 */
+.s5 { display: grid; grid-template-columns: 1fr 480px; gap: 64px; margin-top: 40px; }
+.check { display: grid; gap: 16px; }
+.check li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; font-size: 23px; }
+.check li::before { content: ""; width: 30px; height: 30px; margin-top: 1px; border: 2px solid var(--text); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f2232' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 18px no-repeat; }
+.check b { font-weight: 600; }
+.how { display: flex; gap: 20px; margin-top: 30px; }
+.how div { flex: 1; padding: 20px 22px; border: 1px solid var(--line); font-size: 19px; color: var(--muted); }
+.how b { display: block; color: var(--text); font-family: var(--display); font-size: 25px; }
+.doc { position: relative; padding: 46px 42px; background: var(--sheet); box-shadow: 0 40px 80px -40px rgba(27, 29, 36, .55); transform: rotate(-1.5deg); }
+.doc::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(176, 138, 74, .5); pointer-events: none; }
+.doc__to { margin-left: auto; width: 60%; color: var(--muted); font-size: 15px; line-height: 1.6; text-align: right; }
+.doc h4 { margin-top: 26px; font-family: var(--display); font-size: 32px; letter-spacing: .2em; text-align: center; }
+.doc i { display: block; height: 7px; margin-top: 13px; background: var(--paper2); }
+.doc i:nth-of-type(3n) { width: 78%; }
+.doc__sign { display: flex; justify-content: space-between; margin-top: 30px; color: var(--faint); font-size: 15px; }
+.doc__sign span { padding-top: 6px; border-top: 1px solid var(--text); width: 40%; }
+
+/* 6 */
+.tbl { margin-top: 46px; border-top: 2px solid var(--text); }
+.tbl li { display: grid; grid-template-columns: 1fr 280px 170px; gap: 30px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.tbl span { font-size: 26px; font-weight: 500; }
+.tbl b { font-family: var(--display); font-size: 44px; font-weight: 600; color: var(--wine); text-align: right; }
+.tbl small { font-size: 17px; color: var(--muted); text-align: right; }
+.tbl em { display: block; font-style: normal; color: var(--muted); font-size: 18px; }
+
+/* 7 */
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 52px; }
+.three .case b { display: block; font-family: var(--display); font-size: 74px; font-weight: 600; line-height: 1; color: var(--wine); }
+.three .case--wine b { color: #f3efe6; }
+.three .case p { margin-top: 14px; font-size: 22px; }
+.three .art { display: block; margin-top: 16px; }
+.calc { display: grid; grid-template-columns: 260px 1fr auto; gap: 40px; align-items: center; margin-top: 40px; padding: 28px 36px; border: 1px dashed var(--gold); }
+.calc h3 { font-family: var(--display); font-size: 28px; font-style: italic; font-weight: 500; color: var(--gold-ink); }
+.calc p { font-size: 22px; }
+.calc output { font-family: var(--display); font-size: 48px; font-weight: 600; color: var(--wine); white-space: nowrap; }
+
+/* 8 */
+.errs { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; margin-top: 46px; border-top: 2px solid var(--text); }
+.errs li { display: grid; grid-template-columns: 60px 1fr; gap: 22px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.errs .errs__x { display: grid; margin: 0; place-items: center; width: 54px; height: 54px; border: 2px solid var(--wine); color: var(--wine); font-size: 34px; font-weight: 400; line-height: 1; }
+.errs b { display: block; font-family: var(--display); font-size: 30px; line-height: 1.2; }
+.errs span { display: block; margin-top: 8px; color: var(--muted); font-size: 21px; }
+.rule { margin-top: 44px; font-family: var(--display); font-size: 34px; font-style: italic; text-align: center; color: var(--wine); }
+.rule::before, .rule::after { content: "—"; margin: 0 18px; color: var(--gold); font-style: normal; }
+
+/* 9 */
+.s9 { display: grid; place-content: center; height: 100%; padding-bottom: 80px; text-align: center; }
+.s9 .label { justify-content: center; }
+.s9 .h1 { font-size: 110px; }
+.s9 p { max-width: 36em; margin: 30px auto 0; color: var(--muted); font-size: 22px; }
+.seal { width: 150px; height: 150px; margin: 0 auto 36px; color: var(--wine); }
+.seal text { font-family: var(--font); font-size: 10.5px; font-weight: 700; letter-spacing: .16em; fill: currentColor; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="scales" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v30M9 11h22" stroke-width="2"/><path d="M9 11l-5 11a5 5 0 0 0 10 0L9 11zM31 11l-5 11a5 5 0 0 0 10 0l-5-11z" stroke-width="1.5"/><path d="M13 35h14" stroke-width="2"/></g></symbol></defs></svg>
+<div class="stage"><div class="deck">
+
+  <!-- 1 -->
+  <section class="slide">
+    <div class="s1">
+      <div>
+        <p class="label a">Вебинар · защита прав потребителей</p>
+        <h1 class="h1 a" style="--d:100ms">Как вернуть деньги за&nbsp;товар — <em>без суда и&nbsp;нервов</em></h1>
+        <div class="speaker a" style="--d:200ms"><span class="mono">НВ</span><div><b>Наталья Воронцова</b><span>юрист «Статуса», 11 лет защищает потребителей</span></div></div>
+      </div>
+      <div class="ticket a" style="--d:260ms">
+        <small>Онлайн-вебинар</small>
+        <b>60 минут</b>
+        <p>и ответы на вопросы в конце</p>
+        <hr>
+        <ul><li>пошаговый план возврата</li><li>шаблон претензии</li><li>сроки по закону — на одном слайде</li></ul>
+      </div>
+    </div>
+    <div class="foot"><span><b>СТАТУС</b> · юридическая компания</span><span class="foot__n">1</span></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <p class="label a">План</p>
+    <h2 class="h2 a" style="--d:100ms">Пять шагов, <em>о&nbsp;которых поговорим</em></h2>
+    <ol class="plan">
+      <li class="a" style="--d:160ms"><span class="plan__n">1</span><b>Понять свой случай</b><span>товар хороший или с&nbsp;недостатком</span></li>
+      <li class="a" style="--d:220ms"><span class="plan__n">2</span><b>Уложиться в&nbsp;сроки</b><span>у&nbsp;каждой ситуации свои</span></li>
+      <li class="a" style="--d:280ms"><span class="plan__n">3</span><b>Написать претензию</b><span>что указать и&nbsp;как отдать</span></li>
+      <li class="a" style="--d:340ms"><span class="plan__n">4</span><b>Дождаться ответа</b><span>сколько у&nbsp;продавца времени</span></li>
+      <li class="a" style="--d:400ms"><span class="plan__n">5</span><b>Если отказали</b><span>неустойка, штраф и&nbsp;суд</span></li>
+    </ol>
+    <p class="abbr a" style="--d:460ms"><b>ЗоЗПП</b> — Закон РФ «О&nbsp;защите прав потребителей». Номера статей на&nbsp;слайдах — из&nbsp;него, если не указано другое.</p>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">2</span></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide">
+    <p class="label a">Шаг 1</p>
+    <h2 class="h2 a" style="--d:100ms">Два случая — <em>два разных права</em></h2>
+    <div class="two">
+      <div class="case a" style="--d:180ms"><span class="art">Ст. 25 ЗоЗПП</span><h3>Товар хороший, но&nbsp;не&nbsp;подошёл</h3><ul><li>обмен или возврат — в&nbsp;течение 14 дней</li><li>товар не был в&nbsp;употреблении, сохранены вид и&nbsp;ярлыки</li><li>есть чек или другое доказательство покупки</li><li>есть перечень товаров, которые не&nbsp;меняют</li></ul></div>
+      <div class="case case--wine a" style="--d:260ms"><span class="art">Ст. 18 ЗоЗПП</span><h3>У товара обнаружился недостаток</h3><ul><li>можно выбрать: замена, ремонт, скидка или возврат денег</li><li>для технически сложных товаров — особые правила после 15 дней</li><li>нет чека — это не повод для отказа</li></ul></div>
+    </div>
+    <p class="hint a" style="--d:340ms"><b>Как отличить</b><span>Не подошли цвет, размер, фасон — <em>статья 25</em>. Не включается, треснул, разошёлся шов — <em>статья 18</em>.</span></p>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">3</span></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide">
+    <p class="label a">Шаг 2</p>
+    <h2 class="h2 a" style="--d:100ms">Сроки, <em>которые нельзя пропустить</em></h2>
+    <ol class="tl">
+      <li class="a" style="--d:180ms"><b>7 дней</b><p>отказаться от покупки в&nbsp;интернет-магазине после получения</p><span class="art">ст. 26.1</span></li>
+      <li class="a" style="--d:250ms"><b>14 дней</b><p>обменять или вернуть хороший товар, купленный в&nbsp;магазине</p><span class="art">ст. 25</span></li>
+      <li class="a" style="--d:320ms"><b>3 месяца</b><p>если интернет-магазин не сообщил письменно условия возврата</p><span class="art">ст. 26.1</span></li>
+      <li class="a" style="--d:390ms"><b>2 года</b><p>заявить о&nbsp;недостатке, если нет гарантии; есть гарантия — в&nbsp;течение её срока</p><span class="art">ст. 19</span></li>
+    </ol>
+    <div class="nope a" style="--d:460ms">
+      <h3>Хороший товар из&nbsp;магазина не&nbsp;обменять<small>Перечень ПП РФ № 2463, к ст. 25</small></h3>
+      <ul><li>бельё и&nbsp;чулочные изделия</li><li>парфюмерия и&nbsp;косметика</li><li>бытовая химия</li><li>ювелирные изделия</li><li>книги</li><li>мебельные гарнитуры</li><li>ткани и&nbsp;товары на&nbsp;метраж</li><li>техника с&nbsp;гарантией от&nbsp;года</li></ul>
+      <p>Это выборка. Если товар с&nbsp;недостатком — перечень не&nbsp;мешает: действует ст. 18.</p>
+    </div>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">4</span></div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <p class="label a">Шаг 3</p>
+    <h2 class="h2 a" style="--d:100ms">Претензия: <em>что написать</em></h2>
+    <div class="s5">
+      <div>
+        <ul class="check">
+          <li class="a" style="--d:160ms"><span><b>Кому:</b> продавец, его адрес и&nbsp;ИНН — есть на&nbsp;чеке</span></li>
+          <li class="a" style="--d:210ms"><span><b>От кого:</b> ваши ФИО и&nbsp;контакты для ответа</span></li>
+          <li class="a" style="--d:260ms"><span><b>Что купили:</b> товар, дата, цена, номер чека</span></li>
+          <li class="a" style="--d:310ms"><span><b>Что случилось</b> — коротко и&nbsp;по&nbsp;фактам</span></li>
+          <li class="a" style="--d:360ms"><span><b>Чего требуете</b> и&nbsp;на&nbsp;какую статью закона ссылаетесь</span></li>
+          <li class="a" style="--d:410ms"><span><b>Реквизиты</b> для возврата денег, дата и&nbsp;подпись</span></li>
+        </ul>
+        <div class="how a" style="--d:460ms"><div><b>Лично</b>второй экземпляр — с&nbsp;отметкой о&nbsp;получении</div><div><b>Почтой</b>заказное письмо с&nbsp;описью и&nbsp;уведомлением</div></div>
+      </div>
+      <div class="doc a" style="--d:240ms" aria-hidden="true">
+        <p class="doc__to">Директору ООО «Магазин»<br>от Ивановой А. С.<br>тел. ___________</p>
+        <h4>ПРЕТЕНЗИЯ</h4>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <div class="doc__sign"><span>дата</span><span>подпись</span></div>
+      </div>
+    </div>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">5</span></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <p class="label a">Шаг 4</p>
+    <h2 class="h2 a" style="--d:100ms">Сколько времени <em>у&nbsp;продавца</em></h2>
+    <ul class="tbl">
+      <li class="a" style="--d:160ms"><span>Вернуть деньги или снизить цену<em>со дня получения требования</em></span><b>10 дней</b><small>ст. 22</small></li>
+      <li class="a" style="--d:230ms"><span>Заменить товар<em>если нужна проверка качества — до 20 дней</em></span><b>7 дней</b><small>ст. 21</small></li>
+      <li class="a" style="--d:300ms"><span>Отремонтировать по гарантии<em>максимальный срок</em></span><b>45 дней</b><small>ст. 20</small></li>
+      <li class="a" style="--d:370ms"><span>Интернет-магазин при отказе от покупки<em>вернуть деньги за товар</em></span><b>10 дней</b><small>ст. 26.1</small></li>
+    </ul>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">6</span></div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide">
+    <p class="label a">Шаг 5</p>
+    <h2 class="h2 a" style="--d:100ms">Если отказали — <em>закон на&nbsp;вашей стороне</em></h2>
+    <div class="three">
+      <div class="case a" style="--d:160ms"><b>1%</b><p>неустойка от&nbsp;цены товара за&nbsp;каждый день просрочки</p><span class="art">ст. 23 ЗоЗПП</span></div>
+      <div class="case case--wine a" style="--d:240ms"><b>50%</b><p>штраф от&nbsp;присуждённой суммы, если продавец не&nbsp;решил вопрос добровольно</p><span class="art">п. 6 ст. 13 ЗоЗПП</span></div>
+      <div class="case a" style="--d:320ms"><b>0&nbsp;₽</b><p>госпошлина по&nbsp;иску о&nbsp;защите прав потребителя до&nbsp;1&nbsp;млн&nbsp;₽</p><span class="art">ст. 333.36 НК РФ</span></div>
+    </div>
+    <div class="calc a" style="--d:400ms"><h3>Пример расчёта</h3><p>Телефон за&nbsp;40&nbsp;000&nbsp;₽, деньги вернули на&nbsp;15&nbsp;дней позже срока: 40&nbsp;000 × 1% × 15</p><output>= 6 000 ₽</output></div>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">7</span></div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide">
+    <p class="label a">Осторожно</p>
+    <h2 class="h2 a" style="--d:100ms">Четыре ошибки, <em>из-за которых теряют деньги</em></h2>
+    <ul class="errs">
+      <li class="a" style="--d:160ms"><span class="errs__x">×</span><div><b>Договариваться устно</b><span>Без письменной претензии нечем доказать, что вы обращались.</span></div></li>
+      <li class="a" style="--d:220ms"><span class="errs__x">×</span><div><b>Ждать «пока магазин подумает»</b><span>Сроки по закону идут — считайте их со дня получения претензии.</span></div></li>
+      <li class="a" style="--d:280ms"><span class="errs__x">×</span><div><b>Соглашаться на бонусы вместо денег</b><span>Если требуете возврат денег — продавец не вправе заменить его баллами.</span></div></li>
+      <li class="a" style="--d:340ms"><span class="errs__x">×</span><div><b>Выбрасывать упаковку и ярлыки</b><span>Для обмена хорошего товара важно сохранить его товарный вид.</span></div></li>
+    </ul>
+    <p class="rule a" style="--d:420ms">всё письменно, с&nbsp;датой и&nbsp;в&nbsp;двух экземплярах</p>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">8</span></div>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide">
+    <div class="s9">
+      <svg class="seal a" viewBox="0 0 150 150" aria-hidden="true">
+        <defs><path id="ring" d="M75 75m-53 0a53 53 0 1 1 106 0a53 53 0 1 1-106 0"/></defs>
+        <circle cx="75" cy="75" r="71" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle cx="75" cy="75" r="64" fill="none" stroke="currentColor" stroke-width="1"/>
+        <text><textPath href="#ring" textLength="330" lengthAdjust="spacing">ЮРИДИЧЕСКАЯ КОМПАНИЯ · СТАТУС · ВЕБИНАР ·</textPath></text>
+        <use href="#scales" x="57" y="55" width="36" height="36"/>
+      </svg>
+      <p class="label a" style="--d:80ms">Спасибо</p>
+      <h2 class="h1 a" style="--d:160ms">Ваши <em>вопросы</em></h2>
+      <p class="a" style="--d:240ms">Это общая информация, а&nbsp;не&nbsp;консультация по&nbsp;вашему делу. Нормы — по&nbsp;состоянию на&nbsp;октябрь 2026 года. Демо-презентация для портфолио: компания и&nbsp;спикер вымышленные.</p>
+    </div>
+    <div class="foot"><span><b>СТАТУС</b> · Как вернуть деньги за товар</span><span class="foot__n">9</span></div>
+  </section>
+
+</div></div>
+<script src="../deck.js"></script>
+</body>
+</html>

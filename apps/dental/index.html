@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f9fb">
+<title>Белый Кит — запись и уход</title>
+<meta name="description" content="Приложение пациента семейной стоматологии «Белый Кит»: запись к врачу, таймер чистки зубов, визиты и документы. Демо для портфолио.">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-app="dental">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="wBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9f1f8"/></linearGradient>
+    <symbol id="whale" viewBox="60 20 340 250">
+      <g fill="none" stroke="#7fdcc0" stroke-width="7" stroke-linecap="round"><path d="M150 92C146 66 132 52 112 46"/><path d="M157 90C161 62 177 48 199 44"/><path d="M153 90V42"/></g>
+      <g fill="#a9e8d5"><circle cx="106" cy="44" r="8"/><circle cx="205" cy="42" r="8"/><circle cx="153" cy="30" r="9"/></g>
+      <path fill="url(#wBody)" stroke="#bfe3ee" stroke-width="3" d="M70 190C70 130 130 96 205 98C268 100 312 128 330 168C338 152 352 130 376 116C380 140 372 162 356 178C374 182 388 196 394 216C368 214 346 204 334 196C314 238 262 262 196 262C118 262 70 236 70 190Z"/>
+      <path fill="#e2f5fa" d="M92 214C120 246 176 256 226 250C266 246 296 230 312 214C286 232 246 238 204 238C156 238 118 230 92 214Z"/>
+      <path d="M118 124C150 108 196 106 232 112" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      <ellipse cx="166" cy="196" rx="13" ry="7.5" fill="#ffc9c0" opacity=".75"/>
+      <circle cx="128" cy="174" r="8.5" fill="#12333f"/><circle cx="131" cy="171" r="2.6" fill="#fff"/>
+      <path d="M104 202q22 14 46 4" fill="none" stroke="#12333f" stroke-width="4.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M8 14.5h3"/></g></symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l8.5-8.5"/><path d="M12 9.5l4-4a2.1 2.1 0 0 1 3 3l-4 4zM13.5 8l2.5 2.5M15.5 6l2.5 2.5"/></g></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.5" width="15" height="17" rx="3"/><path d="M8.5 8.5h7M8.5 12.5h7M8.5 16.5h4"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.2"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></g></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7.5 5h3v14h-3zM13.5 5h3v14h-3z" fill="currentColor"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4.5v3h3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <main class="screens">
+
+    <!-- Главная -->
+    <section class="screen" id="s-home" aria-labelledby="h-home">
+      <header class="top">
+        <div><p class="top__date" id="home-date"></p><h1 class="title" id="h-home">Здравствуйте, <em>Ксения</em></h1></div>
+        <button class="ava" type="button" data-sheet="profile" aria-label="Профиль">КТ</button>
+      </header>
+      <div id="home-visit"></div>
+      <button class="card brush-mini" type="button" data-go="brush">
+        <svg class="brush-mini__whale" aria-hidden="true"><use href="#whale"/></svg>
+        <span class="brush-mini__body"><b id="mini-streak"></b><span>чистка утром и вечером</span><i class="dots" id="mini-dots" aria-hidden="true"></i></span>
+        <svg class="brush-mini__go" aria-hidden="true"><use href="#i-chevron"/></svg>
+      </button>
+      <section class="card card--mint remind">
+        <p class="eyebrow">Напоминание</p>
+        <h2 class="h3">Профгигиена — раз в&nbsp;полгода</h2>
+        <p class="muted small" id="remind-text"></p>
+      </section>
+      <section class="card clinic" aria-label="Клиника">
+        <ul>
+          <li><svg><use href="#i-pin"/></svg><div><b>ул.&nbsp;Тихая, 14</b><span>3 минуты от&nbsp;метро, вход со&nbsp;двора</span></div></li>
+          <li><svg><use href="#i-clock"/></svg><div><b>Ежедневно 8:00–21:00</b><span>без выходных</span></div></li>
+          <li><svg><use href="#i-shield"/></svg><div><button class="link" type="button" data-sheet="license">Лицензия на&nbsp;медицинскую деятельность</button><span>№ Л041-00000-54/00000000</span></div></li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- Запись -->
+    <section class="screen" id="s-book" aria-labelledby="h-book">
+      <header class="top"><div><p class="top__date">Онлайн-запись</p><h1 class="title" id="h-book">Запись <em>к&nbsp;врачу</em></h1></div></header>
+      <p class="step-cap">Для кого</p>
+      <div class="chips" id="b-who" role="radiogroup" aria-label="Для кого"></div>
+      <p class="step-cap">Услуга</p>
+      <ul class="services" id="b-services" role="radiogroup" aria-label="Услуга"></ul>
+      <p class="med"><svg aria-hidden="true"><use href="#i-info"/></svg>Имеются противопоказания. Необходима консультация специалиста.</p>
+      <p class="step-cap">Врач</p>
+      <div id="b-doctor"></div>
+      <p class="step-cap">День</p>
+      <div class="days" id="b-days" role="radiogroup" aria-label="День"></div>
+      <p class="step-cap">Время</p>
+      <div class="times" id="b-times" role="radiogroup" aria-label="Время"></div>
+      <div class="summary" id="b-summary">
+        <div><b id="sum-when"></b><span id="sum-what"></span></div>
+        <button class="btn btn--primary" type="button" id="b-next">Далее</button>
+      </div>
+    </section>
+
+    <!-- Чистка -->
+    <section class="screen" id="s-brush" aria-labelledby="h-brush">
+      <header class="top"><div><p class="top__date">Таймер на&nbsp;2 минуты</p><h1 class="title" id="h-brush">Чистка <em>зубов</em></h1></div></header>
+      <section class="timer">
+        <svg class="timer__ring" viewBox="0 0 220 220" aria-hidden="true">
+          <circle cx="110" cy="110" r="96" class="timer__bg"/>
+          <g id="t-segs"></g>
+        </svg>
+        <div class="timer__mid">
+          <svg class="timer__whale" aria-hidden="true"><use href="#whale"/></svg>
+          <b id="t-time" aria-live="off">2:00</b>
+          <span id="t-zone" aria-live="polite">Готовы?</span>
+        </div>
+      </section>
+      <svg class="jaw" viewBox="0 0 200 92" aria-hidden="true" id="jaw">
+        <path data-q="0" d="M100 8C70 8 46 16 34 34L52 42C60 30 78 24 100 24z"/>
+        <path data-q="1" d="M100 8C130 8 154 16 166 34L148 42C140 30 122 24 100 24z"/>
+        <path data-q="2" d="M100 84C130 84 154 76 166 58L148 50C140 62 122 68 100 68z"/>
+        <path data-q="3" d="M100 84C70 84 46 76 34 58L52 50C60 62 78 68 100 68z"/>
+      </svg>
+      <div class="timer__acts">
+        <button class="btn btn--primary" type="button" id="t-start"><svg><use href="#i-play"/></svg><span>Начать</span></button>
+        <button class="btn btn--soft btn--icon" type="button" id="t-reset" aria-label="Сначала"><svg><use href="#i-reset"/></svg></button>
+      </div>
+      <section class="card">
+        <div class="row-head"><h2 class="h3">Эта неделя</h2><p class="muted small" id="week-sum"></p></div>
+        <ol class="week" id="week"></ol>
+      </section>
+      <section class="card brushcard">
+        <div><p class="eyebrow">Щётка</p><h2 class="h3" id="brush-change"></h2><p class="muted small">Щётку обычно меняют раз в&nbsp;3 месяца.</p></div>
+        <button class="btn btn--soft" type="button" id="brush-new">Заменила</button>
+      </section>
+    </section>
+
+    <!-- Визиты -->
+    <section class="screen" id="s-visits" aria-labelledby="h-visits">
+      <header class="top"><div><p class="top__date">Вы и&nbsp;Миша</p><h1 class="title" id="h-visits">Мои <em>визиты</em></h1></div></header>
+      <h2 class="sect">Предстоящие</h2>
+      <ul class="visits" id="v-up"></ul>
+      <h2 class="sect">История</h2>
+      <ul class="visits visits--past" id="v-past"></ul>
+      <h2 class="sect">Документы</h2>
+      <ul class="docs">
+        <li><button type="button" data-doc><svg><use href="#i-doc"/></svg><span><b>Договор на&nbsp;оказание услуг</b>подписан 20 января 2026</span><svg class="docs__go"><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" data-doc><svg><use href="#i-doc"/></svg><span><b>Информированные согласия</b>к&nbsp;каждому лечению</span><svg class="docs__go"><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" data-sheet="license"><svg><use href="#i-shield"/></svg><span><b>Лицензия клиники</b>бессрочная, с&nbsp;2022 года</span><svg class="docs__go"><use href="#i-chevron"/></svg></button></li>
+      </ul>
+    </section>
+
+    <!-- UI-кит для портфолио -->
+    <section class="screen kit" id="s-kit" aria-label="Компоненты">
+      <div class="kit__grid">
+        <div class="kit__box"><p class="kit__cap">Кнопки</p><div class="kit__row"><button class="btn btn--primary" type="button">Записаться</button><button class="btn btn--soft" type="button">Перенести</button></div><div class="chips" style="margin-top:12px"><button class="chip" type="button" aria-checked="true">Я</button><button class="chip" type="button" aria-checked="false">Миша, 7 лет</button></div></div>
+        <div class="kit__box"><p class="kit__cap">Время приёма</p><div class="times times--kit"><button class="time" type="button" aria-checked="false">9:00</button><button class="time" type="button" aria-checked="true">10:30</button><button class="time" type="button" disabled>12:00</button><button class="time" type="button" aria-checked="false">14:30</button></div></div>
+        <div class="kit__box kit__box--wide"><p class="kit__cap">Услуга</p><ul class="services" id="kit-service"></ul></div>
+        <div class="kit__box kit__box--wide"><p class="kit__cap">Карточка визита</p><div id="kit-visit"></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="tabs" aria-label="Разделы">
+    <button type="button" data-go="home"><svg><use href="#i-home"/></svg>Главная</button>
+    <button type="button" data-go="book"><svg><use href="#i-cal"/></svg>Запись</button>
+    <button type="button" data-go="brush"><svg><use href="#i-brush"/></svg>Чистка</button>
+    <button type="button" data-go="visits"><svg><use href="#i-list"/></svg>Визиты</button>
+  </nav>
+
+  <!-- Лист: подтверждение записи -->
+  <div class="sheet-wrap" id="sh-confirm">
+    <div class="sheet-bg" data-close></div>
+    <form class="sheet" role="dialog" aria-modal="true" aria-labelledby="cf-title" id="cf-form" novalidate>
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="cf-title">Проверьте запись</h2>
+      <ul class="facts" id="cf-facts"></ul>
+      <p class="note-blue">Цена указана «от». Точную стоимость врач назовёт после осмотра — до&nbsp;начала лечения.</p>
+      <label class="field"><span>Имя пациента</span><input id="cf-name" autocomplete="name" placeholder="Как к вам обращаться"></label>
+      <label class="field"><span>Телефон для связи</span><input id="cf-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></label>
+      <label class="consent"><input type="checkbox" id="cf-agree"><span>Согласна на&nbsp;обработку персональных данных для записи на&nbsp;приём — <button type="button" class="inline-link" data-sheet="privacy">политика конфиденциальности</button></span></label>
+      <p class="field__err" id="cf-err" role="alert"></p>
+      <button class="btn btn--primary btn--block" type="submit">Записаться</button>
+    </form>
+  </div>
+
+  <!-- Лист: отмена визита -->
+  <div class="sheet-wrap" id="sh-cancel">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="cn-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="cn-title">Отменить визит?</h2>
+      <p class="sheet__text" id="cn-text"></p>
+      <button class="btn btn--danger btn--block" type="button" id="cn-ok">Отменить визит</button>
+      <button class="btn btn--soft btn--block" type="button" data-close>Оставить</button>
+    </div>
+  </div>
+
+  <!-- Лист: лицензия -->
+  <div class="sheet-wrap" id="sh-license">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="lic-title">
+      <div class="sheet__grip"></div>
+      <p class="eyebrow">Образец для демо</p>
+      <h2 class="sheet__title" id="lic-title">Лицензия на&nbsp;медицинскую деятельность</h2>
+      <dl class="lic">
+        <div><dt>Номер</dt><dd>Л041-00000-54/00000000</dd></div>
+        <div><dt>Дата</dt><dd>12 марта 2022, бессрочно</dd></div>
+        <div><dt>Организация</dt><dd>ООО «Белый Кит»</dd></div>
+        <div><dt>Адрес</dt><dd>г. Новосибирск, ул. Тихая, д. 14</dd></div>
+        <div><dt>Работы</dt><dd>стоматология терапевтическая, хирургическая, детская, ортопедическая; гигиена</dd></div>
+      </dl>
+      <p class="muted small">Сведения о&nbsp;лицензии проверяются в&nbsp;едином реестре лицензий Росздравнадзора. Данные выше вымышлены.</p>
+      <button class="btn btn--soft btn--block" type="button" data-close>Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Лист: профиль -->
+  <div class="sheet-wrap" id="sh-profile">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pr-title">
+      <div class="sheet__grip"></div>
+      <div class="prof"><span class="ava ava--lg" aria-hidden="true">КТ</span><div><h2 class="sheet__title" id="pr-title">Ксения Титова</h2><p class="muted small">пациентка с&nbsp;января 2026 · в&nbsp;семье: Миша, 7 лет</p></div></div>
+      <ul class="menu">
+        <li><button type="button" data-install>Установить на телефон<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" data-sheet="privacy">Политика конфиденциальности<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" class="is-danger" id="wipe">Удалить данные с устройства</button></li>
+      </ul>
+      <p class="muted small note">Демо-приложение для портфолио: клиника, врачи и&nbsp;пациенты вымышленные. Приложение не&nbsp;ставит диагнозов и&nbsp;не&nbsp;заменяет консультацию врача.</p>
+    </div>
+  </div>
+
+  <!-- Лист: политика -->
+  <div class="sheet-wrap" id="sh-privacy">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="priv-title">Политика конфиденциальности</h2>
+      <div class="doc">
+        <p>Это демонстрационное приложение. Записи никуда не&nbsp;отправляются: ни&nbsp;в&nbsp;клинику, ни&nbsp;на&nbsp;сервер.</p>
+        <p><b>Что хранится.</b> Записи на&nbsp;приём с&nbsp;именем и&nbsp;телефоном, отметки о&nbsp;чистке зубов и&nbsp;дата замены щётки — только в&nbsp;памяти браузера на&nbsp;этом устройстве.</p>
+        <p><b>Чего нет.</b> Приложение не&nbsp;спрашивает о&nbsp;жалобах и&nbsp;здоровье: сведения о&nbsp;здоровье — особая категория данных, их обсуждают с&nbsp;врачом на&nbsp;приёме.</p>
+        <p><b>В рабочей версии</b> здесь будет политика клиники: оператор, цели, сроки хранения и&nbsp;контакты для обращений по&nbsp;152-ФЗ.</p>
+      </div>
+      <button class="btn btn--soft btn--block" type="button" id="priv-ok">Понятно</button>
+    </div>
+  </div>
+</div>
+
+<p class="desk-note">Демо мобильного приложения «Белый Кит» · откройте на телефоне и установите на главный экран</p>
+<script src="../core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

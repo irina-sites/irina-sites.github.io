@@ -205,6 +205,13 @@ ul,ol{margin:0; padding:0; list-style:none;}
 }
 .tip.is-off{opacity:0; pointer-events:none;}
 
+/* ?static — кадр для снимков портфолио: рабочий холст 1180×664 без кнопок, подсказки и анимации */
+.static body{overflow:visible; background:var(--bg);}
+.static .stage{position:static; display:block; padding:0;}
+.static .deck{width:1180px; height:664px; max-height:none; border-radius:0; box-shadow:none;}
+.static .hud,.static .tip,.static .bar{display:none;}
+.static .slide.is-on > *{animation:none;}
+
 @media (max-width:760px){
   .cols--2,.cols--sb{grid-template-columns:1fr;}
   .cols--3,.cols--4{grid-template-columns:1fr 1fr;}
@@ -526,6 +533,9 @@ ul,ol{margin:0; padding:0; list-style:none;}
 (function () {
   'use strict';
 
+  var query = new URLSearchParams(location.search);
+  if (query.has('static')) document.documentElement.classList.add('static');
+
   var deck = document.getElementById('deck');
   var slides = deck.querySelectorAll('.slide');
   var last = slides.length - 1;
@@ -587,6 +597,7 @@ ul,ol{margin:0; padding:0; list-style:none;}
   /* открытие по ссылке вида #7 */
   function fromHash(push) {
     var n = parseInt((location.hash || '').replace('#', ''), 10);
+    if (isNaN(n)) n = parseInt(query.get('slide'), 10); // ?slide=N — для снимков
     show(isNaN(n) ? 0 : n - 1, push);
   }
   /* смена только якоря страницу не перезагружает — ловим её отдельно,

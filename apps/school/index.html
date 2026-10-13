@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4f2ff">
+<title>Мастерская — учёба</title>
+<meta name="description" content="Приложение студента онлайн-школы «Мастерская»: уроки, программа курса, домашние задания с комментариями наставника. Демо для портфолио.">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../core.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-app="school">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-today" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></symbol>
+    <symbol id="i-course" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h6a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h6z"/></g></symbol>
+    <symbol id="i-hw" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.5" width="15" height="17" rx="2.5"/><path d="M8.5 9l2 2 4-4M8.5 15.5h7"/></g></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c1.3-3.6 4.2-5.5 7.5-5.5s6.2 1.9 7.5 5.5"/></g></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7.5 5h3v14h-3zM13.5 5h3v14h-3z" fill="currentColor"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></g></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 2.5c.5 3.5 4.5 5.5 4.5 10a4.5 4.5 0 0 1-9 0c0-2 1-3.5 2-4.5 0 1.5.7 2.6 1.8 3C10.5 8.5 11 5 12 2.5z" fill="currentColor" stroke="#1b1338" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></g></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><path d="M20 11.5l-7.8 7.8a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4L15 6.9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <main class="screens">
+
+    <!-- Сегодня -->
+    <section class="screen" id="s-today" aria-labelledby="h-today">
+      <header class="top">
+        <div><p class="top__date" id="today-date"></p><h1 class="title" id="h-today">Привет, <span class="hl">Лиза</span></h1></div>
+        <button class="ava" type="button" data-go="profile" aria-label="Профиль">ЛО</button>
+      </header>
+      <section class="box streak" aria-label="Серия">
+        <div class="streak__top"><svg class="streak__fire" aria-hidden="true"><use href="#i-fire"/></svg><div><b id="streak-n">12</b><span>дней подряд</span></div></div>
+        <ol class="streak__days" id="streak-days" aria-hidden="true"></ol>
+        <p class="streak__hint" id="streak-hint">Урок дня — 14 минут. Серия не прервётся.</p>
+      </section>
+      <section class="box box--violet cont" aria-label="Продолжить урок">
+        <p class="eyebrow eyebrow--light" id="cont-eyebrow">Продолжить · Модуль 2</p>
+        <h2 class="cont__title" id="cont-title">Урок 7. Сетка и отступы</h2>
+        <div class="bar bar--light" aria-hidden="true"><i id="cont-bar"></i></div>
+        <div class="cont__foot"><span id="cont-left">осталось 8 мин</span><button class="play" type="button" id="cont-play" aria-label="Открыть урок"><svg><use href="#i-play"/></svg></button></div>
+      </section>
+      <button class="box box--pink dl" type="button" data-go="hw" id="today-dl"></button>
+      <section class="box mentor" aria-label="Комментарий наставника">
+        <div class="mentor__who"><span class="ava ava--sm ava--yellow" aria-hidden="true">АМ</span><div><b>Анна Миронова</b><span>к домашке 6 · вчера</span></div></div>
+        <p class="mentor__text">«Сетка ровная, а&nbsp;заголовок теряется. Попробуй 24/32 и&nbsp;добавь воздуха над кнопкой».</p>
+        <button class="link" type="button" data-hw="6">Открыть разбор<svg><use href="#i-chevron"/></svg></button>
+      </section>
+    </section>
+
+    <!-- Программа -->
+    <section class="screen" id="s-course" aria-labelledby="h-course">
+      <header class="top"><div><p class="top__date">4 месяца · с наставником</p><h1 class="title" id="h-course">Дизайн <span class="hl">интерфейсов</span></h1></div></header>
+      <section class="box prog">
+        <svg class="ring" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" class="ring__bg"/><circle cx="40" cy="40" r="32" class="ring__fg" id="ring-fg" pathLength="100"/></svg>
+        <div><b id="prog-pct">25%</b><span id="prog-text">6 из 24 уроков</span><span id="prog-hw">5 домашек принято</span></div>
+      </section>
+      <div class="modules" id="modules"></div>
+    </section>
+
+    <!-- Урок -->
+    <section class="screen" id="s-lesson" data-tab="course" aria-labelledby="lesson-title">
+      <button class="back" type="button" data-back><svg><use href="#i-back"/></svg>Программа</button>
+      <div class="player" id="player">
+        <svg class="player__art" viewBox="0 0 320 180" aria-hidden="true"><g stroke="rgba(255,255,255,.18)" stroke-width="1"><path d="M40 0v180M80 0v180M120 0v180M160 0v180M200 0v180M240 0v180M280 0v180"/></g><rect x="56" y="38" width="96" height="104" rx="8" fill="#fff" stroke="#1b1338" stroke-width="2.5"/><rect x="66" y="48" width="76" height="40" rx="4" fill="#ffd166"/><rect x="66" y="96" width="56" height="7" rx="3" fill="#1b1338"/><rect x="66" y="110" width="40" height="6" rx="3" fill="#8b86ad"/><rect x="168" y="38" width="96" height="104" rx="8" fill="#fff" stroke="#1b1338" stroke-width="2.5"/><rect x="178" y="48" width="76" height="40" rx="4" fill="#ff8fab"/><rect x="178" y="96" width="56" height="7" rx="3" fill="#1b1338"/><rect x="178" y="110" width="40" height="6" rx="3" fill="#8b86ad"/><path d="M152 64h16" stroke="#ffd166" stroke-width="2" stroke-dasharray="3 3"/><text x="160" y="58" fill="#ffd166" font-size="9" font-family="Manrope" font-weight="800" text-anchor="middle">16</text></svg>
+        <button class="player__btn" type="button" id="play-btn" aria-label="Смотреть"><svg><use href="#i-play"/></svg></button>
+        <div class="player__bar">
+          <span id="p-time">5:36</span>
+          <div class="player__track" id="p-track" role="slider" tabindex="0" aria-label="Перемотка" aria-valuemin="0" aria-valuemax="840" aria-valuenow="336"><i id="p-fill"></i></div>
+          <span>14:00</span>
+          <button class="player__speed" type="button" id="p-speed">1×</button>
+        </div>
+      </div>
+      <p class="eyebrow" id="lesson-eyebrow">Модуль 2 · 14 минут</p>
+      <h1 class="lesson__title" id="lesson-title">Урок 7. Сетка и отступы</h1>
+      <div class="seg" role="tablist" aria-label="Материалы урока">
+        <button type="button" role="tab" aria-selected="true" class="is-on" data-pane="notes">Конспект</button>
+        <button type="button" role="tab" aria-selected="false" data-pane="files">Материалы</button>
+      </div>
+      <ul class="notes" id="pane-notes">
+        <li><b>Шаг 8 pt.</b> Все отступы и&nbsp;размеры кратны восьми: 8, 16, 24, 32.</li>
+        <li><b>Внутри меньше, снаружи больше.</b> Отступ внутри карточки меньше, чем между карточками.</li>
+        <li><b>Колонки.</b> 4 на&nbsp;телефоне, 12 на&nbsp;компьютере, поля по&nbsp;16–24.</li>
+        <li><b>Проверка.</b> Включайте Layout grid в&nbsp;Figma, прежде чем отдавать макет.</li>
+      </ul>
+      <ul class="files" id="pane-files" hidden>
+        <li><button type="button" data-file><svg><use href="#i-file"/></svg><span><b>Шаблон сетки</b>Figma · 2,1 МБ</span></button></li>
+        <li><button type="button" data-file><svg><use href="#i-file"/></svg><span><b>Чек-лист отступов</b>PDF · 340 КБ</span></button></li>
+        <li><button type="button" data-file><svg><use href="#i-file"/></svg><span><b>Пример: карточка товара</b>PNG · 1,4 МБ</span></button></li>
+      </ul>
+      <button class="btn btn--violet btn--block" type="button" id="lesson-done">Отметить пройденным</button>
+      <button class="btn btn--white btn--block" type="button" data-hw="7">Домашка к уроку</button>
+    </section>
+
+    <!-- Домашки -->
+    <section class="screen" id="s-hw" aria-labelledby="h-hw">
+      <header class="top"><div><p class="top__date" id="hw-sum"></p><h1 class="title" id="h-hw"><span class="hl">Домашки</span></h1></div></header>
+      <div class="chips" id="hw-filters" role="group" aria-label="Статус"></div>
+      <ul class="hws" id="hws"></ul>
+    </section>
+
+    <!-- Профиль -->
+    <section class="screen" id="s-profile" aria-labelledby="h-profile">
+      <header class="me"><span class="ava ava--lg" aria-hidden="true">ЛО</span><div><h1 class="title title--sm" id="h-profile">Лиза Орлова</h1><p class="muted">Дизайн интерфейсов · поток «Осень-2026»</p></div></header>
+      <section class="box cert">
+        <p class="eyebrow">Сертификат школы</p>
+        <h2 class="h3">Выдаётся после защиты итогового проекта</h2>
+        <ol class="cert__steps" id="cert-steps"></ol>
+        <p class="small muted">Сертификат подтверждает прохождение курса. Это не&nbsp;документ об&nbsp;образовании — главное, что вы забираете, три проекта в&nbsp;портфолио.</p>
+      </section>
+      <ul class="menu box">
+        <li><button type="button" id="speed-set">Скорость видео по умолчанию<b id="speed-val">1×</b></button></li>
+        <li><button type="button" data-install>Установить на телефон<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" data-sheet="privacy">Политика конфиденциальности<svg><use href="#i-chevron"/></svg></button></li>
+        <li><button type="button" class="is-danger" id="wipe">Удалить данные с устройства</button></li>
+      </ul>
+      <p class="small muted note">Демо-приложение для портфолио: школа, курс и&nbsp;люди вымышленные.</p>
+    </section>
+
+    <!-- UI-кит для портфолио -->
+    <section class="screen kit" id="s-kit" aria-label="Компоненты">
+      <div class="kit__grid">
+        <div class="kit__box"><p class="kit__cap">Кнопки</p><div class="kit__row"><button class="btn btn--violet" type="button">Сдать</button><button class="btn btn--yellow" type="button">Продолжить</button><button class="btn btn--white" type="button">Позже</button></div></div>
+        <div class="kit__box"><p class="kit__cap">Статусы домашек</p><div class="kit__row"><span class="st st--todo">Не сдано</span><span class="st st--review">На проверке</span><span class="st st--fix">Доработать</span><span class="st st--ok">Принято</span></div></div>
+        <div class="kit__box kit__box--wide"><p class="kit__cap">Урок в программе</p><ul class="lessons" id="kit-lessons"></ul></div>
+        <div class="kit__box"><p class="kit__cap">Серия</p><ol class="streak__days streak__days--kit"><li class="is-on"></li><li class="is-on"></li><li class="is-on"></li><li class="is-on"></li><li class="is-today"></li><li></li><li></li></ol></div>
+        <div class="kit__box"><p class="kit__cap">Прогресс</p><div class="bar"><i style="width:40%"></i></div><div class="chips chips--kit"><button class="chip is-on" type="button">Все</button><button class="chip" type="button">Принято</button></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="tabs" aria-label="Разделы">
+    <button type="button" data-go="today"><svg><use href="#i-today"/></svg>Сегодня</button>
+    <button type="button" data-go="course"><svg><use href="#i-course"/></svg>Программа</button>
+    <button type="button" data-go="hw"><svg><use href="#i-hw"/></svg>Домашки<i class="tabs__badge" id="hw-badge" hidden></i></button>
+    <button type="button" data-go="profile"><svg><use href="#i-user"/></svg>Профиль</button>
+  </nav>
+
+  <!-- Лист: домашка -->
+  <div class="sheet-wrap" id="sh-hw">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="hw-title">
+      <div class="sheet__grip"></div>
+      <div id="hw-body"></div>
+    </div>
+  </div>
+
+  <!-- Лист: политика -->
+  <div class="sheet-wrap" id="sh-privacy">
+    <div class="sheet-bg" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+      <div class="sheet__grip"></div>
+      <h2 class="sheet__title" id="priv-title">Политика конфиденциальности</h2>
+      <div class="doc">
+        <p>Это демонстрационное приложение. Оно не&nbsp;отправляет данные ни&nbsp;на&nbsp;сервер, ни&nbsp;наставнику, ни&nbsp;третьим лицам.</p>
+        <p><b>Что хранится.</b> Пройденные уроки, статусы домашек, имена прикреплённых файлов и&nbsp;настройки — в&nbsp;памяти браузера на&nbsp;этом устройстве. Сами файлы никуда не&nbsp;загружаются.</p>
+        <p><b>Как удалить.</b> Профиль → «Удалить данные с&nbsp;устройства».</p>
+        <p><b>В рабочей версии</b> здесь будет политика школы: оператор, цели обработки, сроки хранения работ и&nbsp;контакты для обращений по&nbsp;152-ФЗ.</p>
+      </div>
+      <button class="btn btn--white btn--block" type="button" data-close>Понятно</button>
+    </div>
+  </div>
+</div>
+
+<p class="desk-note">Демо мобильного приложения «Мастерская» · откройте на телефоне и установите на главный экран</p>
+<script src="../core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

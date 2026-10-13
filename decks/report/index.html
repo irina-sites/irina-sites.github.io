@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>МЕРИДИАН — рынок новостроек, III квартал 2026</title>
+<meta name="description" content="Аналитический обзор рынка новостроек от агентства «Меридиан»: цены, спрос, районы, ипотека и выводы для покупателя. 8 слайдов с графиками. Демо для портфолио, данные условные.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../realty/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../deck.css">
+<style>
+:root {
+  --page: #050a10; --bg: #0a1420; --text: #f2f5f8; --muted: #8ba0b5; --faint: #5f7489;
+  --gold: #c9a227; --gold-2: #e8c45a; --green: #5ed29a; --accent: #c9a227;
+  --line: rgba(201, 162, 39, .26); --line-2: rgba(242, 245, 248, .1);
+  --font: "Inter", system-ui, sans-serif; --display: "Jost", "Inter", sans-serif;
+}
+.deck { background: linear-gradient(rgba(139, 160, 181, .08) 1px, transparent 1px) 0 0 / 160px 160px, linear-gradient(90deg, rgba(139, 160, 181, .08) 1px, transparent 1px) 0 0 / 160px 160px, linear-gradient(rgba(139, 160, 181, .035) 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, rgba(139, 160, 181, .035) 1px, transparent 1px) 0 0 / 32px 32px, radial-gradient(900px 600px at 100% 0%, rgba(201, 162, 39, .14), transparent 65%), var(--bg); }
+.slide { font-size: 21px; line-height: 1.55; }
+.slide::after { content: ""; position: absolute; inset: 26px; border: 1px solid var(--line); pointer-events: none; }
+.foot { position: absolute; left: 112px; right: 112px; bottom: 50px; display: flex; justify-content: space-between; align-items: center; color: var(--faint); font-family: var(--display); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; }
+.foot svg { display: inline-block; width: 22px; height: 22px; margin-right: 12px; vertical-align: -5px; color: var(--gold); }
+.foot__n { color: var(--gold); }
+.note { position: absolute; right: 112px; top: 102px; color: var(--faint); font-size: 15px; }
+
+.label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 22px; color: var(--gold); font-family: var(--display); font-size: 17px; letter-spacing: .3em; text-transform: uppercase; }
+.label::before { content: ""; width: 44px; height: 1px; background: currentColor; }
+.h1 { font-family: var(--display); font-size: 96px; font-weight: 300; line-height: 1.02; text-transform: uppercase; }
+.h2 { font-family: var(--display); font-size: 58px; font-weight: 300; line-height: 1.06; text-transform: uppercase; }
+.h1 b, .h2 b { font-weight: 400; color: var(--gold-2); }
+.lead { margin-top: 26px; color: var(--muted); font-size: 25px; line-height: 1.5; }
+
+/* 1 */
+.s1 { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; height: 100%; padding-bottom: 70px; }
+.s1__meta { display: flex; gap: 40px; margin-top: 50px; padding-top: 26px; border-top: 1px solid var(--line); }
+.s1__meta span { display: block; color: var(--faint); font-family: var(--display); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; }
+.s1__meta b { display: block; margin-top: 6px; font-family: var(--display); font-size: 24px; font-weight: 400; }
+.city path { fill: none; stroke: var(--gold); stroke-width: 2; }
+.city .thin { stroke-width: 1; opacity: .5; }
+.city .lit { fill: rgba(232, 196, 90, .85); stroke: none; }
+
+/* 2 */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 64px; border-top: 1px solid var(--line); }
+.kpi { padding: 34px 30px 10px 0; }
+.kpi + .kpi { padding-left: 30px; border-left: 1px solid var(--line-2); }
+.kpi span { display: block; color: var(--muted); font-family: var(--display); font-size: 16px; letter-spacing: .16em; text-transform: uppercase; }
+.kpi b { display: block; margin-top: 16px; font-family: var(--display); font-size: 64px; font-weight: 300; line-height: 1; color: var(--gold-2); }
+.kpi small { display: inline-block; margin-top: 16px; padding: 4px 12px; border: 1px solid; font-size: 17px; font-weight: 600; }
+.up { color: var(--green); border-color: rgba(94, 210, 154, .5); }
+.down { color: #e2725b; border-color: rgba(226, 114, 91, .5); }
+.kpi p { margin-top: 14px; color: var(--muted); font-size: 18px; }
+
+/* 3 */
+.chart { margin-top: 30px; }
+.chart text { font-family: var(--font); }
+
+/* 4 */
+.bars { display: grid; gap: 26px; margin-top: 56px; }
+.bar { display: grid; grid-template-columns: 220px 1fr; gap: 30px; align-items: center; }
+.bar span { font-family: var(--display); font-size: 26px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+.bar div { position: relative; height: 64px; }
+.bar i { display: block; height: 100%; background: linear-gradient(90deg, rgba(201, 162, 39, .35), var(--gold)); border-right: 3px solid var(--gold-2); }
+.bar b { position: absolute; top: 50%; transform: translateY(-50%); padding-left: 18px; font-family: var(--display); font-size: 34px; font-weight: 300; }
+.bar--top i { background: linear-gradient(90deg, rgba(232, 196, 90, .5), var(--gold-2)); }
+.insight { margin-top: 46px; padding: 22px 28px; border-left: 3px solid var(--gold); background: rgba(201, 162, 39, .07); color: var(--muted); font-size: 22px; }
+.insight b { color: var(--text); font-weight: 600; }
+
+/* 5 */
+.table { margin-top: 44px; border-top: 1px solid var(--line); }
+.tr { display: grid; grid-template-columns: 200px 1fr 230px 160px; gap: 30px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line-2); }
+.tr--h { padding: 14px 0; color: var(--faint); font-family: var(--display); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; }
+.tr__name { font-family: var(--display); font-size: 27px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; }
+.tr__bar { height: 14px; background: var(--line-2); }
+.tr__bar i { display: block; height: 100%; background: var(--gold); }
+.tr__price { font-family: var(--display); font-size: 30px; font-weight: 300; text-align: right; }
+.tr__chg { color: var(--green); font-size: 22px; font-weight: 600; text-align: right; }
+.tr--hot .tr__name, .tr--hot .tr__chg { color: var(--gold-2); }
+.tr--hot .tr__bar i { background: var(--gold-2); }
+
+/* 6 */
+.s6 { display: grid; grid-template-columns: 460px 1fr; gap: 80px; align-items: center; margin-top: 30px; }
+.donut { position: relative; }
+.donut__c { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.donut__c b { font-family: var(--display); font-size: 90px; font-weight: 300; line-height: 1; color: var(--gold-2); }
+.donut__c span { margin-top: 8px; color: var(--muted); font-family: var(--display); font-size: 17px; letter-spacing: .16em; text-transform: uppercase; }
+.facts { border-top: 1px solid var(--line); }
+.facts li { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line-2); }
+.facts span { color: var(--muted); font-size: 22px; }
+.facts b { font-family: var(--display); font-size: 42px; font-weight: 300; }
+
+/* 7 */
+.s7 { display: grid; grid-template-columns: 1.2fr .8fr; gap: 60px; margin-top: 50px; }
+.outs { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.outs li { display: grid; grid-template-columns: 70px 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line-2); }
+.outs__n { font-family: var(--display); font-size: 44px; font-weight: 300; line-height: 1; color: var(--gold); }
+.outs b { display: block; font-family: var(--display); font-size: 27px; font-weight: 400; line-height: 1.25; }
+.outs span { display: block; margin-top: 6px; color: var(--muted); font-size: 19px; }
+.advice { padding: 34px; border: 1px solid var(--line); background: rgba(201, 162, 39, .07); }
+.advice h3 { color: var(--gold-2); font-family: var(--display); font-size: 22px; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; }
+.advice ul { display: grid; gap: 18px; margin-top: 22px; }
+.advice li { position: relative; padding-left: 30px; font-size: 21px; }
+.advice li::before { content: ""; position: absolute; left: 0; top: .55em; width: 12px; height: 12px; border: 1px solid var(--gold); transform: rotate(45deg); }
+
+/* 8 */
+.s8 { display: grid; place-content: center; height: 100%; padding-bottom: 60px; text-align: center; }
+.s8 .label { justify-content: center; }
+.s8 .label::after { content: ""; width: 44px; height: 1px; background: currentColor; }
+.s8__logo { width: 120px; height: 120px; margin: 0 auto 40px; color: var(--gold); }
+.s8 p { max-width: 30em; margin: 26px auto 0; color: var(--muted); font-size: 24px; }
+.s8 small { display: block; margin-top: 60px; color: var(--faint); font-size: 16px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M20 6L24 20L20 34L16 20Z" fill="currentColor"/><circle cx="20" cy="20" r="2.5" fill="#0a1420"/></symbol></defs></svg>
+<div class="stage"><div class="deck">
+
+  <!-- 1 -->
+  <section class="slide">
+    <div class="s1">
+      <div>
+        <p class="label a">Аналитический обзор</p>
+        <h1 class="h1 a" style="--d:100ms">Новостройки Краснодара: <b>итоги III&nbsp;квартала</b></h1>
+        <p class="lead a" style="--d:200ms">Цены, спрос, районы и&nbsp;ипотека — что изменилось за&nbsp;квартал и&nbsp;что это значит для покупателя.</p>
+        <div class="s1__meta a" style="--d:300ms"><div><span>Период</span><b>июль — сентябрь 2026</b></div><div><span>Подготовил</span><b>Аналитический отдел</b></div></div>
+      </div>
+      <svg class="city a" style="--d:250ms" viewBox="0 0 560 520" aria-hidden="true">
+        <path d="M40 500H520"/>
+        <path d="M70 500V250H170V500M90 280H150M90 320H150M90 360H150M90 400H150M90 440H150"/>
+        <path d="M200 500V120H320V500M220 150H300M220 190H300M220 230H300M220 270H300M220 310H300M220 350H300M220 390H300M220 430H300"/>
+        <path d="M350 500V200H470V500M370 230H450M370 270H450M370 310H450M370 350H450M370 390H450M370 430H450"/>
+        <path class="thin" d="M260 120V60M240 80H280"/>
+        <rect class="lit" x="236" y="196" width="24" height="16"/><rect class="lit" x="390" y="296" width="24" height="16"/><rect class="lit" x="100" y="346" width="24" height="16"/><rect class="lit" x="260" y="356" width="24" height="16"/>
+        <path class="thin" d="M20 500C120 470 200 520 300 490S460 470 540 500"/>
+      </svg>
+    </div>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">01</span></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <p class="label a">Ключевые цифры</p>
+    <h2 class="h2 a" style="--d:100ms">Квартал <b>в&nbsp;четырёх числах</b></h2>
+    <span class="note">Данные условные — демо для портфолио</span>
+    <div class="kpis">
+      <div class="kpi a" style="--d:180ms"><span>Цена м²</span><b>148&nbsp;200&nbsp;₽</b><small class="up">+3,4% к II кв.</small><p>средняя цена на первичном рынке</p></div>
+      <div class="kpi a" style="--d:260ms"><span>Сделки</span><b>6&nbsp;120</b><small class="down">−8% к II кв.</small><p>квартир продано за квартал</p></div>
+      <div class="kpi a" style="--d:340ms"><span>Ипотека</span><b>71%</b><small class="up">+2 п.п.</small><p>сделок оформлены в кредит</p></div>
+      <div class="kpi a" style="--d:420ms"><span>Экспозиция</span><b>94 дня</b><small class="down">+11 дней</small><p>средний срок продажи квартиры</p></div>
+    </div>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">02</span></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide">
+    <p class="label a">Цены</p>
+    <h2 class="h2 a" style="--d:100ms">Средняя цена м² <b>за&nbsp;два года</b></h2>
+    <span class="note">Тыс. ₽ за м² · шкала начинается со 120 тыс. · данные условные</span>
+    <svg class="chart a" style="--d:180ms" viewBox="0 0 1376 520" width="1376" height="520" aria-label="Цена квадратного метра по кварталам: от 128,4 до 148,2 тысячи рублей">
+      <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9a227" stop-opacity=".35"/><stop offset="1" stop-color="#c9a227" stop-opacity="0"/></linearGradient></defs>
+      <g transform="translate(110 40)">
+        <g stroke="rgba(242,245,248,.1)" stroke-width="1"><path d="M0 0H1200M0 140H1200M0 280H1200M0 420H1200"/></g>
+        <g fill="#5f7489" font-size="17" text-anchor="end"><text x="-18" y="6">150</text><text x="-18" y="146">140</text><text x="-18" y="286">130</text><text x="-18" y="426">120</text></g>
+        <path d="M0 302.4L171.4 266L342.9 225.4L514.3 193.2L685.7 147L857.1 114.8L1028.6 93.8L1200 25.2V420H0Z" fill="url(#area)"/>
+        <path d="M0 302.4L171.4 266L342.9 225.4L514.3 193.2L685.7 147L857.1 114.8L1028.6 93.8L1200 25.2" fill="none" stroke="#c9a227" stroke-width="4" stroke-linejoin="round"/>
+        <g fill="#0a1420" stroke="#c9a227" stroke-width="3"><circle cx="0" cy="302.4" r="7"/><circle cx="171.4" cy="266" r="7"/><circle cx="342.9" cy="225.4" r="7"/><circle cx="514.3" cy="193.2" r="7"/><circle cx="685.7" cy="147" r="7"/><circle cx="857.1" cy="114.8" r="7"/><circle cx="1028.6" cy="93.8" r="7"/></g>
+        <circle cx="1200" cy="25.2" r="11" fill="#e8c45a"/>
+        <g fill="#f2f5f8" font-size="20" text-anchor="middle"><text x="18" y="342">128,4</text><text x="1028.6" y="72">143,3</text></g>
+        <text x="1176" y="18" text-anchor="end" fill="#e8c45a" font-size="30" font-family="Jost, sans-serif">148,2</text>
+        <g fill="#8ba0b5" font-size="17" text-anchor="middle"><text x="0" y="462">IV 2024</text><text x="171.4" y="462">I 2025</text><text x="342.9" y="462">II 2025</text><text x="514.3" y="462">III 2025</text><text x="685.7" y="462">IV 2025</text><text x="857.1" y="462">I 2026</text><text x="1028.6" y="462">II 2026</text><text x="1200" y="462">III 2026</text></g>
+      </g>
+    </svg>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">03</span></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide">
+    <p class="label a">Спрос</p>
+    <h2 class="h2 a" style="--d:100ms">Покупают <b>небольшие квартиры</b></h2>
+    <span class="note">Доля сделок по типу квартиры · данные условные</span>
+    <div class="bars">
+      <div class="bar a" style="--d:180ms"><span>Студии</span><div><i style="width:calc((100% - 140px) * .632)"></i><b style="left:calc((100% - 140px) * .632)">24%</b></div></div>
+      <div class="bar bar--top a" style="--d:240ms"><span>1-комнатные</span><div><i style="width:calc(100% - 140px)"></i><b style="left:calc(100% - 140px)">38%</b></div></div>
+      <div class="bar a" style="--d:300ms"><span>2-комнатные</span><div><i style="width:calc((100% - 140px) * .711)"></i><b style="left:calc((100% - 140px) * .711)">27%</b></div></div>
+      <div class="bar a" style="--d:360ms"><span>3 комнаты и больше</span><div><i style="width:calc((100% - 140px) * .289)"></i><b style="left:calc((100% - 140px) * .289)">11%</b></div></div>
+    </div>
+    <p class="insight a" style="--d:420ms"><b>62% сделок — студии и однушки.</b> Небольшие квартиры легче купить в ипотеку и сдать — на них держится спрос.</p>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">04</span></div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <p class="label a">Районы</p>
+    <h2 class="h2 a" style="--d:100ms">Где дорого, <b>а где дорожает</b></h2>
+    <span class="note">Цена м², ₽ и изменение к II кв. · данные условные</span>
+    <div class="table a" style="--d:180ms">
+      <div class="tr tr--h"><span>Район</span><span></span><span style="text-align:right">Цена м²</span><span style="text-align:right">За квартал</span></div>
+      <div class="tr"><span class="tr__name">Центр</span><span class="tr__bar"><i style="width:100%"></i></span><span class="tr__price">176&nbsp;400</span><span class="tr__chg">+2,1%</span></div>
+      <div class="tr"><span class="tr__name">Север</span><span class="tr__bar"><i style="width:86.1%"></i></span><span class="tr__price">151&nbsp;900</span><span class="tr__chg">+4,6%</span></div>
+      <div class="tr"><span class="tr__name">Запад</span><span class="tr__bar"><i style="width:80.7%"></i></span><span class="tr__price">142&nbsp;300</span><span class="tr__chg">+3,8%</span></div>
+      <div class="tr"><span class="tr__name">Восток</span><span class="tr__bar"><i style="width:75.8%"></i></span><span class="tr__price">133&nbsp;700</span><span class="tr__chg">+2,9%</span></div>
+      <div class="tr tr--hot"><span class="tr__name">Юг</span><span class="tr__bar"><i style="width:72.9%"></i></span><span class="tr__price">128&nbsp;600</span><span class="tr__chg">+5,2%</span></div>
+    </div>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">05</span></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <p class="label a">Ипотека</p>
+    <h2 class="h2 a" style="--d:100ms">Рынок <b>держится на&nbsp;кредите</b></h2>
+    <span class="note">Данные условные</span>
+    <div class="s6">
+      <div class="donut a" style="--d:180ms">
+        <svg viewBox="0 0 460 460" width="460" height="460" aria-label="71% сделок с ипотекой, 29% за собственные средства">
+          <g transform="rotate(-90 230 230)" fill="none" stroke-width="44">
+            <circle cx="230" cy="230" r="190" stroke="rgba(242,245,248,.12)"/>
+            <circle cx="230" cy="230" r="190" stroke="#c9a227" stroke-dasharray="847.6 1193.8"/>
+          </g>
+          <circle cx="230" cy="230" r="150" fill="none" stroke="rgba(201,162,39,.3)" stroke-width="1"/>
+        </svg>
+        <div class="donut__c"><b>71%</b><span>сделок в ипотеку</span></div>
+      </div>
+      <ul class="facts">
+        <li class="a" style="--d:240ms"><span>Средняя сумма кредита</span><b>6,1 млн ₽</b></li>
+        <li class="a" style="--d:300ms"><span>Средний срок кредита</span><b>24 года</b></li>
+        <li class="a" style="--d:360ms"><span>Средний первый взнос</span><b>22%</b></li>
+        <li class="a" style="--d:420ms"><span>Сделки по льготным программам</span><b>46%</b></li>
+      </ul>
+    </div>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">06</span></div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide">
+    <p class="label a">Выводы</p>
+    <h2 class="h2 a" style="--d:100ms">Что это значит <b>для покупателя</b></h2>
+    <div class="s7">
+      <ol class="outs">
+        <li class="a" style="--d:180ms"><span class="outs__n">01</span><div><b>Цена растёт, сделок меньше</b><span>Квадратный метр подорожал на 3,4%, а продажи упали на 8% — у покупателя появилось время выбирать.</span></div></li>
+        <li class="a" style="--d:260ms"><span class="outs__n">02</span><div><b>Юг дорожает быстрее всех</b><span>+5,2% за квартал при самой низкой цене — район догоняет город.</span></div></li>
+        <li class="a" style="--d:340ms"><span class="outs__n">03</span><div><b>Срок продажи вырос</b><span>94 дня в среднем — застройщики охотнее дают скидки и рассрочку.</span></div></li>
+      </ol>
+      <div class="advice a" style="--d:420ms">
+        <h3>Что делать</h3>
+        <ul>
+          <li>Сравнивать итоговую стоимость с отделкой и ипотекой, а не цену в рекламе</li>
+          <li>Просить у застройщика скидку за 100% оплату или раннее бронирование</li>
+          <li>Проверять сроки сдачи дома по проектной декларации</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">07</span></div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide">
+    <div class="s8">
+      <svg class="s8__logo a"><use href="#logo"/></svg>
+      <p class="label a" style="--d:80ms">Спасибо</p>
+      <h2 class="h2 a" style="--d:160ms">Подберём квартиру <b>под вашу задачу</b></h2>
+      <p class="a" style="--d:240ms">Аналитический отдел «Меридиана» обновляет обзор каждый квартал.</p>
+      <small class="a" style="--d:320ms">Демо-презентация для портфолио: агентство и все данные в обзоре вымышленные</small>
+    </div>
+    <div class="foot"><span><svg><use href="#logo"/></svg>Меридиан · рынок новостроек · III кв. 2026</span><span class="foot__n">08</span></div>
+  </section>
+
+</div></div>
+<script src="../deck.js"></script>
+</body>
+</html>

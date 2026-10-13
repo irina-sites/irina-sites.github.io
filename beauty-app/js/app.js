@@ -50,15 +50,25 @@
     btn.onclick = function () { switchScreen(btn.getAttribute('data-screen')); };
   });
 
+  // ---- Параметры адреса для снимков в портфолио (обычную работу не меняют) ----
+  // ?static — без service worker; ?screen=routine|facegym|progress|knowledge|profile|quiz — открыть экран
+  var query = new URLSearchParams(location.search);
+  var isStatic = query.has('static');
+  if (isStatic) document.documentElement.classList.add('static');
+  var wantScreen = query.get('screen');
+
   // ---- Точка входа ----
-  if (Store.isOnboarded()) {
+  if (wantScreen === 'quiz') {
+    startQuiz();
+  } else if (Store.isOnboarded()) {
     launchApp();
+    if (wantScreen) switchScreen('screen-' + wantScreen);
   } else {
     startQuiz();
   }
 
   // ---- Регистрация service worker (офлайн-режим) ----
-  if ('serviceWorker' in navigator) {
+  if (!isStatic && 'serviceWorker' in navigator) {
     // Когда обновлённая версия берёт управление — один раз перезагружаем страницу,
     // чтобы новые функции появлялись сразу, без ручной очистки кэша.
     var refreshing = false;

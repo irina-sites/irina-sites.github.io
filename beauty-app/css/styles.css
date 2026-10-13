@@ -322,3 +322,12 @@ body.no-scroll { overflow: hidden; }
   color: #b3453f;
   border: 2px solid #f0d2d0;
 }
+
+/* ===== Кадры для портфолио (?static) =====
+   Место под статус-бар телефона сверху и полоску «домой» снизу, без анимаций.
+   В обычной работе приложения не участвует. */
+.static .screen { padding-top: 64px; animation: none; }
+.static .screen--full { padding-top: 70px; }
+.static .nav { height: calc(var(--nav-h) + 16px); padding-bottom: 16px; }
+.static .article-view, .static .fg-player { animation: none; }
+.static .quiz { min-height: calc(100vh - 92px); }

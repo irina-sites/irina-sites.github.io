@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ШЁЛК — студия эстетической косметологии в Казани</title>
+<meta name="description" content="Студия косметологии «ШЁЛК»: диагностика кожи, уход, пилинги, массаж лица, аппаратная и врачебная косметология. Подбираем уход по коже, а не по прайсу. Демо-сайт для портфолио.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="ШЁЛК">
+<meta property="og:title" content="ШЁЛК — студия эстетической косметологии">
+<meta property="og:description" content="Сначала диагностика кожи и план ухода, потом процедуры — только те, что нужны.">
+<meta name="theme-color" content="#fbf4f2">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<script>
+document.documentElement.classList.add('js');
+if (/[?&]static/.test(location.search)) document.documentElement.classList.add('static');
+</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="flower" viewBox="0 0 120 120">
+      <g fill="currentColor" opacity=".92">
+        <ellipse cx="60" cy="30" rx="13" ry="26"/>
+        <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(72 60 60)"/>
+        <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(144 60 60)"/>
+        <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(216 60 60)"/>
+        <ellipse cx="60" cy="30" rx="13" ry="26" transform="rotate(288 60 60)"/>
+      </g>
+      <circle cx="60" cy="60" r="12" fill="#e7b96f"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 8h16M4 16h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.2"/></g></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="head" id="head">
+  <div class="wrap head__row">
+    <a class="brand" href="#top" aria-label="ШЁЛК — в начало страницы">
+      <svg class="brand__mark" aria-hidden="true"><use href="#flower"/></svg>
+      <span class="brand__text"><span class="brand__name">ШЁЛК</span><span class="brand__sub">студия косметологии</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Разделы страницы">
+      <a href="#approach">Подход</a>
+      <a href="#services">Цены</a>
+      <a href="#diagnostics">Диагностика</a>
+      <a href="#team">Специалисты</a>
+      <a href="#contacts">Контакты</a>
+      <a class="nav__phone" href="tel:+79000000000"><svg aria-hidden="true"><use href="#i-phone"/></svg>+7 900 000-00-00</a>
+    </nav>
+    <div class="head__act">
+      <a class="head__phone" href="tel:+79000000000" aria-label="Позвонить: +7 900 000-00-00"><svg aria-hidden="true"><use href="#i-phone"/></svg><span>+7 900 000-00-00</span></a>
+      <a class="btn btn--line btn--sm head__cta" href="#contacts">Записаться</a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="label anim" style="--d:0ms">Студия эстетической косметологии · Казань</p>
+      <h1 class="hero__title anim" style="--d:100ms">Подбираем уход <em>по&nbsp;коже,</em> а&nbsp;не&nbsp;по&nbsp;прайсу</h1>
+      <p class="hero__lead anim" style="--d:200ms">Сначала диагностика и&nbsp;план ухода с&nbsp;ценами, потом процедуры — только те, что нужны вашей коже. Ничего не&nbsp;навязываем: решение остаётся за&nbsp;вами.</p>
+      <div class="hero__cta anim" style="--d:300ms">
+        <a class="btn btn--primary" href="#contacts">Записаться на&nbsp;диагностику</a>
+        <a class="btn btn--line" href="../quiz/beauty/index.html">Тест кожи онлайн <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="hero__facts anim" style="--d:400ms">
+        <li><b>30&nbsp;мин</b><span>диагностика кожи</span></li>
+        <li><b>с&nbsp;2018</b><span>работаем в&nbsp;Казани</span></li>
+        <li><b>врач</b><span>косметолог в&nbsp;штате студии</span></li>
+      </ul>
+    </div>
+
+    <div class="hero__art anim anim--art" style="--d:180ms" aria-hidden="true">
+      <div class="arch">
+        <svg class="silk" viewBox="0 0 400 530" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="silkA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fdeef2"/>
+              <stop offset=".34" stop-color="#f2bccb"/>
+              <stop offset=".56" stop-color="#fde4ea"/>
+              <stop offset=".78" stop-color="#e49cb2"/>
+              <stop offset="1" stop-color="#f6d0da"/>
+            </linearGradient>
+            <linearGradient id="silkB" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d9849f"/>
+              <stop offset=".38" stop-color="#fbe2e8"/>
+              <stop offset=".66" stop-color="#cf7090"/>
+              <stop offset="1" stop-color="#efb6c5"/>
+            </linearGradient>
+            <linearGradient id="silkC" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+              <stop offset=".5" stop-color="#fff6ea" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <radialGradient id="silkLight" cx=".3" cy=".1" r=".8">
+              <stop offset="0" stop-color="#fff" stop-opacity=".75"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="silkBlur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+          </defs>
+          <rect width="400" height="530" fill="#f7d6de"/>
+          <g class="silk__drift">
+            <path d="M-80 110C30 50 110 170 220 128C300 98 360 30 480 62V300C390 250 320 336 220 344C120 352 40 268-80 318Z" fill="url(#silkA)"/>
+            <path d="M-80 296C30 246 120 352 232 330C332 310 382 236 480 256V450C384 412 300 492 196 494C96 496 20 424-80 466Z" fill="url(#silkB)"/>
+            <path d="M-80 452C40 410 140 506 250 482C340 462 400 410 480 426V560H-80Z" fill="url(#silkA)" opacity=".9"/>
+            <path d="M-70 200C60 146 150 262 250 228C336 200 386 140 470 160" stroke="url(#silkC)" stroke-width="26" fill="none" filter="url(#silkBlur)"/>
+            <path d="M-70 392C60 352 156 446 256 416C346 390 394 344 470 356" stroke="url(#silkC)" stroke-width="20" fill="none" filter="url(#silkBlur)" opacity=".8"/>
+            <path d="M-70 506C60 470 160 540 260 514" stroke="url(#silkC)" stroke-width="14" fill="none" filter="url(#silkBlur)" opacity=".7"/>
+          </g>
+          <rect width="400" height="530" fill="url(#silkLight)"/>
+        </svg>
+      </div>
+      <div class="badge">
+        <svg class="badge__ring" viewBox="0 0 138 138">
+          <defs><path id="ring" d="M69 69m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs>
+          <text><textPath href="#ring" textLength="326" lengthAdjust="spacing">Студия косметологии · Казань · с 2018 ·</textPath></text>
+        </svg>
+        <svg class="badge__flower"><use href="#flower"/></svg>
+      </div>
+      <div class="price-tag"><small>Диагностика кожи</small><b>1&nbsp;500&nbsp;₽</b><span>засчитаем в&nbsp;первую процедуру</span></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="med-note"><svg aria-hidden="true"><use href="#i-info"/></svg>Имеются противопоказания. Необходима консультация специалиста.</p>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Диагностика кожи</span><span>Уход по типу кожи</span><span>Пилинги</span><span>Массаж лица</span><span>Аппаратная косметология</span><span>Консультация врача</span>
+      <span>Диагностика кожи</span><span>Уход по типу кожи</span><span>Пилинги</span><span>Массаж лица</span><span>Аппаратная косметология</span><span>Консультация врача</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="label">Подход</p>
+        <h2 class="h2">Три правила <em>студии</em></h2>
+      </div>
+      <p class="sec-head__note">Мы работаем медленнее сетевых салонов — и&nbsp;поэтому к&nbsp;нам возвращаются.</p>
+    </div>
+    <ol class="rules">
+      <li class="rule reveal"><span class="rule__num" aria-hidden="true">I</span><h3 class="h3">Сначала диагностика</h3><p>Смотрим кожу при дневном свете и&nbsp;под лупой, расспрашиваем о&nbsp;привычном уходе. Только потом выбираем процедуру.</p></li>
+      <li class="rule reveal"><span class="rule__num" aria-hidden="true">II</span><h3 class="h3">Курс, а&nbsp;не&nbsp;разовый визит</h3><p>Составляем план на&nbsp;1–3 месяца с&nbsp;понятной стоимостью. Можно начать с&nbsp;одной процедуры и&nbsp;решить дальше.</p></li>
+      <li class="rule reveal"><span class="rule__num" aria-hidden="true">III</span><h3 class="h3">Решение — за&nbsp;вами</h3><p>Не&nbsp;продаём абонементы на&nbsp;год и&nbsp;не&nbsp;уговариваем. Если процедура не&nbsp;нужна — так и&nbsp;скажем.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--tint" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="label">Услуги и цены</p>
+        <h2 class="h2">Прайс <em>без звёздочек</em></h2>
+      </div>
+      <p class="sec-head__note">Цена указана за&nbsp;одну процедуру, расходные материалы уже включены. Курс обсуждаем после диагностики.</p>
+    </div>
+
+    <div class="prices">
+      <div class="price-group reveal">
+        <div class="price-group__head"><h3 class="h3">Уход и очищение</h3><span class="price-group__count">3 процедуры</span></div>
+        <ul>
+          <li class="price-row"><span class="price-row__name">Комбинированная чистка лица</span><span class="price-row__fill"></span><span class="price-row__price">3&nbsp;800&nbsp;₽</span></li>
+          <li class="price-row"><span class="price-row__name">Уход по типу кожи</span><span class="price-row__fill"></span><span class="price-row__price">4&nbsp;200&nbsp;₽</span></li>
+          <li class="price-row"><span class="price-row__name">Массаж лица, 60 минут</span><span class="price-row__fill"></span><span class="price-row__price">2&nbsp;900&nbsp;₽</span></li>
+        </ul>
+      </div>
+      <div class="price-group reveal">
+        <div class="price-group__head"><h3 class="h3">Пилинги</h3><span class="price-group__count">2 процедуры</span></div>
+        <ul>
+          <li class="price-row"><span class="price-row__name">Поверхностный пилинг</span><span class="price-row__fill"></span><span class="price-row__price">3&nbsp;500&nbsp;₽</span></li>
+          <li class="price-row"><span class="price-row__name">Срединный пилинг <span class="tag-doc">врач</span></span><span class="price-row__fill"></span><span class="price-row__price">7&nbsp;900&nbsp;₽</span></li>
+        </ul>
+      </div>
+      <div class="price-group reveal">
+        <div class="price-group__head"><h3 class="h3">Аппаратная косметология</h3><span class="price-group__count">2 процедуры</span></div>
+        <ul>
+          <li class="price-row"><span class="price-row__name">Микротоковая терапия</span><span class="price-row__fill"></span><span class="price-row__price">3&nbsp;200&nbsp;₽</span></li>
+          <li class="price-row"><span class="price-row__name">RF-лифтинг <span class="tag-doc">врач</span></span><span class="price-row__fill"></span><span class="price-row__price">5&nbsp;500&nbsp;₽</span></li>
+        </ul>
+      </div>
+      <div class="price-group reveal">
+        <div class="price-group__head"><h3 class="h3">Врачебная косметология</h3><span class="price-group__count">по назначению</span></div>
+        <ul>
+          <li class="price-row"><span class="price-row__name">Консультация врача-косметолога <span class="tag-doc">врач</span></span><span class="price-row__fill"></span><span class="price-row__price">1&nbsp;500&nbsp;₽</span></li>
+          <li class="price-row"><span class="price-row__name">Инъекционные методики <span class="tag-doc">врач</span></span><span class="price-row__fill"></span><span class="price-row__price"><small>после консультации</small></span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="prices__note reveal">Процедуры с&nbsp;пометкой «врач» — медицинские: их&nbsp;выполняет врач-косметолог по&nbsp;лицензии студии и&nbsp;только после очной консультации.</p>
+
+    <div class="quiz-band reveal">
+      <div>
+        <p class="h3">Не знаете, что выбрать? <em>Начните с&nbsp;теста</em></p>
+        <p>7 вопросов о&nbsp;коже — и&nbsp;станет понятно, с&nbsp;какой процедуры начать.</p>
+      </div>
+      <a class="btn btn--gold" href="../quiz/beauty/index.html">Пройти тест кожи <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="diagnostics">
+  <div class="wrap diag">
+    <div class="reveal">
+      <p class="label">Диагностика кожи</p>
+      <h2 class="h2">Карта ухода — <em>после первого визита</em></h2>
+      <p class="diag__text">За&nbsp;30 минут косметолог определит тип и&nbsp;состояние кожи и&nbsp;составит план: какие процедуры, в&nbsp;каком порядке и&nbsp;сколько это будет стоить. Карту можно забрать с&nbsp;собой — без обязательства продолжать.</p>
+      <div class="diag__price"><b>1&nbsp;500&nbsp;₽</b><span>засчитаем в&nbsp;стоимость первой процедуры, если решите продолжить</span></div>
+      <div class="diag__cta"><a class="btn btn--primary" href="#contacts">Записаться на&nbsp;диагностику</a></div>
+    </div>
+
+    <figure class="card-map reveal" aria-label="Пример карты ухода">
+      <div class="card-map__top"><span class="card-map__title">Карта ухода</span><span class="card-map__date">Пример</span></div>
+      <dl class="card-map__facts">
+        <div><dt>Тип кожи</dt><dd>Комбинированная</dd></div>
+        <div><dt>Чувствительность</dt><dd>Умеренная</dd></div>
+        <div><dt>Цель</dt><dd>Ровный тон, увлажнение</dd></div>
+      </dl>
+      <ol class="card-map__plan">
+        <li><span>1</span><span>Комбинированная чистка<small>1 визит</small></span><b>3&nbsp;800&nbsp;₽</b></li>
+        <li><span>2</span><span>Курс ухода по типу кожи<small>4 визита, раз в 10 дней</small></span><b>16&nbsp;800&nbsp;₽</b></li>
+        <li><span>3</span><span>Домашний уход<small>подбор средств на диагностике</small></span><b>0&nbsp;₽</b></li>
+      </ol>
+      <div class="card-map__total"><span>Итого за&nbsp;6 недель</span><b>20&nbsp;600&nbsp;₽</b></div>
+      <p class="card-map__sign">косметолог А. Гайнуллина</p>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--tint" id="team">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="label">Специалисты</p>
+        <h2 class="h2">Кто будет <em>работать с&nbsp;вами</em></h2>
+      </div>
+      <p class="sec-head__note">Медицинские процедуры проводит только врач. Уход и массаж — специалисты с&nbsp;профильным образованием.</p>
+    </div>
+    <ul class="team">
+      <li class="member reveal">
+        <div class="member__arch" style="--a:#f3c3cf;--b:#c9587a" aria-hidden="true"><span class="member__initials">МЛ</span></div>
+        <p class="member__name">Мария Лебедева</p>
+        <p class="member__role">Врач-косметолог · стаж 12&nbsp;лет</p>
+        <p class="member__edu">Высшее медицинское образование, ординатура по&nbsp;дерматовенерологии, специализация по&nbsp;косметологии</p>
+      </li>
+      <li class="member reveal">
+        <div class="member__arch" style="--a:#f6dcc0;--b:#d6a35a" aria-hidden="true"><span class="member__initials">АГ</span></div>
+        <p class="member__name">Алина Гайнуллина</p>
+        <p class="member__role">Медсестра по&nbsp;косметологии · 7&nbsp;лет</p>
+        <p class="member__edu">Среднее медицинское образование, специализация «Сестринское дело в&nbsp;косметологии»</p>
+      </li>
+      <li class="member reveal">
+        <div class="member__arch" style="--a:#e6d4dc;--b:#9c7480" aria-hidden="true"><span class="member__initials">КМ</span></div>
+        <p class="member__name">Ксения Морозова</p>
+        <p class="member__role">Массаж лица · стаж 5&nbsp;лет</p>
+        <p class="member__edu">Курсы классического и&nbsp;скульптурного массажа лица, регулярное повышение квалификации</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="docs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="label">Документы</p>
+        <h2 class="h2">Лицензия <em>на&nbsp;виду</em></h2>
+      </div>
+      <p class="sec-head__note">Нажмите на&nbsp;документ, чтобы открыть его крупно. Оригиналы — у&nbsp;администратора.</p>
+    </div>
+    <ul class="docs">
+      <li class="reveal"><button class="doc" type="button" data-doc="license" aria-haspopup="dialog"><span class="doc__paper" aria-hidden="true"></span><span><span class="doc__name">Лицензия на&nbsp;медицинскую деятельность</span><span class="doc__meta">№ Л041-00000-16/00000000</span><span class="doc__open"><svg aria-hidden="true"><use href="#i-eye"/></svg>Открыть</span></span></button></li>
+      <li class="reveal"><button class="doc" type="button" data-doc="lebedeva" aria-haspopup="dialog"><span class="doc__paper" aria-hidden="true"></span><span><span class="doc__name">Аккредитация врача</span><span class="doc__meta">М. Лебедева · косметология</span><span class="doc__open"><svg aria-hidden="true"><use href="#i-eye"/></svg>Открыть</span></span></button></li>
+      <li class="reveal"><button class="doc" type="button" data-doc="gainullina" aria-haspopup="dialog"><span class="doc__paper" aria-hidden="true"></span><span><span class="doc__name">Аккредитация медсестры</span><span class="doc__meta">А. Гайнуллина · косметология</span><span class="doc__open"><svg aria-hidden="true"><use href="#i-eye"/></svg>Открыть</span></span></button></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--deep" id="contacts">
+  <div class="wrap contacts">
+    <div class="reveal">
+      <p class="label label--light">Контакты</p>
+      <h2 class="h2">Запишитесь <em>на&nbsp;диагностику</em></h2>
+      <p class="contacts__lead">Администратор перезвонит в&nbsp;течение часа в&nbsp;рабочее время и&nbsp;подберёт удобный день.</p>
+      <ul class="contact-list">
+        <li><span class="k">Адрес</span><div><b>Казань, Липовый переулок,&nbsp;5</b><span>второй этаж, вход с&nbsp;торца, есть парковка</span></div></li>
+        <li><span class="k">Часы</span><div><b>Пн–Сб 10:00–21:00</b><span>воскресенье 10:00–18:00</span></div></li>
+        <li><span class="k">Телефон</span><div><a href="tel:+79000000000"><b>+7 900 000-00-00</b></a><span>или напишите в&nbsp;Telegram</span></div></li>
+      </ul>
+    </div>
+
+    <form class="form reveal" id="form" novalidate>
+      <div class="form__head">
+        <h3 class="form__title">Запись в&nbsp;студию</h3>
+        <p class="form__sub">Перезвоним и&nbsp;подберём время</p>
+      </div>
+      <div class="form__body" id="formBody">
+        <div style="display:grid;gap:22px">
+          <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться" required></label>
+          <label class="field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></label>
+          <label class="field"><span>Что интересует</span>
+            <select name="service">
+              <option>Не знаю — нужна диагностика</option>
+              <option>Уход и очищение</option>
+              <option>Пилинг</option>
+              <option>Массаж лица</option>
+              <option>Аппаратная косметология</option>
+              <option>Консультация врача-косметолога</option>
+            </select>
+          </label>
+          <label class="consent"><input type="checkbox" name="agree" required><span>Даю согласие на&nbsp;обработку персональных данных в&nbsp;соответствии с&nbsp;<a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a></span></label>
+          <button class="btn btn--primary btn--block" type="submit">Записаться</button>
+          <p class="form__note">О&nbsp;состоянии кожи расскажете на&nbsp;диагностике — в&nbsp;форме писать не&nbsp;нужно. Демо-сайт: заявка никуда не&nbsp;отправляется.</p>
+        </div>
+      </div>
+      <div class="form__ok" id="formOk" role="status" hidden>
+        <b id="formOkTitle">Спасибо!</b>
+        <span>В&nbsp;настоящей студии администратор перезвонил бы в&nbsp;течение часа. Это демо-сайт: данные никуда не&nbsp;отправлены и&nbsp;не&nbsp;сохранены.</span>
+        <button class="btn btn--line btn--sm" type="button" id="formAgain" style="justify-self:center;margin-top:6px">Заполнить ещё раз</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot__warn">Имеются противопоказания. Необходима консультация специалиста.</p>
+    <div class="foot__grid">
+      <div>
+        <a class="brand" href="#top" aria-label="ШЁЛК — в начало страницы">
+          <svg class="brand__mark" aria-hidden="true"><use href="#flower"/></svg>
+          <span class="brand__text"><span class="brand__name">ШЁЛК</span><span class="brand__sub">студия косметологии</span></span>
+        </a>
+        <p class="foot__about">Диагностика кожи, уход, пилинги, массаж лица, аппаратная и&nbsp;врачебная косметология. Казань, с&nbsp;2018 года.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#approach">Подход</a></li>
+          <li><a href="#services">Цены</a></li>
+          <li><a href="#team">Специалисты</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Клиентам</h4>
+        <ul>
+          <li><a href="#docs">Лицензия</a></li>
+          <li><a href="privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="../quiz/beauty/index.html">Тест кожи онлайн</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Реквизиты</h4>
+        <p class="foot__legal">ООО «Студия Шёлк», ИНН 1600000000, ОГРН&nbsp;1181600000000<br>
+        Лицензия № Л041-00000-16/00000000 от&nbsp;15.02.2022, бессрочно<br>
+        Контролирующие органы: Росздравнадзор, Роспотребнадзор, министерство здравоохранения Республики Татарстан</p>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© <span id="year">2026</span> ШЁЛК</span>
+      <span class="foot__demo">Демонстрационный проект для портфолио. «ШЁЛК» — вымышленная студия: специалисты, документы, контакты и&nbsp;цены приведены как пример.</span>
+    </div>
+  </div>
+</footer>
+
+<dialog class="modal" id="docModal" aria-labelledby="docTitle">
+  <div class="sheet" id="docSheet"></div>
+  <button class="modal__close" type="button" data-close aria-label="Закрыть документ"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+</dialog>
+
+<template id="doc-license">
+  <p class="sheet__org">Министерство здравоохранения Республики Татарстан</p>
+  <h3 class="sheet__title" id="docTitle">Лицензия на&nbsp;осуществление медицинской деятельности</h3>
+  <p class="sheet__num">№ Л041-00000-16/00000000 от&nbsp;15&nbsp;февраля 2022&nbsp;г.</p>
+  <dl class="sheet__rows">
+    <div><dt>Лицензиат</dt><dd>ООО «Студия Шёлк», ИНН 1600000000, ОГРН 1181600000000</dd></div>
+    <div><dt>Место деятельности</dt><dd>г. Казань, Липовый переулок, д. 5</dd></div>
+    <div><dt>Работы и услуги</dt><dd>косметология, дерматовенерология, сестринское дело в&nbsp;косметологии</dd></div>
+    <div><dt>Срок действия</dt><dd>бессрочно</dd></div>
+  </dl>
+  <div class="sheet__sign"><span>Сведения внесены в&nbsp;единый реестр лицензий</span><span class="sheet__stamp">ОБРАЗЕЦ<br>ДЛЯ ДЕМО</span></div>
+  <p class="sheet__foot">Документ-образец для демонстрационного сайта. Номер и реквизиты вымышленные.</p>
+</template>
+
+<template id="doc-lebedeva">
+  <p class="sheet__org">Аккредитационная комиссия</p>
+  <h3 class="sheet__title" id="docTitle">Выписка о&nbsp;прохождении периодической аккредитации</h3>
+  <p class="sheet__num">Лебедева Мария Игоревна</p>
+  <dl class="sheet__rows">
+    <div><dt>Специальность</dt><dd>Косметология</dd></div>
+    <div><dt>Дата решения</dt><dd>20 мая 2024 г.</dd></div>
+    <div><dt>Действует до</dt><dd>20 мая 2029 г.</dd></div>
+    <div><dt>Номер записи</dt><dd>0000000000000</dd></div>
+  </dl>
+  <div class="sheet__sign"><span>Председатель комиссии</span><span class="sheet__stamp">ОБРАЗЕЦ<br>ДЛЯ ДЕМО</span></div>
+  <p class="sheet__foot">Документ-образец для демонстрационного сайта. Специалист и реквизиты вымышленные.</p>
+</template>
+
+<template id="doc-gainullina">
+  <p class="sheet__org">Аккредитационная комиссия</p>
+  <h3 class="sheet__title" id="docTitle">Выписка о&nbsp;прохождении периодической аккредитации</h3>
+  <p class="sheet__num">Гайнуллина Алина Рустемовна</p>
+  <dl class="sheet__rows">
+    <div><dt>Специальность</dt><dd>Сестринское дело в&nbsp;косметологии</dd></div>
+    <div><dt>Дата решения</dt><dd>11 ноября 2023 г.</dd></div>
+    <div><dt>Действует до</dt><dd>11 ноября 2028 г.</dd></div>
+    <div><dt>Номер записи</dt><dd>0000000000000</dd></div>
+  </dl>
+  <div class="sheet__sign"><span>Председатель комиссии</span><span class="sheet__stamp">ОБРАЗЕЦ<br>ДЛЯ ДЕМО</span></div>
+  <p class="sheet__foot">Документ-образец для демонстрационного сайта. Специалист и реквизиты вымышленные.</p>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>

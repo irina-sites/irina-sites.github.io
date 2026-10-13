@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>МАСТЕРСКАЯ — онлайн-школа дизайна, иллюстрации и монтажа</title>
+<meta name="description" content="Онлайн-школа «Мастерская»: дизайн интерфейсов, иллюстрация и монтаж коротких видео. Уроки по 15–20 минут, разбор домашних заданий за 48 часов, 3 проекта в портфолио. Демо-сайт для портфолио.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="МАСТЕРСКАЯ">
+<meta property="og:title" content="МАСТЕРСКАЯ — освойте профессию за 6 часов в неделю">
+<meta property="og:description" content="Короткие уроки, разбор от наставника и проекты в портфолио.">
+<meta name="theme-color" content="#f4f2ff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<script>
+document.documentElement.classList.add('js');
+if (/[?&]static/.test(location.search)) document.documentElement.classList.add('static');
+</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 40 40"><path fill="currentColor" stroke="#1b1338" stroke-width="2.5" stroke-linejoin="round" d="M20 2l4.5 13.5L38 20l-13.5 4.5L20 38l-4.5-13.5L2 20l13.5-4.5z"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="head" id="head">
+  <div class="wrap head__row">
+    <a class="brand" href="#top" aria-label="МАСТЕРСКАЯ — в начало страницы">
+      <span class="brand__mark" aria-hidden="true">М</span>
+      <span class="brand__text"><span class="brand__name">Мастерская</span><span class="brand__sub">онлайн-школа</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Разделы страницы">
+      <a href="#courses">Курсы</a>
+      <a href="#how">Как учимся</a>
+      <a href="#mentors">Наставники</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn--violet btn--sm head__cta" href="#signup">Пробный урок</a>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero__grid">
+      <div>
+        <p class="label anim" style="--d:0ms">Онлайн-школа · старт 20 октября</p>
+        <h1 class="hero__title anim" style="--d:80ms">Освойте профессию <span class="hl">за&nbsp;6&nbsp;часов</span> в&nbsp;неделю</h1>
+        <p class="hero__lead anim" style="--d:160ms">Короткие уроки, домашние задания с&nbsp;разбором от&nbsp;практикующего наставника и&nbsp;3 проекта в&nbsp;портфолио. Учитесь в&nbsp;своём темпе — не&nbsp;бросая работу.</p>
+        <div class="hero__cta anim" style="--d:240ms">
+          <a class="btn btn--violet" href="#courses">Выбрать курс</a>
+          <a class="btn btn--white" href="../quiz/online-school/index.html">Подобрать формат за&nbsp;2&nbsp;минуты <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+
+      <div class="collage anim" style="--d:200ms" aria-hidden="true">
+        <svg class="star star--1"><use href="#i-star"/></svg>
+        <div class="lesson">
+          <div class="lesson__screen"><span class="lesson__frame"></span><span class="lesson__play"></span><span class="lesson__time">14:32</span></div>
+          <div class="lesson__body">
+            <p class="lesson__kicker">Дизайн интерфейсов · урок 7</p>
+            <p class="lesson__title">Сетка и отступы</p>
+            <div class="lesson__bar"><i></i></div>
+            <div class="lesson__meta"><span>7 из 24 уроков</span><span>≈ 6 ч в неделю</span></div>
+          </div>
+        </div>
+        <div class="note">
+          <div class="note__who"><span>АМ</span>Анна, наставник</div>
+          <p>Сетка — огонь! Поправь отступы в&nbsp;карточках — и&nbsp;можно в&nbsp;портфолио.</p>
+          <small>разбор пришёл через 31 час</small>
+        </div>
+        <div class="week">
+          <div class="week__top"><span>Неделя 5</span><b>6 ч 10 мин</b></div>
+          <div class="week__bars"><i style="height:55%"></i><i style="height:30%"></i><i style="height:80%"></i><i class="is-off" style="height:12%"></i><i style="height:65%"></i><i style="height:100%"></i><i class="is-off" style="height:12%"></i></div>
+          <div class="week__days"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+        </div>
+        <div class="sticker"><span>Старт<b>20.10</b></span></div>
+        <svg class="star star--2"><use href="#i-star"/></svg>
+      </div>
+    </div>
+
+    <ul class="stats">
+      <li class="stat reveal"><b>6&nbsp;ч</b><span>в неделю — этого достаточно</span></li>
+      <li class="stat reveal"><b>48&nbsp;ч</b><span>максимум на разбор домашки</span></li>
+      <li class="stat reveal"><b>1:12</b><span>наставник на 12 студентов</span></li>
+      <li class="stat reveal"><b>3</b><span>проекта в портфолио к концу курса</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--band" id="courses">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="label">Курсы</p><h2 class="h2">Три курса — <span class="hl">один подход</span></h2></div>
+      <p class="sec-head__note">Выберите формат — цены обновятся. Записи можно смотреть сколько угодно, наставник добавляет разборы и созвоны.</p>
+    </div>
+
+    <div class="formats reveal">
+      <div class="seg" id="seg" role="group" aria-label="Формат обучения">
+        <button type="button" data-format="rec" aria-pressed="false">Записи</button>
+        <button type="button" data-format="group" aria-pressed="true">С наставником</button>
+        <button type="button" data-format="solo" aria-pressed="false">Индивидуально</button>
+      </div>
+      <ul class="formats__inc" id="formatInc" aria-live="polite"></ul>
+    </div>
+
+    <ul class="courses">
+      <li class="course course--violet reveal" data-prices='{"rec":24000,"group":48000,"solo":96000}' data-parts="4">
+        <div class="course__top"><span class="tag">С нуля</span><span class="course__len">4 месяца</span></div>
+        <h3 class="h3">Дизайн интерфейсов</h3>
+        <p>От&nbsp;первой кнопки до&nbsp;кликабельного прототипа приложения: сетки, типографика, UX-тексты.</p>
+        <div class="course__skills"><span>Figma</span><span>прототипы</span><span>UX</span></div>
+        <div class="course__price"><b data-price>48&nbsp;000&nbsp;₽</b><span data-parts-text>или 4 платежа по 12&nbsp;000&nbsp;₽</span></div>
+        <a class="btn btn--yellow" href="#signup">Хочу на курс</a>
+      </li>
+      <li class="course course--yellow reveal" data-prices='{"rec":12000,"group":26000,"solo":52000}' data-parts="2">
+        <div class="course__top"><span class="tag">Для начинающих</span><span class="course__len">2 месяца</span></div>
+        <h3 class="h3">Иллюстрация для соцсетей</h3>
+        <p>Персонажи, обложки и&nbsp;карусели в&nbsp;едином стиле. Рисуем на&nbsp;планшете или в&nbsp;векторе.</p>
+        <div class="course__skills"><span>персонажи</span><span>вектор</span><span>свой стиль</span></div>
+        <div class="course__price"><b data-price>26&nbsp;000&nbsp;₽</b><span data-parts-text>или 2 платежа по 13&nbsp;000&nbsp;₽</span></div>
+        <a class="btn btn--white" href="#signup">Хочу на курс</a>
+      </li>
+      <li class="course reveal" data-prices='{"rec":9000,"group":19000,"solo":38000}' data-parts="2">
+        <div class="course__top"><span class="tag">Быстрый старт</span><span class="course__len">6 недель</span></div>
+        <h3 class="h3">Монтаж коротких видео</h3>
+        <p>Вертикальные ролики: сценарий, съёмка на&nbsp;телефон, монтаж, субтитры и&nbsp;обложки.</p>
+        <div class="course__skills"><span>монтаж</span><span>субтитры</span><span>сторителлинг</span></div>
+        <div class="course__price"><b data-price>19&nbsp;000&nbsp;₽</b><span data-parts-text>или 2 платежа по 9&nbsp;500&nbsp;₽</span></div>
+        <a class="btn btn--violet" href="#signup">Хочу на курс</a>
+      </li>
+    </ul>
+    <p class="courses__note reveal">Оплата частями — помесячно, напрямую школе, без банков и&nbsp;процентов. Передумали — вернём деньги за&nbsp;непройденную часть курса.</p>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap how">
+    <div class="reveal">
+      <p class="label">Как учимся</p>
+      <h2 class="h2">Учимся делать, <span class="hl">а&nbsp;не&nbsp;смотреть</span></h2>
+      <ol class="steps" style="margin-top:32px">
+        <li class="step"><span class="step__n">1</span><div><b>Урок 15–20 минут</b><span>Короткие видео без воды. Можно смотреть в&nbsp;обед или в&nbsp;метро.</span></div></li>
+        <li class="step"><span class="step__n">2</span><div><b>Практика сразу</b><span>После каждого урока — задание на&nbsp;реальном примере.</span></div></li>
+        <li class="step"><span class="step__n">3</span><div><b>Разбор за 48 часов</b><span>Наставник отвечает голосом или пометками прямо на&nbsp;работе.</span></div></li>
+        <li class="step"><span class="step__n">4</span><div><b>Проект в портфолио</b><span>К&nbsp;концу курса — 3 работы, которые не&nbsp;стыдно показать.</span></div></li>
+      </ol>
+    </div>
+    <figure class="review reveal" aria-label="Пример разбора домашнего задания">
+      <div class="review__head"><b>Домашка 7 · карточка товара</b><span class="review__status">Принято с правками</span></div>
+      <div class="review__work" aria-hidden="true"><i></i><i></i><i></i></div>
+      <ol class="review__pins">
+        <li><span>1</span>Сетка — огонь, держи её во&nbsp;всех макетах.</li>
+        <li><span>2</span>Увеличь отступы между карточками до&nbsp;24.</li>
+        <li><span>3</span>Кнопку сделай контрастнее — сейчас она теряется.</li>
+      </ol>
+      <p class="review__foot">Наставник Анна Миронова · ответила через 31 час</p>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--band" id="mentors">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><p class="label">Наставники</p><h2 class="h2">Учат те, кто <span class="hl">делает это каждый день</span></h2></div>
+      <p class="sec-head__note">Наставники работают в&nbsp;профессии, а&nbsp;не&nbsp;только преподают. На&nbsp;одного — не&nbsp;больше 12 студентов.</p>
+    </div>
+    <ul class="mentors">
+      <li class="mentor reveal"><div class="mentor__ava" aria-hidden="true"><span class="mentor__shape mentor__shape--circle" style="--c:#6c3ef4"></span><b>АМ</b></div><p class="mentor__name">Анна Миронова</p><p class="mentor__role">Дизайн интерфейсов</p><p class="mentor__text">Продуктовый дизайнер, 9 лет делает мобильные приложения.</p></li>
+      <li class="mentor reveal"><div class="mentor__ava" aria-hidden="true"><span class="mentor__shape mentor__shape--square" style="--c:#ffd166"></span><b>КН</b></div><p class="mentor__name">Кирилл Новиков</p><p class="mentor__role">Иллюстрация</p><p class="mentor__text">Иллюстратор, рисует обложки и&nbsp;персонажей для брендов и&nbsp;издательств.</p></li>
+      <li class="mentor reveal"><div class="mentor__ava" aria-hidden="true"><span class="mentor__shape mentor__shape--arch" style="--c:#ff8fab"></span><b>ВК</b></div><p class="mentor__name">Вера Ким</p><p class="mentor__role">Монтаж видео</p><p class="mentor__text">Монтажёр, 6 лет делает ролики для брендов и&nbsp;блогеров.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap faq">
+    <div class="reveal">
+      <p class="label">Вопросы</p>
+      <h2 class="h2">Спрашивают <span class="hl">до&nbsp;старта</span></h2>
+    </div>
+    <div class="faq__list reveal">
+      <details open><summary>Получится, если я совсем новичок?</summary><p>Да: «Дизайн интерфейсов» и&nbsp;«Монтаж» начинаются с&nbsp;нуля. Если сомневаетесь — пройдите тест, подскажем формат.</p></details>
+      <details><summary>Выдаёте ли вы диплом?</summary><p>Мы выдаём сертификат школы о&nbsp;прохождении курса. Это не&nbsp;государственный документ об&nbsp;образовании: главное, что вы забираете, — портфолио из&nbsp;реальных проектов.</p></details>
+      <details><summary>Поможете с работой?</summary><p>Помогаем собрать портфолио и&nbsp;резюме, разбираем тестовые задания. Трудоустройство не&nbsp;гарантируем — честно говорим об&nbsp;этом заранее.</p></details>
+      <details><summary>Что, если передумаю?</summary><p>Вернём деньги за&nbsp;непройденную часть курса. Без анкет «почему уходите» и&nbsp;долгих переписок.</p></details>
+      <details><summary>Сколько времени нужно?</summary><p>В&nbsp;среднем 6 часов в&nbsp;неделю: 2–3 урока и&nbsp;практика. Выдалась тяжёлая неделя — догоните позже, уроки остаются у&nbsp;вас.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--band" id="signup">
+  <div class="wrap signup">
+    <div class="reveal">
+      <p class="label">Запись</p>
+      <h2 class="h2">Начните <span class="hl">с&nbsp;пробного урока</span></h2>
+      <p class="signup__lead">Оставьте контакт — куратор пришлёт бесплатный урок выбранного курса и&nbsp;ответит на&nbsp;вопросы.</p>
+      <ul class="perks">
+        <li>Пробный урок — бесплатно</li>
+        <li>Оплата частями без банков</li>
+        <li>Возврат за непройденную часть</li>
+      </ul>
+      <div class="support"><b>Поддержка: пн–пт, 10:00–19:00 мск</b><span>hello@masterskaya-demo.ru · отвечаем в течение рабочего дня</span></div>
+    </div>
+
+    <form class="form reveal" id="form" novalidate>
+      <h3 class="form__title">Пробный урок</h3>
+      <p class="form__sub">Бесплатно, пришлём в течение дня</p>
+      <div class="form__body" id="formBody">
+        <div style="display:grid;gap:18px">
+          <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться" required></label>
+          <label class="field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required></label>
+          <label class="field"><span>Курс</span>
+            <select name="course">
+              <option>Дизайн интерфейсов</option>
+              <option>Иллюстрация для соцсетей</option>
+              <option>Монтаж коротких видео</option>
+              <option>Пока не решил(а)</option>
+            </select>
+          </label>
+          <label class="consent"><input type="checkbox" name="agree" required><span>Даю согласие на&nbsp;обработку персональных данных в&nbsp;соответствии с&nbsp;<a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a></span></label>
+          <button class="btn btn--violet btn--block" type="submit">Получить урок</button>
+          <p class="form__note">Демо-сайт: заявка никуда не&nbsp;отправляется.</p>
+        </div>
+      </div>
+      <div class="form__ok" id="formOk" role="status" hidden>
+        <b id="formOkTitle">Заявка принята</b>
+        <span>В&nbsp;настоящей школе куратор прислал бы урок в&nbsp;течение дня. Это демо-сайт: данные никуда не&nbsp;отправлены и&nbsp;не&nbsp;сохранены.</span>
+        <button class="btn btn--white btn--sm" type="button" id="formAgain" style="justify-self:start;margin-top:6px">Заполнить ещё раз</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="brand" href="#top" aria-label="МАСТЕРСКАЯ — в начало страницы"><span class="brand__mark" aria-hidden="true" style="color:#1b1338">М</span><span class="brand__text"><span class="brand__name">Мастерская</span><span class="brand__sub">онлайн-школа</span></span></a>
+        <p class="foot__about">Дизайн интерфейсов, иллюстрация и&nbsp;монтаж коротких видео. Учимся онлайн, в&nbsp;своём темпе.</p>
+      </div>
+      <div>
+        <h4>Разделы</h4>
+        <ul><li><a href="#courses">Курсы</a></li><li><a href="#how">Как учимся</a></li><li><a href="#mentors">Наставники</a></li><li><a href="#faq">Вопросы</a></li></ul>
+      </div>
+      <div>
+        <h4>Студентам</h4>
+        <ul><li><a href="#signup">Пробный урок</a></li><li><a href="privacy.html">Политика конфиденциальности</a></li><li><a href="../quiz/online-school/index.html">Подбор формата</a></li></ul>
+      </div>
+      <div>
+        <h4>Реквизиты</h4>
+        <p class="foot__legal">ООО «Мастерская»<br>ИНН 7700000000, ОГРН 1207700000000<br>г. Москва, ул. Новая, д. 1, офис 1</p>
+      </div>
+    </div>
+    <p class="foot__disclaimer">По&nbsp;окончании курса выдаётся сертификат школы — он не&nbsp;является документом об&nbsp;образовании. Трудоустройство не&nbsp;гарантируется. Информация на&nbsp;сайте не&nbsp;является публичной офертой.</p>
+    <div class="foot__bottom">
+      <span>© <span id="year">2026</span> МАСТЕРСКАЯ</span>
+      <span class="foot__demo">Демонстрационный проект для портфолио. «МАСТЕРСКАЯ» — вымышленная школа: наставники, курсы и&nbsp;цены приведены как пример.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
